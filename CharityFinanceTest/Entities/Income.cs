@@ -27,5 +27,17 @@ namespace FinanceEntities
         }
 
         public GiftAidStatus GiftAidStatus { get; set; }
+
+        public override bool FieldsValidated()
+        {
+            if ((PaymentType == PaymentTypes.CASH || PaymentType == PaymentTypes.CHQ) && !string.IsNullOrEmpty(PayingInSlip))
+            {
+                return base.FieldsValidated();
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

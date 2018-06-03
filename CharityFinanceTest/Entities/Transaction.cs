@@ -14,5 +14,16 @@ namespace FinanceEntities
         public Double Amount { get; set; }
         public BudgetTypes BudgetType { get; set; }
         public string Notes { get; set; }
+
+        public virtual bool FieldsValidated()
+        {
+            var isValid = this.Date > DateTime.MinValue 
+                && !string.IsNullOrEmpty(this.Description)
+                && PaymentType != PaymentTypes.NotSet 
+                && Amount > 0.00 
+                && BudgetType != BudgetTypes.NotSet ?  true :  false;
+
+            return isValid;
+        }
     }
 }

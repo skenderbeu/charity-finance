@@ -8,6 +8,7 @@ namespace FinanceEntities
 {
     public enum PaymentTypes
     {
+        NotSet,
         CHQ,
         BAC,
         SO,
@@ -17,18 +18,21 @@ namespace FinanceEntities
 
     public enum BudgetTypes
     {
+        NotSet,
         GeneralIncome,
         CouncilTax
     }
 
     public enum GiftAidStatus
     {
+        NotSet,
         NotGiftAid,
         GiftAid
     }
 
     public enum SpendTypes
     {
+        NotSet,
         Capital,
         Revenue
     }
