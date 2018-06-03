@@ -19,6 +19,10 @@ namespace FinanceEntities
                 {
                     _payingInSlip = value;
                 }
+                else
+                {
+                    throw new ArgumentException("A PayingIn Slip with non numeric characters is not allowed.");
+                }
             }
         }
 

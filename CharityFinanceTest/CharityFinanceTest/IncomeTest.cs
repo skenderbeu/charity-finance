@@ -44,16 +44,16 @@ namespace CharityFinanceTests
 
 
         [TestMethod]
-        public void Income_AddNANPayingSlip_Rejected()
+        [ExpectedException(typeof(ArgumentException),
+    "A PayingIn Slip with non numeric characters is not allowed.")]
+        public void Income_AddNANPayingSlip_ThrowException()
         {
             Income income = new Income
             {
                 PayingInSlip = "P000124",
             };
 
-            var actual = income.PayingInSlip;
-
-            Assert.AreEqual(null, actual);
+            Assert.Fail();
         }
     }
 }
