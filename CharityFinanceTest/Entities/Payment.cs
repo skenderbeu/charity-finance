@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace FinanceEntities
 {
-    public class Income : Transaction
+    public class Payment: Transaction
     {
-        public string PayingInSlip { get; set; }
-        public GiftAidStatus GiftAidStatus { get; set; }
+        public SpendTypes SpendType { get; set; }
     }
 }
