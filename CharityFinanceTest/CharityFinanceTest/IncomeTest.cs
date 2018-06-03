@@ -26,5 +26,34 @@ namespace CharityFinanceTests
 
             Assert.AreEqual(expected, actual);
         }
+
+        [TestMethod]
+        public void Income_AddPayingSlip_Accepted()
+        {
+            Income income = new Income
+            {
+                PayingInSlip = "000124",
+            };
+
+            var expected = "000124";
+
+            var actual = income.PayingInSlip;
+
+            Assert.AreEqual(expected, actual);
+        }
+
+
+        [TestMethod]
+        public void Income_AddNANPayingSlip_Rejected()
+        {
+            Income income = new Income
+            {
+                PayingInSlip = "P000124",
+            };
+
+            var actual = income.PayingInSlip;
+
+            Assert.AreEqual(null, actual);
+        }
     }
 }

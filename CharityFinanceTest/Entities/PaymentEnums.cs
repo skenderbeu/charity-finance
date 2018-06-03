@@ -11,12 +11,14 @@ namespace FinanceEntities
         CHQ,
         BAC,
         SO,
-        CASH
+        CASH,
+        DDR
     }
 
     public enum BudgetTypes
     {
-        GeneralIncome
+        GeneralIncome,
+        CouncilTax
     }
 
     public enum GiftAidStatus

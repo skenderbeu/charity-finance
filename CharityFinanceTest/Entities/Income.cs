@@ -8,7 +8,20 @@ namespace FinanceEntities
 {
     public class Income : Transaction
     {
-        public string PayingInSlip { get; set; }
+        private string _payingInSlip;
+
+        public string PayingInSlip {
+            get { return _payingInSlip;  }
+            set
+            {
+                int result;
+                if (int.TryParse(value, out result))
+                {
+                    _payingInSlip = value;
+                }
+            }
+        }
+
         public GiftAidStatus GiftAidStatus { get; set; }
     }
 }
