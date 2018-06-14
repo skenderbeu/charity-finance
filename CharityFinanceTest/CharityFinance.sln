@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CharityFinanceTests", "Char
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinanceEntities", "Entities\FinanceEntities.csproj", "{5EDF35BC-981A-4C34-B428-1BEADBB29FE0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repositories", "Repositories\Repositories.csproj", "{D50CD673-444F-468F-ABD3-8D258E47DDB9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{5EDF35BC-981A-4C34-B428-1BEADBB29FE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5EDF35BC-981A-4C34-B428-1BEADBB29FE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5EDF35BC-981A-4C34-B428-1BEADBB29FE0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D50CD673-444F-468F-ABD3-8D258E47DDB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D50CD673-444F-468F-ABD3-8D258E47DDB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D50CD673-444F-468F-ABD3-8D258E47DDB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D50CD673-444F-468F-ABD3-8D258E47DDB9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

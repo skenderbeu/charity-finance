@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("FinanceEntities")]
+[assembly: AssemblyTitle("Repositories")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Peter Campbell")]
-[assembly: AssemblyProduct("Entities")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("Repositories")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("5edf35bc-981a-4c34-b428-1beadbb29fe0")]
+[assembly: Guid("d50cd673-444f-468f-abd3-8d258e47ddb9")]
 
 // Version information for an assembly consists of the following four values:
 //

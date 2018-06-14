@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{5EDF35BC-981A-4C34-B428-1BEADBB29FE0}</ProjectGuid>
+    <ProjectGuid>{D50CD673-444F-468F-ABD3-8D258E47DDB9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FinanceEntities</RootNamespace>
-    <AssemblyName>FinanceEntities</AssemblyName>
+    <RootNamespace>Repositories</RootNamespace>
+    <AssemblyName>Repositories</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -40,12 +40,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Fund.cs" />
-    <Compile Include="Transaction.cs" />
-    <Compile Include="Income.cs" />
-    <Compile Include="Payment.cs" />
-    <Compile Include="PaymentEnums.cs" />
+    <Compile Include="FundRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Entities\FinanceEntities.csproj">
+      <Project>{5edf35bc-981a-4c34-b428-1beadbb29fe0}</Project>
+      <Name>FinanceEntities</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
