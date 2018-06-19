@@ -36,4 +36,11 @@ namespace FinanceEntities
         Capital,
         Revenue
     }
+
+    public enum FundTypes
+    {
+        BuildingFund,
+        MessyChurch,
+        Capital
+    }
 }

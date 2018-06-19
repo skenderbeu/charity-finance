@@ -14,6 +14,7 @@ namespace FinanceEntities
         public Double Amount { get; set; }
         public BudgetTypes BudgetType { get; set; }
         public string Notes { get; set; }
+        public FundTypes FundType { get; set; }
 
         public virtual bool FieldsValidated()
         {
