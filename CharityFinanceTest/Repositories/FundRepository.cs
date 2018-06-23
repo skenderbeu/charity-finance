@@ -7,9 +7,10 @@ using FinanceEntities;
 
 namespace Repositories
 {
-    public interface IFundRepository
+    public interface IFundRepository: IDisposable
     {
         Fund GetFundByName(FundTypes fundType);
+        Fund GetFundByNameAndDate(FundTypes fundType, DateTime date);
     }
 
     public class FundRepository : IFundRepository
@@ -21,7 +22,17 @@ namespace Repositories
             fund = new Fund();
         }
 
+        public void Dispose()
+        {
+            fund = null;
+        }
+
         public Fund GetFundByName(FundTypes fundType)
+        {
+            return fund;
+        }
+
+        public Fund GetFundByNameAndDate(FundTypes fundType, DateTime date)
         {
             return fund;
         }
@@ -48,13 +59,31 @@ namespace Repositories
             return fund;
         }
 
+        public Fund GetFundByNameAndDate(FundTypes fundType, DateTime date)
+        {
+            var balance = CreateIncomeList().Where(t => t.FundType == fundType && t.Date <= date).Sum(i => i.Amount) -
+                CreatePaymentList().Where(t => t.FundType == fundType && t.Date <= date).Sum(p => p.Amount);
+
+            fund = new Fund()
+            {
+                Balance = balance
+            };
+
+            return fund;
+        }
+
+        private IQueryable GetIncomeByFundType(FundTypes fundType)
+        {
+            return CreateIncomeList().Where(t => t.FundType == fundType);
+        }
+
         private List<Income> CreateIncomeList()
         {
             return new List<Income>()
             {
                 new Income()
                 {
-                    Date = DateTime.Parse("22/05/2018"),
+                    Date = DateTime.Parse("01/05/2018"),
                     Description = "Offering 20/05/18",
                     PaymentType = PaymentTypes.CHQ,
                     PayingInSlip = "000124",
@@ -75,7 +104,7 @@ namespace Repositories
                 },
                 new Income()
                 {
-                    Date = DateTime.Parse("22/05/2018"),
+                    Date = DateTime.Parse("01/05/2018"),
                     Description = "Offering 20/05/18",
                     PaymentType = PaymentTypes.CHQ,
                     PayingInSlip = "000124",
@@ -113,7 +142,7 @@ namespace Repositories
                 },
                 new Payment()
                 {
-                    Date = DateTime.Parse("03/06/2018"),
+                    Date = DateTime.Parse("23/06/2018"),
                     Description = "Council Tax",
                     PaymentType = PaymentTypes.DDR,
                     Amount = 50.00,
@@ -133,7 +162,7 @@ namespace Repositories
                 },
                 new Payment()
                 {
-                    Date = DateTime.Parse("03/06/2018"),
+                    Date = DateTime.Parse("23/06/2018"),
                     Description = "Council Tax",
                     PaymentType = PaymentTypes.DDR,
                     Amount = 50.00,
@@ -142,6 +171,11 @@ namespace Repositories
                     FundType = FundTypes.MessyChurch
                 }
             };
+        }
+
+        public void Dispose()
+        {
+            fund = null;
         }
     }
 }
