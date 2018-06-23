@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using FinanceEntities;
 
 namespace Repositories
@@ -36,6 +34,16 @@ namespace Repositories
         {
             return fund;
         }
+
+        private IEnumerable<Income> GetIncomeByFundType(FundTypes fundType)
+        {
+            throw new NotImplementedException();
+        }
+
+        private IEnumerable<Payment> GetPaymentByFundType(FundTypes fundType)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public class MockFundRepository : IFundRepository
@@ -49,7 +57,7 @@ namespace Repositories
         public Fund GetFundByName(FundTypes fundType)
         {
             var balance = GetIncomeByFundType(fundType).Sum(i => i.Amount) -
-                CreatePaymentList().Where(t => t.FundType == fundType).Sum(p => p.Amount);
+                        GetPaymentByFundType(fundType).Sum(p => p.Amount);
 
             fund = new Fund()
             {
@@ -62,7 +70,7 @@ namespace Repositories
         public Fund GetFundByNameAndDate(FundTypes fundType, DateTime date)
         {
             var balance = GetIncomeByFundType(fundType).Where(t => t.Date <= date).Sum(i => i.Amount) -
-                CreatePaymentList().Where(t => t.FundType == fundType && t.Date <= date).Sum(p => p.Amount);
+                GetPaymentByFundType(fundType).Where(t => t.Date <= date).Sum(p => p.Amount);
 
             fund = new Fund()
             {
@@ -75,6 +83,11 @@ namespace Repositories
         private IEnumerable<Income> GetIncomeByFundType(FundTypes fundType)
         {
             return CreateIncomeList().Where(t => t.FundType == fundType);
+        }
+
+        private IEnumerable<Payment> GetPaymentByFundType(FundTypes fundType)
+        {
+            return CreatePaymentList().Where(t => t.FundType == fundType);
         }
 
         private List<Income> CreateIncomeList()
