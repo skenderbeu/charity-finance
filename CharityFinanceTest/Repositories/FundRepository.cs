@@ -48,7 +48,7 @@ namespace Repositories
 
         public Fund GetFundByName(FundTypes fundType)
         {
-            var balance = CreateIncomeList().Where(t => t.FundType == fundType).Sum(i => i.Amount) -
+            var balance = GetIncomeByFundType(fundType).Sum(i => i.Amount) -
                 CreatePaymentList().Where(t => t.FundType == fundType).Sum(p => p.Amount);
 
             fund = new Fund()
@@ -61,7 +61,7 @@ namespace Repositories
 
         public Fund GetFundByNameAndDate(FundTypes fundType, DateTime date)
         {
-            var balance = CreateIncomeList().Where(t => t.FundType == fundType && t.Date <= date).Sum(i => i.Amount) -
+            var balance = GetIncomeByFundType(fundType).Where(t => t.Date <= date).Sum(i => i.Amount) -
                 CreatePaymentList().Where(t => t.FundType == fundType && t.Date <= date).Sum(p => p.Amount);
 
             fund = new Fund()
@@ -72,7 +72,7 @@ namespace Repositories
             return fund;
         }
 
-        private IQueryable GetIncomeByFundType(FundTypes fundType)
+        private IEnumerable<Income> GetIncomeByFundType(FundTypes fundType)
         {
             return CreateIncomeList().Where(t => t.FundType == fundType);
         }
