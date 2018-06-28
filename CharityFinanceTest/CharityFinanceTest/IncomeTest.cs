@@ -10,14 +10,16 @@ namespace CharityFinanceTests
         [TestMethod]
         public void Income_AddIncome()
         {
-            Income income = new Income{
+            Income income = new Income
+            {
                 Date = DateTime.Parse("22/05/2018"),
                 Description = "Offering 20/05/18",
                 PaymentType = PaymentTypes.CASH,
-                PayingInSlip = "000124",
                 Amount = 230.00,
-                GiftAidStatus = GiftAidStatus.NotGiftAid,
-                BudgetType = BudgetTypes.GeneralIncome };
+                BudgetType = BudgetTypes.GeneralIncome,
+                PayingInSlip = "000124",
+                GiftAidStatus = GiftAidStatus.NotGiftAid
+            };
 
             var expected = 230.00;
                 
