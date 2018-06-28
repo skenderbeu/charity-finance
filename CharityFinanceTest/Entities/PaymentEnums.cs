@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace FinanceEntities
 {
     public enum PaymentTypes
@@ -20,7 +15,10 @@ namespace FinanceEntities
     {
         NotSet,
         GeneralIncome,
-        CouncilTax
+        CouncilTax,
+        MessyChurch,
+        Building,
+        Capital
     }
 
     public enum GiftAidStatus
@@ -39,8 +37,11 @@ namespace FinanceEntities
 
     public enum FundTypes
     {
+        NotSet,
         BuildingFund,
         MessyChurch,
-        Capital
+        Capital,
+        Revenue,
+        Children
     }
 }

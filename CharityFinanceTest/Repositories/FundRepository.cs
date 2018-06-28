@@ -102,7 +102,7 @@ namespace Repositories
                     PayingInSlip = "000124",
                     Amount = 100.00,
                     GiftAidStatus = GiftAidStatus.NotGiftAid,
-                    BudgetType = BudgetTypes.GeneralIncome,
+                    BudgetType = BudgetTypes.Building,
                     FundType = FundTypes.BuildingFund
                 },
                 new Income()
@@ -112,28 +112,28 @@ namespace Repositories
                     PaymentType = PaymentTypes.CASH,
                     Amount = 100.00,
                     GiftAidStatus = GiftAidStatus.NotGiftAid,
-                    BudgetType = BudgetTypes.GeneralIncome,
+                    BudgetType = BudgetTypes.Building,
                     FundType = FundTypes.BuildingFund
                 },
                 new Income()
                 {
                     Date = DateTime.Parse("01/05/2018"),
-                    Description = "Offering 20/05/18",
+                    Description = "Messy Church donation",
                     PaymentType = PaymentTypes.CHQ,
                     PayingInSlip = "000124",
                     Amount = 200.00,
                     GiftAidStatus = GiftAidStatus.NotGiftAid,
-                    BudgetType = BudgetTypes.GeneralIncome,
+                    BudgetType = BudgetTypes.MessyChurch,
                     FundType = FundTypes.MessyChurch
                 },
                 new Income()
                 {
                     Date = DateTime.Parse("22/05/2018"),
-                    Description = "Offering 20/05/18",
+                    Description = "Messy Church donation",
                     PaymentType = PaymentTypes.CASH,
                     Amount = 100.00,
                     GiftAidStatus = GiftAidStatus.NotGiftAid,
-                    BudgetType = BudgetTypes.GeneralIncome,
+                    BudgetType = BudgetTypes.MessyChurch,
                     FundType = FundTypes.MessyChurch
                 }
             };
@@ -149,7 +149,7 @@ namespace Repositories
                     Description = "Council Tax",
                     PaymentType = PaymentTypes.DDR,
                     Amount = 50.00,
-                    BudgetType = BudgetTypes.CouncilTax,
+                    BudgetType = BudgetTypes.Building,
                     SpendType = SpendTypes.Revenue,
                     FundType = FundTypes.BuildingFund
                 },
@@ -159,27 +159,27 @@ namespace Repositories
                     Description = "Council Tax",
                     PaymentType = PaymentTypes.DDR,
                     Amount = 50.00,
-                    BudgetType = BudgetTypes.CouncilTax,
+                    BudgetType = BudgetTypes.Building,
                     SpendType = SpendTypes.Revenue,
                     FundType = FundTypes.BuildingFund
                 },
                 new Payment
                 {
                     Date = DateTime.Parse("03/06/2018"),
-                    Description = "Council Tax",
+                    Description = "Messy Church payment",
                     PaymentType = PaymentTypes.DDR,
                     Amount = 50.00,
-                    BudgetType = BudgetTypes.GeneralIncome,
+                    BudgetType = BudgetTypes.MessyChurch,
                     SpendType = SpendTypes.Revenue,
                     FundType = FundTypes.MessyChurch
                 },
                 new Payment()
                 {
                     Date = DateTime.Parse("23/06/2018"),
-                    Description = "Council Tax",
+                    Description = "Messy Church payment",
                     PaymentType = PaymentTypes.DDR,
                     Amount = 50.00,
-                    BudgetType = BudgetTypes.GeneralIncome,
+                    BudgetType = BudgetTypes.MessyChurch,
                     SpendType = SpendTypes.Revenue,
                     FundType = FundTypes.MessyChurch
                 }

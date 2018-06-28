@@ -63,6 +63,54 @@ namespace CharityFinanceTests
             Assert.IsFalse(actual);
         }
 
-    
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void Payment_ValidateFundType_ThrowsException()
+        {
+            Payment payment = new Payment
+            {
+                Date = DateTime.Parse("03/06/2018"),
+                Description = "Council Tax",
+                PaymentType = PaymentTypes.DDR,
+                Amount = 210.00,
+                BudgetType = BudgetTypes.NotSet,
+                FundType = FundTypes.MessyChurch
+            };
+
+            payment.GetFund();
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void Payment_ValidateFundTypeNoBudgetType_ThrowsException()
+        {
+            Payment payment = new Payment
+            {
+                Date = DateTime.Parse("03/06/2018"),
+                Description = "Council Tax",
+                PaymentType = PaymentTypes.DDR,
+                Amount = 210.00,
+                FundType = FundTypes.MessyChurch
+            };
+
+            payment.GetFund();
+        }
+
+
+        [TestMethod]
+        public void Payment_ValidateFundType_NoException()
+        {
+            Payment payment = new Payment
+            {
+                Date = DateTime.Parse("03/06/2018"),
+                Description = "Council Tax",
+                PaymentType = PaymentTypes.DDR,
+                Amount = 210.00,
+                BudgetType = BudgetTypes.MessyChurch,
+                FundType = FundTypes.MessyChurch
+            };
+
+        }
+
     }
 }

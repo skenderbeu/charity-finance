@@ -6,10 +6,10 @@ using Repositories;
 namespace CharityFinanceTest
 {
     [TestClass]
-    public class FundTests
+    public class FundRepositoryTests
     {
         [TestMethod]
-        public void FundRepository_GetFundByName_ReturnsFund()
+        public void GetFundByName__BuildingFund_ReturnsTypeFund()
         {
             //Arrange
             IFundRepository repo = new MockFundRepository();
@@ -24,7 +24,7 @@ namespace CharityFinanceTest
 
 
         [TestMethod]
-        public void FundRepository_GetFundBalance_ReturnsBalance100()
+        public void GetFundBalance_FundBuildingFund_ReturnsBalance100()
         {
             //Arrange
             IFundRepository repo = new MockFundRepository();
@@ -39,7 +39,7 @@ namespace CharityFinanceTest
         }
 
         [TestMethod]
-        public void FundRepository_GetFundBalance_ReturnsBalance200()
+        public void GetFundByName_FundMessyChurch_ReturnsBalance200()
         {
             //Arrange
             IFundRepository repo = new MockFundRepository();
@@ -54,7 +54,7 @@ namespace CharityFinanceTest
         }
 
         [TestMethod]
-        public void FundRepository_GetFundBalanceByDate010518_ReturnsBalance200()
+        public void GetFundBalanceByDate_Date010518_ReturnsBalance200()
         {
             //Arrange
             IFundRepository repo = new MockFundRepository();
@@ -72,7 +72,7 @@ namespace CharityFinanceTest
         }
 
         [TestMethod]
-        public void FundRepository_GetFundBalanceByDate220518_ReturnsBalance300()
+        public void GetFundBalanceByDate_Date220518_ReturnsBalance300()
         {
             //Arrange
             IFundRepository repo = new MockFundRepository();
@@ -90,7 +90,7 @@ namespace CharityFinanceTest
         }
 
         [TestMethod]
-        public void FundRepository_GetFundBalanceByDate030618_ReturnsBalance250()
+        public void GetFundBalanceByDate_Date030618_ReturnsBalance250()
         {
             //Arrange
             IFundRepository repo = new MockFundRepository();
@@ -108,7 +108,7 @@ namespace CharityFinanceTest
         }
 
         [TestMethod]
-        public void FundRepository_GetFundBalanceByDate230618_ReturnsBalance200()
+        public void GetFundBalanceByDate_Date230618_ReturnsBalance200()
         {
             //Arrange
             IFundRepository repo = new MockFundRepository();

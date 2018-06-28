@@ -26,5 +26,25 @@ namespace FinanceEntities
 
             return isValid;
         }
+
+        public virtual void GetFund()
+        {
+            if (BudgetType == BudgetTypes.NotSet) throw new ArgumentOutOfRangeException("No Budget Type Selected before setting Fund");
+
+            if (BudgetType == BudgetTypes.MessyChurch)
+            {
+                FundType = FundTypes.MessyChurch;
+            }
+            if (BudgetType == BudgetTypes.Building)
+            {
+                FundType = FundTypes.BuildingFund;
+            }
+            else
+            {
+                FundType = FundTypes.Revenue;
+            }
+        }
+
+
     }
 }
