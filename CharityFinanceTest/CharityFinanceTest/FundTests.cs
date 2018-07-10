@@ -8,12 +8,42 @@ namespace CharityFinanceTest
     [TestClass]
     public class FundRepositoryTests
     {
+        IFundRepository repo;
+
+        [TestInitialize]
+        public void Setup()
+        {
+            repo = new FundRepository(
+                MockIncomes.Incomes(), 
+                MockPayments.Payments());
+        }
+
+        [TestCleanup]
+        public void CloseDown()
+        {
+            repo = null;
+        }
+
         [TestMethod]
         public void GetFundByName__BuildingFund_ReturnsTypeFund()
         {
             //Arrange
-            IFundRepository repo = new MockFundRepository();
+            
             var fundName = FundTypes.BuildingFund;
+
+            //Act
+            Fund actual = repo.GetFundByName(fundName);
+
+            //Assert
+            Assert.IsInstanceOfType(actual, typeof(Fund));
+        }
+
+        [TestMethod]
+        public void GetFundByName__MessyChurch_ReturnsTypeFund()
+        {
+            //Arrange
+
+            var fundName = FundTypes.MessyChurch;
 
             //Act
             Fund actual = repo.GetFundByName(fundName);
@@ -27,7 +57,6 @@ namespace CharityFinanceTest
         public void GetFundBalance_FundBuildingFund_ReturnsBalance100()
         {
             //Arrange
-            IFundRepository repo = new MockFundRepository();
             var fundName = FundTypes.BuildingFund;
 
             //Act
@@ -38,11 +67,11 @@ namespace CharityFinanceTest
             Assert.AreEqual(expected, actual.Balance);
         }
 
+
         [TestMethod]
         public void GetFundByName_FundMessyChurch_ReturnsBalance200()
         {
             //Arrange
-            IFundRepository repo = new MockFundRepository();
             var fundName = FundTypes.MessyChurch;
 
             //Act
@@ -57,7 +86,6 @@ namespace CharityFinanceTest
         public void GetFundBalanceByDate_Date010518_ReturnsBalance200()
         {
             //Arrange
-            IFundRepository repo = new MockFundRepository();
             var fundName = FundTypes.MessyChurch;
 
             DateTime date;
@@ -75,7 +103,6 @@ namespace CharityFinanceTest
         public void GetFundBalanceByDate_Date220518_ReturnsBalance300()
         {
             //Arrange
-            IFundRepository repo = new MockFundRepository();
             var fundName = FundTypes.MessyChurch;
 
             DateTime date;
@@ -93,7 +120,6 @@ namespace CharityFinanceTest
         public void GetFundBalanceByDate_Date030618_ReturnsBalance250()
         {
             //Arrange
-            IFundRepository repo = new MockFundRepository();
             var fundName = FundTypes.MessyChurch;
 
             DateTime date;
@@ -111,7 +137,6 @@ namespace CharityFinanceTest
         public void GetFundBalanceByDate_Date230618_ReturnsBalance200()
         {
             //Arrange
-            IFundRepository repo = new MockFundRepository();
             var fundName = FundTypes.MessyChurch;
 
             DateTime date;
