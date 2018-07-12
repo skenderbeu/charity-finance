@@ -1,134 +1,86 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using FinanceEntities;
 
 namespace Repositories
 {
-    public enum Month{
-        NotSet,
-        January,
-        February,
-        March,
-        April,
-        May,
-        June,
-        July,
-        August,
-        September,
-        October,
-        November,
-        December
-    }
-
     public interface IPaymentRepository : IDisposable
     {
-        List<Payment> GetPaymentsByDescription(string description);
-        List<Payment> GetPaymentsByDescription(string description, List<Payment> paymentsToFilterBy);
-        List<Payment> GetPaymentsByDate(DateTime date);
-        List<Payment> GetPaymentsByDateRange(DateTime dateFrom, DateTime dateTo);
-        List<Payment> GetPaymentsByBudgetType(BudgetTypes budgetTypes);
-        List<Payment> GetPaymentsByBudgetType(BudgetTypes budgetTypes, List<Payment> paymentsToFilterBy);
-        List<Payment> GetPaymentsByPaymentType(PaymentTypes paymentType);
-        List<Payment> GetPaymentsByPaymentType(PaymentTypes paymentType, List<Payment> paymentsToFilterBy);
-        List<Payment> GetPaymentsByAmount(double amount);
-        List<Payment> GetPaymentsByAmount(double amount, List<Payment> paymentsToFilterBy);
-        List<Payment> GetPaymentsByGiftAidStatus(GiftAidStatus giftAidStatus);
-        List<Payment> GetPaymentsByGiftAidStatus(GiftAidStatus giftAidStatus, List<Payment> paymentsToFilterBy);
-        double GetPaymentsTotalByMonth(Month month, int year);
-        double GetBankedClearedPaymentsTotalByMonth(Month month, int year);
-        double GetOSChequesByMonth(Month month, int year);
+        IEnumerable<Payment> GetPaymentsByDescription(string description);
+        IEnumerable<Payment> GetPaymentsByDescription(string description, IEnumerable<Payment> paymentsToFilterBy);
+        IEnumerable<Payment> GetPaymentsByDate(DateTime date);
+        IEnumerable<Payment> GetPaymentsByDateRange(DateTime dateFrom, DateTime dateTo);
+        IEnumerable<Payment> GetPaymentsByBudgetType(BudgetTypes budgetType);
+        IEnumerable<Payment> GetPaymentsByBudgetType(BudgetTypes budgetType, IEnumerable<Payment> paymentsToFilterBy);
+        IEnumerable<Payment> GetPaymentsByPaymentType(PaymentTypes paymentType);
+        IEnumerable<Payment> GetPaymentsByPaymentType(PaymentTypes paymentType, IEnumerable<Payment> paymentsToFilterBy);
+        IEnumerable<Payment> GetPaymentsByAmount(double amount);
+        IEnumerable<Payment> GetPaymentsByAmount(double amount, IEnumerable<Payment> paymentsToFilterBy);
     }
 
     public class PaymentRepository : IPaymentRepository
     {
-        List<Payment> payments;
+        IEnumerable<Payment> payments;
 
         public PaymentRepository()
         {
         }
 
         //Used for Testing
-        public PaymentRepository(List<Payment> payments)
+        public PaymentRepository(IEnumerable<Payment> payments)
         {
             this.payments = payments;
         }
 
-        public List<Payment> GetPaymentsByAmount(double amount)
+        public IEnumerable<Payment> GetPaymentsByAmount(double amount)
         {
-            return payments.Where(p => p.Amount == amount).ToList();
+            return payments.Where(p => p.Amount == amount);
         }
 
-        public List<Payment> GetPaymentsByAmount(double amount, List<Payment> paymentsToFilterBy)
+        public IEnumerable<Payment> GetPaymentsByAmount(double amount, IEnumerable<Payment> paymentsToFilterBy)
         {
-            throw new NotImplementedException();
+            return paymentsToFilterBy.Where(p => p.Amount == amount);
         }
 
-        public List<Payment> GetPaymentsByBudgetType(BudgetTypes budgetTypes)
+        public IEnumerable<Payment> GetPaymentsByBudgetType(BudgetTypes budgetType)
         {
-            throw new NotImplementedException();
+            return payments.Where(p => p.BudgetType == budgetType);
         }
 
-        public List<Payment> GetPaymentsByBudgetType(BudgetTypes budgetTypes, List<Payment> paymentsToFilterBy)
+        public IEnumerable<Payment> GetPaymentsByBudgetType(BudgetTypes budgetType, IEnumerable<Payment> paymentsToFilterBy)
         {
-            throw new NotImplementedException();
+            return paymentsToFilterBy.Where(p => p.BudgetType == budgetType);
         }
 
-        public List<Payment> GetPaymentsByDate(DateTime date)
+        public IEnumerable<Payment> GetPaymentsByDate(DateTime date)
         {
-            throw new NotImplementedException();
+            return payments.Where(p => p.Date.Date == date.Date);
         }
 
-        public List<Payment> GetPaymentsByDateRange(DateTime dateFrom, DateTime dateTo)
+        public IEnumerable<Payment> GetPaymentsByDateRange(DateTime dateFrom, DateTime dateTo)
         {
-            throw new NotImplementedException();
+            return payments.Where(p => p.Date.Date >= dateFrom && p.Date.Date <= dateTo);
         }
 
-        public List<Payment> GetPaymentsByDescription(string description)
+        public IEnumerable<Payment> GetPaymentsByDescription(string description)
         {
-            throw new NotImplementedException();
+            return payments.Where(p => p.Description.ToUpper().Contains(description.ToUpper()));
         }
 
-        public List<Payment> GetPaymentsByDescription(string description, List<Payment> paymentsToFilterBy)
+        public IEnumerable<Payment> GetPaymentsByDescription(string description, IEnumerable<Payment> paymentsToFilterBy)
         {
-            throw new NotImplementedException();
+            return paymentsToFilterBy.Where(p => p.Description.ToUpper().Contains(description.ToUpper()));
         }
 
-        public List<Payment> GetPaymentsByGiftAidStatus(GiftAidStatus giftAidStatus)
+        public IEnumerable<Payment> GetPaymentsByPaymentType(PaymentTypes paymentType)
         {
-            throw new NotImplementedException();
+            return payments.Where(p => p.PaymentType == paymentType);
         }
 
-        public List<Payment> GetPaymentsByGiftAidStatus(GiftAidStatus giftAidStatus, List<Payment> paymentsToFilterBy)
+        public IEnumerable<Payment> GetPaymentsByPaymentType(PaymentTypes paymentType, IEnumerable<Payment> paymentsToFilterBy)
         {
-            throw new NotImplementedException();
-        }
-
-        public List<Payment> GetPaymentsByPaymentType(PaymentTypes paymentType)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<Payment> GetPaymentsByPaymentType(PaymentTypes paymentType, List<Payment> paymentsToFilterBy)
-        {
-            throw new NotImplementedException();
-        }
-
-        public double GetPaymentsTotalByMonth(Month month, int year)
-        {
-            throw new NotImplementedException();
-        }
-
-        public double GetBankedClearedPaymentsTotalByMonth(Month month, int year)
-        {
-            throw new NotImplementedException();
-        }
-
-        public double GetOSChequesByMonth(Month month, int year)
-        {
-            throw new NotImplementedException();
+            return paymentsToFilterBy.Where(p => p.PaymentType == paymentType);
         }
 
         #region IDisposable Support
