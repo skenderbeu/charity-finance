@@ -52,7 +52,6 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="IncomeMoq.cs" />
     <Compile Include="MockIncomes.cs" />
     <Compile Include="MockPayments.cs" />
     <Compile Include="PaymentTest.cs" />
