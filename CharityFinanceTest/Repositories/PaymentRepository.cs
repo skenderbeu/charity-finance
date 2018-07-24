@@ -65,12 +65,12 @@ namespace Repositories
 
         public IEnumerable<Payment> GetPaymentsByDescription(string description)
         {
-            return payments.Where(p => p.Description.ToUpper().Contains(description.ToUpper()));
+            return payments.Where(p => TrimUpperReplaceBlank(p.Description).Contains(TrimUpperReplaceBlank(description)));
         }
 
         public IEnumerable<Payment> GetPaymentsByDescription(string description, IEnumerable<Payment> paymentsToFilterBy)
         {
-            return paymentsToFilterBy.Where(p => p.Description.ToUpper().Contains(description.ToUpper()));
+            return paymentsToFilterBy.Where(p => TrimUpperReplaceBlank(p.Description).Contains(TrimUpperReplaceBlank(description)));
         }
 
         public IEnumerable<Payment> GetPaymentsByPaymentType(PaymentTypes paymentType)
@@ -81,6 +81,11 @@ namespace Repositories
         public IEnumerable<Payment> GetPaymentsByPaymentType(PaymentTypes paymentType, IEnumerable<Payment> paymentsToFilterBy)
         {
             return paymentsToFilterBy.Where(p => p.PaymentType == paymentType);
+        }
+
+        private string TrimUpperReplaceBlank(string input)
+        {
+            return input.ToUpper().Trim().Replace(" ", "");
         }
 
         #region IDisposable Support

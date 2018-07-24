@@ -1,5 +1,6 @@
 ﻿using FinanceEntities;
 using System;
+using System.Collections.Generic;
 
 namespace Repositories
 {
@@ -12,6 +13,20 @@ namespace Repositories
 
     public class MonthRepository: IMonthRepository
     {
+        IEnumerable<Payment> payments;
+        IEnumerable<Income> incomes;
+
+        public MonthRepository()
+        {
+        }
+
+        //Used for Testing
+        public MonthRepository(IEnumerable<Payment> payments, IEnumerable<Income> incomes)
+        {
+            this.payments = payments;
+            this.incomes = incomes;
+        }
+
         public double GetPaymentsTotalByMonth(Month month, int year)
         {
             throw new NotImplementedException();
