@@ -59,7 +59,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="FundRepositoryTests.cs" />
     <Compile Include="PaymentRepositoryTests.cs" />
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="MonthRepositoryTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Entities\FinanceEntities.csproj">
