@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace CharityFinanceTests
 {
-    public class MockPayments
+    public class MockPaymentsMonthRepo
     {
         
        public static List<Payment> Payments()
@@ -47,7 +47,7 @@ namespace CharityFinanceTests
                 {
                     Date = DateTime.Parse("23/06/2018"),
                     Description = "Messy Church payment",
-                    PaymentType = PaymentTypes.DDR,
+                    PaymentType = PaymentTypes.CHQ,
                     Amount = 50.00,
                     BudgetType = BudgetTypes.MessyChurch,
                     SpendType = SpendTypes.Revenue,

@@ -3,7 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using FinanceEntities;
 using Repositories;
 
-namespace CharityFinanceTest
+namespace CharityFinanceTests
 {
     [TestClass]
     public class FundRepositoryTests

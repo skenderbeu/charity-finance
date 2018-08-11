@@ -3,7 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Repositories;
 using FinanceEntities;
 
-namespace CharityFinanceTest
+namespace CharityFinanceTests
 {
     [TestClass]
     public class MonthRepositoryTests
@@ -14,7 +14,7 @@ namespace CharityFinanceTest
         [TestInitialize]
         public void Setup()
         {
-            repo = new MonthRepository(MockPayments.Payments(), MockIncomes.Incomes());
+            repo = new MonthRepository(MockPaymentsMonthRepo.Payments(), MockIncomes.Incomes());
         }
 
         [TestCleanup]
@@ -82,7 +82,7 @@ namespace CharityFinanceTest
         }
 
         [TestMethod]
-        public void GetIncomeTotalByMonth_May2018_Returns400()
+        public void GetIncomeTotalByMonth_May2018_Returns500()
         {
             //Arrange
             var month = Month.May;
@@ -107,6 +107,68 @@ namespace CharityFinanceTest
             //Act
             var actual = repo.GetIncomeTotalByMonth(month, year);
         }
+
+        [TestMethod]
+        public void GetBankClearedPaymentsByMonth_June2018_Returns100()
+        {
+            //Arrange
+            var month = Month.June;
+            var year = 2018;
+
+            //Act
+            var actual = repo.GetBankedClearedPaymentsTotalByMonth(month, year);
+            var expected = 100.00;
+
+            //Assert
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void GetBankClearedIncomeByMonth_May2018_Returns200()
+        {
+            //Arrange
+            var month = Month.May;
+            var year = 2018;
+
+            //Act
+            var actual = repo.GetBankedClearedIncomeTotalByMonth(month, year);
+            var expected = 200.00;
+
+            //Assert
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void GetOSChequesAmountByMonth_June2018_Returns250()
+        {
+            //Arrange
+            var month = Month.June;
+            var year = 2018;
+
+            //Act
+            var actual = repo.GetOSChequesAmountByMonth(month, year);
+            var expected = 50.00;
+
+            //Assert
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void GetOSPaidInAmountByMonth_May2018_Returns200()
+        {
+            //Arrange
+            var month = Month.May;
+            var year = 2018;
+
+            //Act
+            var actual = repo.GetOSPaidInAmountByMonth(month, year);
+            var expected = 200.00;
+
+            //Assert
+            Assert.AreEqual(expected, actual);
+        }
+
+
 
     }
 }

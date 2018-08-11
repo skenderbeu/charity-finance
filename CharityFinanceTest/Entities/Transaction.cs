@@ -11,6 +11,7 @@ namespace FinanceEntities
         public BudgetTypes BudgetType { get; set; }
         public string Notes { get; set; }
         public FundTypes FundType { get; set; }
+        public Boolean BankCleared { get; set; }
 
         public virtual bool FieldsValidated()
         {

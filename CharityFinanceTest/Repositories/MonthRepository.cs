@@ -10,9 +10,13 @@ namespace Repositories
         double GetPaymentsTotalByMonth(Month month, int year);
         double GetIncomeTotalByMonth(Month month, int year);
         double GetBankedClearedPaymentsTotalByMonth(Month month, int year);
-        double GetOSChequesByMonth(Month month, int year);
+        double GetBankedClearedIncomeTotalByMonth(Month month, int year);
+        double GetOSChequesAmountByMonth(Month month, int year);
+        double GetOSPaidInAmountByMonth(Month month, int year);
+        IEnumerable<Payment> GetOSChequesByMonth(Month month, int year);
+        IEnumerable<Income> GetOSPaidInByMonth(Month month, int year);
     }
-
+   
     public class MonthRepository: IMonthRepository
     {
         IEnumerable<Payment> payments;
@@ -49,10 +53,45 @@ namespace Repositories
 
         public double GetBankedClearedPaymentsTotalByMonth(Month month, int year)
         {
+            return payments
+                .Where(p => p.BankCleared == true && p.Date.Month == (int)month && p.Date.Year == year)
+                .Sum(p => p.Amount);
+        }
+
+        public double GetBankedClearedIncomeTotalByMonth(Month month, int year)
+        {
+            return incomes
+                .Where(i => i.BankCleared == true && i.Date.Month == (int)month && i.Date.Year == year)
+                .Sum(p => p.Amount);
+        }
+
+
+        public double GetOSChequesAmountByMonth(Month month, int year)
+        {
+            return payments
+                .Where(p => p.PaymentType == PaymentTypes.CHQ 
+                    && p.BankCleared == false 
+                    && p.Date.Month == (int)month 
+                    && p.Date.Year == year)
+                .Sum(p => p.Amount);
+        }
+
+        public double GetOSPaidInAmountByMonth(Month month, int year)
+        {
+            return incomes
+                .Where(i => !string.IsNullOrWhiteSpace(i.PayingInSlip)
+                    && i.Date.Month == (int)month 
+                    && i.Date.Year == year
+                    && i.BankCleared == false)
+                .Sum(i => i.Amount);
+        }
+
+        public IEnumerable<Payment> GetOSChequesByMonth(Month month, int year)
+        {
             throw new NotImplementedException();
         }
 
-        public double GetOSChequesByMonth(Month month, int year)
+        public IEnumerable<Income> GetOSPaidInByMonth(Month month, int year)
         {
             throw new NotImplementedException();
         }

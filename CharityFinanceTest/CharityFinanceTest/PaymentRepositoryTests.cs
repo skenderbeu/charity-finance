@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using FinanceEntities;
 
-namespace CharityFinanceTest
+namespace CharityFinanceTests
 {
     [TestClass]
     public class PaymentRepositoryTests

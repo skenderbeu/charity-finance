@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace CharityFinanceTest
+namespace CharityFinanceTests
 {
     public class MockIncomes
     {
@@ -19,7 +19,8 @@ namespace CharityFinanceTest
                     Amount = 100.00,
                     GiftAidStatus = GiftAidStatus.NotGiftAid,
                     BudgetType = BudgetTypes.Building,
-                    FundType = FundTypes.BuildingFund
+                    FundType = FundTypes.BuildingFund,
+                    BankCleared = true
                 },
                 new Income()
                 {
@@ -29,7 +30,8 @@ namespace CharityFinanceTest
                     Amount = 100.00,
                     GiftAidStatus = GiftAidStatus.NotGiftAid,
                     BudgetType = BudgetTypes.Building,
-                    FundType = FundTypes.BuildingFund
+                    FundType = FundTypes.BuildingFund,
+                    BankCleared = true
                 },
                 new Income()
                 {

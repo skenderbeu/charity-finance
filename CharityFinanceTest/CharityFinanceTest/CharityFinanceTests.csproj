@@ -53,6 +53,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="MockIncomes.cs" />
+    <Compile Include="MockPaymentsMonthRepo.cs" />
     <Compile Include="MockPayments.cs" />
     <Compile Include="PaymentTest.cs" />
     <Compile Include="IncomeTest.cs" />
