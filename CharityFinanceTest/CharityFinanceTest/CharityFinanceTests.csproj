@@ -6,7 +6,7 @@
     <ProjectGuid>{6927B21B-2845-486C-9950-090A08B4BA73}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CharityFinanceTest</RootNamespace>
+    <RootNamespace>CharityFinanceTests</RootNamespace>
     <AssemblyName>CharityFinanceTest</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -61,6 +61,7 @@
     <Compile Include="FundRepositoryTests.cs" />
     <Compile Include="PaymentRepositoryTests.cs" />
     <Compile Include="MonthRepositoryTest.cs" />
+    <Compile Include="IncomeRepositoryTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Entities\FinanceEntities.csproj">
