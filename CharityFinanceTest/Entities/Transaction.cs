@@ -15,11 +15,11 @@ namespace FinanceEntities
 
         public virtual bool FieldsValidated()
         {
-            var isValid = this.Date > DateTime.MinValue 
+            var isValid = this.Date > DateTime.MinValue
                 && !string.IsNullOrEmpty(this.Description)
-                && PaymentType != PaymentTypes.NotSet 
-                && Amount > 0.00 
-                && BudgetType != BudgetTypes.NotSet ?  true :  false;
+                && PaymentType != PaymentTypes.NotSet
+                && Amount > 0.00
+                && BudgetType != BudgetTypes.NotSet ? true : false;
 
             return isValid;
         }
@@ -41,7 +41,5 @@ namespace FinanceEntities
                 FundType = FundTypes.Revenue;
             }
         }
-
-
     }
 }

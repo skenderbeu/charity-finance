@@ -1,6 +1,6 @@
-﻿using System;
+﻿using FinanceEntities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using FinanceEntities;
+using System;
 
 namespace CharityFinanceTests
 {
@@ -22,7 +22,7 @@ namespace CharityFinanceTests
             };
 
             var expected = 230.00;
-                
+
             var actual = income.Amount;
 
             Assert.AreEqual(expected, actual);
@@ -42,7 +42,6 @@ namespace CharityFinanceTests
 
             Assert.AreEqual(expected, actual);
         }
-
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException),

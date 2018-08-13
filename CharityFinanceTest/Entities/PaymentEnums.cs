@@ -1,5 +1,4 @@
-﻿
-namespace FinanceEntities
+﻿namespace FinanceEntities
 {
     public enum PaymentTypes
     {

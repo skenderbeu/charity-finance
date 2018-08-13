@@ -1,31 +1,41 @@
-﻿using System;
+﻿using FinanceEntities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using FinanceEntities;
 
 namespace Repositories
 {
     public interface IIncomeRepository : IDisposable
     {
         IEnumerable<Income> GetIncomeByDescription(string description);
+
         IEnumerable<Income> GetIncomeByDescription(string description, IEnumerable<Income> incomeToFilterBy);
+
         IEnumerable<Income> GetIncomeByDate(DateTime date);
+
         IEnumerable<Income> GetIncomeByDateRange(DateTime dateFrom, DateTime dateTo);
+
         IEnumerable<Income> GetIncomeByBudgetType(BudgetTypes budgetType);
+
         IEnumerable<Income> GetIncomeByBudgetType(BudgetTypes budgetType, IEnumerable<Income> incomeToFilterBy);
+
         IEnumerable<Income> GetIncomeByPaymentType(PaymentTypes paymentType);
+
         IEnumerable<Income> GetIncomeByPaymentType(PaymentTypes paymentType, IEnumerable<Income> incomeToFilterBy);
+
         IEnumerable<Income> GetIncomeByAmount(double amount);
+
         IEnumerable<Income> GetIncomeByAmount(double amount, IEnumerable<Income> incomeToFilterBy);
+
+        void AddIncome(Income income);
     }
 
     public class IncomeRepository : IIncomeRepository
     {
-        IEnumerable<Income> incomes;
+        private IEnumerable<Income> incomes;
 
         public IncomeRepository()
         {
-
         }
 
         //Used for Testing
@@ -41,7 +51,7 @@ namespace Repositories
 
         public IEnumerable<Income> GetIncomeByDescription(string description, IEnumerable<Income> incomeToFilterBy)
         {
-           return incomeToFilterBy.Where(i => i.Description == description);
+            return incomeToFilterBy.Where(i => i.Description == description);
         }
 
         public IEnumerable<Income> GetIncomeByDate(DateTime date)
@@ -84,9 +94,13 @@ namespace Repositories
             return incomeToFilterBy.Where(i => i.Amount == amount);
         }
 
-
+        public void AddIncome(Income income)
+        {
+            //Add income to database
+        }
 
         #region IDisposable Support
+
         private bool disposedValue = false; // To detect redundant calls
 
         protected virtual void Dispose(bool disposing)
@@ -102,13 +116,11 @@ namespace Repositories
             }
         }
 
-
         public void Dispose()
         {
             Dispose(true);
-
         }
 
-        #endregion
+        #endregion IDisposable Support
     }
 }

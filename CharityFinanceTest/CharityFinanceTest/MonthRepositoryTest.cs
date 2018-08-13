@@ -1,15 +1,14 @@
-﻿using System;
+﻿using FinanceEntities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Repositories;
-using FinanceEntities;
+using System;
 
 namespace CharityFinanceTests
 {
     [TestClass]
     public class MonthRepositoryTests
     {
-
-        IMonthRepository repo;
+        private IMonthRepository repo;
 
         [TestInitialize]
         public void Setup()
@@ -20,7 +19,6 @@ namespace CharityFinanceTests
         [TestCleanup]
         public void CloseDown()
         {
-
             repo = null;
         }
 
@@ -55,7 +53,7 @@ namespace CharityFinanceTests
         }
 
         [TestMethod]
-        [ExpectedException (typeof(ArgumentException), "Month has not been set properly")]
+        [ExpectedException(typeof(ArgumentException), "Month has not been set properly")]
         public void GetPaymentsTotalByMonth_NotSet2018_throwsException()
         {
             //Arrange
@@ -167,8 +165,5 @@ namespace CharityFinanceTests
             //Assert
             Assert.AreEqual(expected, actual);
         }
-
-
-
     }
 }

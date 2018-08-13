@@ -93,5 +93,15 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Entities\FinanceEntities.csproj">
+      <Project>{5edf35bc-981a-4c34-b428-1beadbb29fe0}</Project>
+      <Name>FinanceEntities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FinanceServices\FinanceServices.csproj">
+      <Project>{bc394c39-01e4-4300-b457-dcd68b67e71f}</Project>
+      <Name>FinanceServices</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

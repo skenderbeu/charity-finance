@@ -1,6 +1,6 @@
-﻿using System;
+﻿using FinanceEntities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using FinanceEntities;
+using System;
 
 namespace CharityFinanceTests
 {
@@ -21,12 +21,11 @@ namespace CharityFinanceTests
             };
 
             var expected = "CouncilTax";
-                
+
             var actual = payment.BudgetType.ToString();
 
             Assert.AreEqual(expected, actual);
         }
-
 
         [TestMethod]
         public void Payment_ValidateFields_True()
@@ -96,7 +95,6 @@ namespace CharityFinanceTests
             payment.GetFund();
         }
 
-
         [TestMethod]
         public void Payment_ValidateFundType_NoException()
         {
@@ -109,8 +107,6 @@ namespace CharityFinanceTests
                 BudgetType = BudgetTypes.MessyChurch,
                 FundType = FundTypes.MessyChurch
             };
-
         }
-
     }
 }

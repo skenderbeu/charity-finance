@@ -1,26 +1,27 @@
-﻿using System;
+﻿using FinanceEntities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using FinanceEntities;
 using Repositories;
+using System;
 
 namespace CharityFinanceTests
 {
     [TestClass]
     public class FundRepositoryTests
     {
-        IFundRepository repo;
+        private IFundRepository repo;
 
         [TestInitialize]
         public void Setup()
         {
             repo = new FundRepository(
-                MockIncomes.Incomes(), 
+                MockIncomes.Incomes(),
                 MockPayments.Payments());
         }
 
         [TestCleanup]
         public void CloseDown()
         {
+            repo.Dispose();
             repo = null;
         }
 
@@ -28,7 +29,7 @@ namespace CharityFinanceTests
         public void GetFundByName__BuildingFund_ReturnsTypeFund()
         {
             //Arrange
-            
+
             var fundName = FundTypes.BuildingFund;
 
             //Act
@@ -52,7 +53,6 @@ namespace CharityFinanceTests
             Assert.IsInstanceOfType(actual, typeof(Fund));
         }
 
-
         [TestMethod]
         public void GetFundBalance_FundBuildingFund_ReturnsBalance100()
         {
@@ -66,7 +66,6 @@ namespace CharityFinanceTests
             //Assert
             Assert.AreEqual(expected, actual.Balance);
         }
-
 
         [TestMethod]
         public void GetFundByName_FundMessyChurch_ReturnsBalance200()
@@ -92,7 +91,7 @@ namespace CharityFinanceTests
             DateTime.TryParse("01/05/2018", out date);
 
             //Act
-            Fund actual = repo.GetFundByNameAndDate(fundName, date );
+            Fund actual = repo.GetFundByNameAndDate(fundName, date);
             double expected = 200.00;
 
             //Assert

@@ -1,21 +1,22 @@
-﻿using System;
+﻿using FinanceEntities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using FinanceEntities;
 
 namespace Repositories
 {
-    public interface IFundRepository: IDisposable
+    public interface IFundRepository : IDisposable
     {
         Fund GetFundByName(FundTypes fundType);
+
         Fund GetFundByNameAndDate(FundTypes fundType, DateTime date);
     }
 
     public class FundRepository : IFundRepository
     {
-        Fund fund;
-        List<Income> incomes;
-        List<Payment> payments;
+        private Fund fund;
+        private List<Income> incomes;
+        private List<Payment> payments;
 
         public FundRepository()
         {
@@ -26,11 +27,6 @@ namespace Repositories
         {
             this.incomes = incomes;
             this.payments = payments;
-        }
-
-        public void Dispose()
-        {
-            fund = null;
         }
 
         public Fund GetFundByName(FundTypes fundType)
@@ -68,5 +64,29 @@ namespace Repositories
         {
             return payments.Where(t => t.FundType == fundType);
         }
+
+        #region IDisposable Support
+
+        private bool disposedValue = false; // To detect redundant calls
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    fund = null;
+                }
+
+                disposedValue = true;
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+        }
+
+        #endregion IDisposable Support
     }
 }

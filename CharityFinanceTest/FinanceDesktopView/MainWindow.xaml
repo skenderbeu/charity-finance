@@ -5,8 +5,33 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FinanceDesktopView"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Charity Finance" Height="450" Width="800">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="6*" />
+            <ColumnDefinition Width="13*" />
+            <ColumnDefinition Width="398*" />
+            <ColumnDefinition Width="376*" />
+        </Grid.ColumnDefinitions>
+        <TabControl HorizontalAlignment="Left" Height="400" Margin="4.091,10,0,0" VerticalAlignment="Top" Width="774" Grid.ColumnSpan="3" Grid.Column="1">
+            <TabItem Header="Income">
+                <Grid Background="#FFE5E5E5">
+                    <StackPanel>
+                        <Grid>
+                            <Label HorizontalAlignment="Left">Select a Payment Type:</Label>
+                            <ComboBox Name="cmbPaymentType" HorizontalAlignment="Right" Width="100">
+                            </ComboBox>
+                        </Grid>
+                        <Button Name="btnAddIncome" Content="Add Income"></Button>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Payments">
+                <Grid Background="#FFE5E5E5" />
+            </TabItem>
+            <TabItem Header="Funds">
+                <Grid Background="#FFE5E5E5" />
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>

@@ -8,19 +8,26 @@ namespace Repositories
     public interface IMonthRepository
     {
         double GetPaymentsTotalByMonth(Month month, int year);
+
         double GetIncomeTotalByMonth(Month month, int year);
+
         double GetBankedClearedPaymentsTotalByMonth(Month month, int year);
+
         double GetBankedClearedIncomeTotalByMonth(Month month, int year);
+
         double GetOSChequesAmountByMonth(Month month, int year);
+
         double GetOSPaidInAmountByMonth(Month month, int year);
+
         IEnumerable<Payment> GetOSChequesByMonth(Month month, int year);
+
         IEnumerable<Income> GetOSPaidInByMonth(Month month, int year);
     }
-   
-    public class MonthRepository: IMonthRepository
+
+    public class MonthRepository : IMonthRepository
     {
-        IEnumerable<Payment> payments;
-        IEnumerable<Income> incomes;
+        private IEnumerable<Payment> payments;
+        private IEnumerable<Income> incomes;
 
         public MonthRepository()
         {
@@ -65,13 +72,12 @@ namespace Repositories
                 .Sum(p => p.Amount);
         }
 
-
         public double GetOSChequesAmountByMonth(Month month, int year)
         {
             return payments
-                .Where(p => p.PaymentType == PaymentTypes.CHQ 
-                    && p.BankCleared == false 
-                    && p.Date.Month == (int)month 
+                .Where(p => p.PaymentType == PaymentTypes.CHQ
+                    && p.BankCleared == false
+                    && p.Date.Month == (int)month
                     && p.Date.Year == year)
                 .Sum(p => p.Amount);
         }
@@ -80,7 +86,7 @@ namespace Repositories
         {
             return incomes
                 .Where(i => !string.IsNullOrWhiteSpace(i.PayingInSlip)
-                    && i.Date.Month == (int)month 
+                    && i.Date.Month == (int)month
                     && i.Date.Year == year
                     && i.BankCleared == false)
                 .Sum(i => i.Amount);

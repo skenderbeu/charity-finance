@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FinanceEntities
 {
@@ -10,8 +6,9 @@ namespace FinanceEntities
     {
         private string _payingInSlip;
 
-        public string PayingInSlip {
-            get { return _payingInSlip;  }
+        public string PayingInSlip
+        {
+            get { return _payingInSlip; }
             set
             {
                 int result;
@@ -27,7 +24,6 @@ namespace FinanceEntities
         }
 
         public GiftAidStatus GiftAidStatus { get; set; }
-
 
         public override bool FieldsValidated()
         {

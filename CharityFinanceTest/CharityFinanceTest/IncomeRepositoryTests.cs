@@ -1,6 +1,6 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Repositories;
+using System;
 using System.Linq;
 
 namespace CharityFinanceTests
@@ -8,7 +8,7 @@ namespace CharityFinanceTests
     [TestClass]
     public class IncomeRepositoryTests
     {
-        IIncomeRepository repo;
+        private IIncomeRepository repo;
 
         [TestInitialize]
         public void Setup()
@@ -19,6 +19,7 @@ namespace CharityFinanceTests
         [TestCleanup]
         public void CloseDown()
         {
+            repo.Dispose();
             repo = null;
         }
 

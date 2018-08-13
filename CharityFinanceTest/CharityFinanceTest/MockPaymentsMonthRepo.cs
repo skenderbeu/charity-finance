@@ -6,8 +6,7 @@ namespace CharityFinanceTests
 {
     public class MockPaymentsMonthRepo
     {
-        
-       public static List<Payment> Payments()
+        public static List<Payment> Payments()
         {
             return new List<Payment>()
             {
