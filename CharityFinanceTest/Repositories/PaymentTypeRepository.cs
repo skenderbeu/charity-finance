@@ -4,41 +4,14 @@ using System.Data.SqlClient;
 
 namespace Repositories
 {
-    public interface IPaymentTypeRepository
+    public class PaymentTypeRepository : TransactionTypeRepository<PaymentType>
     {
-        List<PaymentType> GetPaymentTypes();
-
-        void AddPaymentType(string description, string longDescription);
-    }
-
-    public class PaymentTypeRepository : IPaymentTypeRepository
-    {
-        private List<PaymentType> paymentTypes;
-
-        private SqlConnectionStringBuilder sqlConnectionStringBuilder = new SqlConnectionStringBuilder
-        {
-            AttachDBFilename = @"C:\Users\pc298\source\repos\charity-finance\charity-finance\CharityFinanceTest\Repositories\FinanceDB.mdf"
-        };
-
         public PaymentTypeRepository()
         {
+            addCommandText = "INSERT INTO dbo.PaymentType ([Description], [LongDescription]) VALUES (@Description, @LongDescription)";
         }
 
-        public void AddPaymentType(string description, string longDescription)
-        {
-            string commandText = "INSERT INTO dbo.PaymentType ([Description], [LongDescription]) VALUES (@Description, @LongDescription)";
-            using (SqlConnection conn = new SqlConnection(sqlConnectionStringBuilder.ConnectionString))
-            {
-                SqlCommand command = new SqlCommand(commandText, conn);
-
-                conn.Open();
-
-                command.Parameters.AddWithValue("@Description", description);
-                command.Parameters.AddWithValue("@LongDescription", longDescription);
-            }
-        }
-
-        public List<PaymentType> GetPaymentTypes()
+        public override IList<PaymentType> GetTypes()
         {
             List<PaymentType> paymentTypes = new List<PaymentType>();
             string commandText = "SELECT Id, Description, LongDescription FROM dbo.PaymentType";

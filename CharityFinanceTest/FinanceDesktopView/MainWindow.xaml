@@ -19,7 +19,7 @@
                     <StackPanel>
                         <Grid>
                             <Label HorizontalAlignment="Left">Select a Payment Type:</Label>
-                            <ComboBox Name="cmbPaymentType" HorizontalAlignment="Right" Width="100">
+                            <ComboBox Name="cmbPaymentType" HorizontalAlignment="Right" Width="100" SelectedValuePath="Id" DisplayMemberPath="LongDescription">
                             </ComboBox>
                         </Grid>
                         <Button Name="btnAddIncome" Content="Add Income"></Button>

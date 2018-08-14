@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Repositories</RootNamespace>
     <AssemblyName>Repositories</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
@@ -26,6 +26,7 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -45,8 +46,38 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr3.Runtime.3.5.1\lib\net40-client\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Glimpse.Core, Version=1.6.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Glimpse.1.6.1\lib\net45\Glimpse.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Iesi.Collections, Version=4.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Iesi.Collections.4.0.4\lib\net461\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate, Version=5.1.0.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\packages\NHibernate.5.1.3\lib\net461\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate.Glimpse, Version=3.3.3.4001, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NHibernate.Glimpse.3.3.3.40011\lib\net35\NHibernate.Glimpse.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate.Validator, Version=5.1.0.0, Culture=neutral, PublicKeyToken=70154e18752585bd, processorArchitecture=MSIL">
+      <HintPath>..\packages\NHibernate.Validator.5.1.0\lib\net461\NHibernate.Validator.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate.Validator.Specific, Version=5.1.0.0, Culture=neutral, PublicKeyToken=70154e18752585bd, processorArchitecture=MSIL">
+      <HintPath>..\packages\NHibernate.Validator.5.1.0\lib\net461\NHibernate.Validator.Specific.dll</HintPath>
+    </Reference>
+    <Reference Include="Remotion.Linq, Version=2.1.0.0, Culture=neutral, PublicKeyToken=fee00910d6e5f53b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Remotion.Linq.2.1.2\lib\net45\Remotion.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="Remotion.Linq.EagerFetching, Version=2.1.0.0, Culture=neutral, PublicKeyToken=fee00910d6e5f53b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Remotion.Linq.EagerFetching.2.1.0\lib\net45\Remotion.Linq.EagerFetching.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -57,10 +88,13 @@
   <ItemGroup>
     <Compile Include="FundRepository.cs" />
     <Compile Include="IncomeRepository.cs" />
+    <Compile Include="ITransactionTypeRepository.cs" />
     <Compile Include="MonthRepository.cs" />
     <Compile Include="PaymentRepository.cs" />
+    <Compile Include="FundTypeRepositoryy.cs" />
     <Compile Include="PaymentTypeRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TransactionTypeRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Entities\FinanceEntities.csproj">
@@ -88,6 +122,10 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
