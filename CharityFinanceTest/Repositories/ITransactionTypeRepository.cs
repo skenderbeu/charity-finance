@@ -1,11 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using FinanceEntities;
+using System.Collections.Generic;
 
 namespace Repositories
 {
     public interface ITransactionTypeRepository<T> where T : struct
     {
-        IList<T> GetTypes();
+        IList<T> GetAll();
 
-        void AddTransactionType(string description, string longDescription);
+        void AddTransactionType(TransactionType transactionType);
+
+        TransactionType FindById(int id);
+
+        void Remove(TransactionType transactionType);
     }
 }

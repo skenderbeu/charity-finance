@@ -8,7 +8,7 @@ namespace FinanceServices
     public class IncomeViewModel
     {
         private IIncomeRepository incomeRepository;
-        private PaymentTypeRepository paymentTypeRepository;
+        private ITransactionTypeRepository<TransactionType> paymentTypeRepository;
 
         public IncomeViewModel()
         {
@@ -22,9 +22,9 @@ namespace FinanceServices
             this.paymentTypeRepository = new PaymentTypeRepository();
         }
 
-        public List<PaymentType> GetPaymentTypes()
+        public List<TransactionType> GetPaymentTypes()
         {
-            return paymentTypeRepository.GetPaymentTypes().ToList();
+            return paymentTypeRepository.GetAll().ToList();
         }
 
         public void AddIncome(Income income)

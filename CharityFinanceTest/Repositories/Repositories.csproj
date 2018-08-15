@@ -91,7 +91,7 @@
     <Compile Include="ITransactionTypeRepository.cs" />
     <Compile Include="MonthRepository.cs" />
     <Compile Include="PaymentRepository.cs" />
-    <Compile Include="FundTypeRepositoryy.cs" />
+    <Compile Include="FundTypeRepository.cs" />
     <Compile Include="PaymentTypeRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TransactionTypeRepository.cs" />

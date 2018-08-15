@@ -41,7 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Fund.cs" />
-    <Compile Include="TransactionTypes.cs" />
+    <Compile Include="TransactionType.cs" />
     <Compile Include="Transaction.cs" />
     <Compile Include="Income.cs" />
     <Compile Include="Payment.cs" />

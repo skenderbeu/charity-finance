@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using FinanceEntities;
+using System.Collections.Generic;
 using System.Data.SqlClient;
 
 namespace Repositories
 {
-    public class TransactionTypeRepository<T> : ITransactionTypeRepository<T> where T : struct
+    public abstract class TransactionTypeRepository<T> : ITransactionTypeRepository<T> where T : struct
     {
         protected SqlConnectionStringBuilder sqlConnectionStringBuilder = new SqlConnectionStringBuilder
         {
@@ -14,12 +15,9 @@ namespace Repositories
         };
 
         protected string addCommandText;
+        protected string deleteCommandText;
 
-        public TransactionTypeRepository()
-        {
-        }
-
-        public void AddTransactionType(string description, string longDescription)
+        public void AddTransactionType(TransactionType transactionType)
         {
             using (SqlConnection conn = new SqlConnection(sqlConnectionStringBuilder.ConnectionString))
             {
@@ -27,14 +25,66 @@ namespace Repositories
 
                 conn.Open();
 
-                command.Parameters.AddWithValue("@Description", description);
-                command.Parameters.AddWithValue("@LongDescription", longDescription);
+                command.Parameters.AddWithValue("@Description", transactionType.Description);
+                command.Parameters.AddWithValue("@LongDescription", transactionType.LongDescription);
             }
         }
 
-        public virtual IList<T> GetTypes()
+        public TransactionType FindById(int id, string table)
+        {
+            string commandText = $"SELECT Id, Description, LongDescription FROM {table} WHERE Id = {id}";
+
+            TransactionType transactionType = new TransactionType();
+
+            using (SqlConnection conn = new SqlConnection(sqlConnectionStringBuilder.ConnectionString))
+            {
+                SqlCommand command = new SqlCommand(commandText, conn);
+
+                conn.Open();
+
+                transactionType = CreateTransactionType(transactionType, command);
+            }
+
+            return transactionType;
+        }
+
+        public virtual TransactionType FindById(int id)
         {
             throw new System.NotImplementedException();
+        }
+
+        public virtual IList<T> GetAll()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void Remove(TransactionType transactionType)
+        {
+            using (SqlConnection conn = new SqlConnection(sqlConnectionStringBuilder.ConnectionString))
+            {
+                SqlCommand command = new SqlCommand(deleteCommandText, conn);
+
+                conn.Open();
+
+                command.Parameters.AddWithValue("@Id", transactionType.Id);
+
+                command.ExecuteNonQuery();
+            }
+        }
+
+        protected TransactionType CreateTransactionType(TransactionType transactionType, SqlCommand command)
+        {
+            using (SqlDataReader dataReader = command.ExecuteReader())
+            {
+                while (dataReader.Read())
+                {
+                    transactionType.Id = (int)dataReader["Id"];
+                    transactionType.Description = (string)dataReader["Description"];
+                    transactionType.LongDescription = (string)dataReader["LongDescription"];
+                }
+            }
+
+            return transactionType;
         }
     }
 }

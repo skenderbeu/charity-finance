@@ -4,16 +4,17 @@ using System.Data.SqlClient;
 
 namespace Repositories
 {
-    public class PaymentTypeRepository : TransactionTypeRepository<PaymentType>
+    public class PaymentTypeRepository : TransactionTypeRepository<TransactionType>
     {
         public PaymentTypeRepository()
         {
             addCommandText = "INSERT INTO dbo.PaymentType ([Description], [LongDescription]) VALUES (@Description, @LongDescription)";
+            deleteCommandText = "DELETE FROM dbo.PaymentType WHERE Id = @Id";
         }
 
-        public override IList<PaymentType> GetTypes()
+        public override IList<TransactionType> GetAll()
         {
-            List<PaymentType> paymentTypes = new List<PaymentType>();
+            List<TransactionType> paymentTypes = new List<TransactionType>();
             string commandText = "SELECT Id, Description, LongDescription FROM dbo.PaymentType";
             using (SqlConnection conn = new SqlConnection(sqlConnectionStringBuilder.ConnectionString))
             {
@@ -25,7 +26,7 @@ namespace Repositories
                 {
                     while (dataReader.Read())
                     {
-                        var paymentType = new PaymentType()
+                        var paymentType = new TransactionType()
                         {
                             Id = (int)dataReader["Id"],
                             Description = (string)dataReader["Description"],
@@ -38,6 +39,13 @@ namespace Repositories
             }
 
             return paymentTypes;
+        }
+
+        public override TransactionType FindById(int id)
+        {
+            string table = "dbo.PaymentType";
+
+            return base.FindById(id, table);
         }
     }
 }
