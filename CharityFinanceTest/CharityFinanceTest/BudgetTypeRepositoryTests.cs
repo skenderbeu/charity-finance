@@ -53,7 +53,7 @@ namespace CharityFinanceTests
             };
 
             //Act
-            budgetType.Id = repo.AddTransactionType(budgetType);
+            budgetType.Id = repo.Add(budgetType);
 
             //Assert
             Assert.AreNotEqual(0, budgetType.Id, "Creating new record does not return id");

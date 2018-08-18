@@ -53,7 +53,7 @@ namespace CharityFinanceTests
             };
 
             //Act
-            paymentType.Id = repo.AddTransactionType(paymentType);
+            paymentType.Id = repo.Add(paymentType);
 
             //Assert
             Assert.AreNotEqual(0, paymentType.Id, "Creating new record does not return id");

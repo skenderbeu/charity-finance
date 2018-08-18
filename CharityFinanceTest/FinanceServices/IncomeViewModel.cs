@@ -8,10 +8,10 @@ namespace FinanceServices
     public class IncomeViewModel
     {
         private IIncomeRepository incomeRepository;
-        private ITransactionTypeRepository paymentTypeRepository;
-        private ITransactionTypeRepository budgetTypeRepository;
-        private ITransactionTypeRepository fundTypeRepository;
-        private ITransactionTypeRepository spendTypeRepository;
+        private ITransactionTypeRepository<PaymentType> paymentTypeRepository;
+        private ITransactionTypeRepository<BudgetType> budgetTypeRepository;
+        private ITransactionTypeRepository<FundType> fundTypeRepository;
+        private ITransactionTypeRepository<SpendType> spendTypeRepository;
 
         public IncomeViewModel()
         {
@@ -31,24 +31,24 @@ namespace FinanceServices
             this.spendTypeRepository = incomeViewModelDTO.SpendTypeRepository;
         }
 
-        public List<TransactionType> GetPaymentTypes()
+        public IList<PaymentType> GetPaymentTypes()
         {
-            return paymentTypeRepository.GetAll().ToList();
+            return paymentTypeRepository.GetAll();
         }
 
-        public List<TransactionType> GetBudgetTypes()
+        public IList<BudgetType> GetBudgetTypes()
         {
-            return budgetTypeRepository.GetAll().ToList();
+            return budgetTypeRepository.GetAll();
         }
 
-        public List<TransactionType> GetFundypes()
+        public IList<FundType> GetFundypes()
         {
-            return fundTypeRepository.GetAll().ToList();
+            return fundTypeRepository.GetAll();
         }
 
-        public List<TransactionType> GetSpendTypes()
+        public IList<SpendType> GetSpendTypes()
         {
-            return spendTypeRepository.GetAll().ToList();
+            return spendTypeRepository.GetAll();
         }
 
         public void Add(Income income)
