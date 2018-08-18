@@ -1,5 +1,5 @@
-﻿using System.Windows;
-using FinanceServices;
+﻿using FinanceServices;
+using System.Windows;
 
 namespace FinanceDesktopView
 {

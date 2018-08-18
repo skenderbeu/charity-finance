@@ -1,15 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FinanceEntities
+﻿namespace FinanceEntities
 {
-    public struct TransactionType
+    public class TransactionType
     {
-        public int Id { get; set; }
-        public string Description { get; set; }
-        public string LongDescription { get; set; }
+        public virtual int Id { get; set; }
+        public virtual string Description { get; set; }
+        public virtual string LongDescription { get; set; }
     }
+
+    public class PaymentType : TransactionType { }
+
+    public class FundType : TransactionType { }
+
+    public class BudgetType : TransactionType { }
+
+    public class SpendType : TransactionType { }
 }

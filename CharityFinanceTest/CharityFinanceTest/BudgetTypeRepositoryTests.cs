@@ -7,16 +7,16 @@ using System.Linq;
 namespace CharityFinanceTests
 {
     [TestClass]
-    public class PaymentTypeRepositoryTests
+    public class BudgetTypeRepositoryTests
     {
-        private ITransactionTypeRepository<PaymentType> repo;
+        private ITransactionTypeRepository<BudgetType> repo;
         private string DESCRIPTION;
         private string LONG_DESCRIPTION;
 
         [TestInitialize]
         public void Setup()
         {
-            repo = new PaymentTypeRepository();
+            repo = new BudgetTypeRepository();
             InitialiseParameters();
         }
 
@@ -28,13 +28,13 @@ namespace CharityFinanceTests
 
         private void InitialiseParameters()
         {
-            DESCRIPTION = "TST";
+            DESCRIPTION = "Test";
             LONG_DESCRIPTION = "Test Type";
         }
 
         [TestMethod]
         [TestCategory("IntegrationTests")]
-        public void PaymentTypeCrud()
+        public void BudgetTypeCrud()
         {
             int newId = Create();
             GetByID(newId);
@@ -46,68 +46,68 @@ namespace CharityFinanceTests
         private int Create()
         {
             //Arrange
-            PaymentType paymentType = new PaymentType
+            BudgetType budgetType = new BudgetType
             {
                 Description = DESCRIPTION,
                 LongDescription = LONG_DESCRIPTION
             };
 
             //Act
-            paymentType.Id = repo.AddTransactionType(paymentType);
+            budgetType.Id = repo.AddTransactionType(budgetType);
 
             //Assert
-            Assert.AreNotEqual(0, paymentType.Id, "Creating new record does not return id");
+            Assert.AreNotEqual(0, budgetType.Id, "Creating new record does not return id");
 
-            return paymentType.Id;
+            return budgetType.Id;
         }
 
         private void Update(int id)
         {
             // Arrange
-            PaymentType paymentType = repo.GetById(id);
-            paymentType.LongDescription = "Test Change";
+            BudgetType budgetType = repo.GetById(id);
+            budgetType.LongDescription = "Test Change";
 
             // Act
-            repo.Update(paymentType);
+            repo.Update(budgetType);
 
-            PaymentType updatedPaymentType = repo.GetById(id);
+            BudgetType updatedBudgetType = repo.GetById(id);
 
             // Assert
-            Assert.AreEqual("Test Change", updatedPaymentType.LongDescription, "Record is not updated.");
+            Assert.AreEqual("Test Change", updatedBudgetType.LongDescription, "Record is not updated.");
         }
 
         private void GetAll()
         {
             // Act
-            IList<PaymentType> paymentTypes = repo.GetAll();
+            IList<BudgetType> budgetTypes = repo.GetAll();
 
             // Assert
-            Assert.IsTrue(paymentTypes.Count() > 0, "GetAll returned no items.");
+            Assert.IsTrue(budgetTypes.Count() > 0, "GetAll returned no items.");
         }
 
         private void GetByID(int id)
         {
             // Act
-            PaymentType paymentType = repo.GetById(id);
+            BudgetType budgetType = repo.GetById(id);
 
             // Assert
-            Assert.IsNotNull(paymentType.Description, "GetByID returned null.");
-            Assert.AreEqual(id, paymentType.Id);
-            Assert.AreEqual(DESCRIPTION, paymentType.Description);
-            Assert.AreEqual(LONG_DESCRIPTION, paymentType.LongDescription);
+            Assert.IsNotNull(budgetType.Description, "GetByID returned null.");
+            Assert.AreEqual(id, budgetType.Id);
+            Assert.AreEqual(DESCRIPTION, budgetType.Description);
+            Assert.AreEqual(LONG_DESCRIPTION, budgetType.LongDescription);
         }
 
         private void Delete(int id)
         {
             // Arrange
-            PaymentType paymentType = repo.GetById(id);
+            BudgetType budgetType = repo.GetById(id);
 
             // Act
-            repo.Remove(paymentType);
-            paymentType = repo.GetById(id);
+            repo.Remove(budgetType);
+            budgetType = repo.GetById(id);
 
             // Assert
-            Assert.IsNull(paymentType, "Record is not deleted.");
+            Assert.IsNull(budgetType, "Record is not deleted.");
         }
     }
 }

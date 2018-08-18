@@ -5,31 +5,6 @@ using System.Linq;
 
 namespace Repositories
 {
-    public interface IIncomeRepository : IDisposable
-    {
-        IEnumerable<Income> GetIncomeByDescription(string description);
-
-        IEnumerable<Income> GetIncomeByDescription(string description, IEnumerable<Income> incomeToFilterBy);
-
-        IEnumerable<Income> GetIncomeByDate(DateTime date);
-
-        IEnumerable<Income> GetIncomeByDateRange(DateTime dateFrom, DateTime dateTo);
-
-        IEnumerable<Income> GetIncomeByBudgetType(BudgetTypes budgetType);
-
-        IEnumerable<Income> GetIncomeByBudgetType(BudgetTypes budgetType, IEnumerable<Income> incomeToFilterBy);
-
-        IEnumerable<Income> GetIncomeByPaymentType(PaymentTypes paymentType);
-
-        IEnumerable<Income> GetIncomeByPaymentType(PaymentTypes paymentType, IEnumerable<Income> incomeToFilterBy);
-
-        IEnumerable<Income> GetIncomeByAmount(double amount);
-
-        IEnumerable<Income> GetIncomeByAmount(double amount, IEnumerable<Income> incomeToFilterBy);
-
-        void AddIncome(Income income);
-    }
-
     public class IncomeRepository : IIncomeRepository
     {
         private IEnumerable<Income> incomes;
@@ -94,9 +69,19 @@ namespace Repositories
             return incomeToFilterBy.Where(i => i.Amount == amount);
         }
 
-        public void AddIncome(Income income)
+        public void Add(Income income)
         {
             //Add income to database
+        }
+
+        public void Update(Income income)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Save()
+        {
+            throw new NotImplementedException();
         }
 
         #region IDisposable Support

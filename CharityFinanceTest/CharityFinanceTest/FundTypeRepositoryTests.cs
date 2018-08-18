@@ -7,16 +7,16 @@ using System.Linq;
 namespace CharityFinanceTests
 {
     [TestClass]
-    public class PaymentTypeRepositoryTests
+    public class FundTypeRepositoryTests
     {
-        private ITransactionTypeRepository<PaymentType> repo;
+        private ITransactionTypeRepository<FundType> repo;
         private string DESCRIPTION;
         private string LONG_DESCRIPTION;
 
         [TestInitialize]
         public void Setup()
         {
-            repo = new PaymentTypeRepository();
+            repo = new FundTypeRepository();
             InitialiseParameters();
         }
 
@@ -28,8 +28,8 @@ namespace CharityFinanceTests
 
         private void InitialiseParameters()
         {
-            DESCRIPTION = "TST";
-            LONG_DESCRIPTION = "Test Type";
+            DESCRIPTION = "TestFund";
+            LONG_DESCRIPTION = "Test Fund";
         }
 
         [TestMethod]
@@ -46,68 +46,68 @@ namespace CharityFinanceTests
         private int Create()
         {
             //Arrange
-            PaymentType paymentType = new PaymentType
+            FundType fundType = new FundType
             {
                 Description = DESCRIPTION,
                 LongDescription = LONG_DESCRIPTION
             };
 
             //Act
-            paymentType.Id = repo.AddTransactionType(paymentType);
+            fundType.Id = repo.AddTransactionType(fundType);
 
             //Assert
-            Assert.AreNotEqual(0, paymentType.Id, "Creating new record does not return id");
+            Assert.AreNotEqual(0, fundType.Id, "Creating new record does not return id");
 
-            return paymentType.Id;
+            return fundType.Id;
         }
 
         private void Update(int id)
         {
             // Arrange
-            PaymentType paymentType = repo.GetById(id);
-            paymentType.LongDescription = "Test Change";
+            FundType fundType = repo.GetById(id);
+            fundType.LongDescription = "Test Change";
 
             // Act
-            repo.Update(paymentType);
+            repo.Update(fundType);
 
-            PaymentType updatedPaymentType = repo.GetById(id);
+            FundType updatedFundType = repo.GetById(id);
 
             // Assert
-            Assert.AreEqual("Test Change", updatedPaymentType.LongDescription, "Record is not updated.");
+            Assert.AreEqual("Test Change", updatedFundType.LongDescription, "Record is not updated.");
         }
 
         private void GetAll()
         {
             // Act
-            IList<PaymentType> paymentTypes = repo.GetAll();
+            IList<FundType> fundTypes = repo.GetAll();
 
             // Assert
-            Assert.IsTrue(paymentTypes.Count() > 0, "GetAll returned no items.");
+            Assert.IsTrue(fundTypes.Count() > 0, "GetAll returned no items.");
         }
 
         private void GetByID(int id)
         {
             // Act
-            PaymentType paymentType = repo.GetById(id);
+            FundType fundType = repo.GetById(id);
 
             // Assert
-            Assert.IsNotNull(paymentType.Description, "GetByID returned null.");
-            Assert.AreEqual(id, paymentType.Id);
-            Assert.AreEqual(DESCRIPTION, paymentType.Description);
-            Assert.AreEqual(LONG_DESCRIPTION, paymentType.LongDescription);
+            Assert.IsNotNull(fundType.Description, "GetByID returned null.");
+            Assert.AreEqual(id, fundType.Id);
+            Assert.AreEqual(DESCRIPTION, fundType.Description);
+            Assert.AreEqual(LONG_DESCRIPTION, fundType.LongDescription);
         }
 
         private void Delete(int id)
         {
             // Arrange
-            PaymentType paymentType = repo.GetById(id);
+            FundType fundType = repo.GetById(id);
 
             // Act
-            repo.Remove(paymentType);
-            paymentType = repo.GetById(id);
+            repo.Remove(fundType);
+            fundType = repo.GetById(id);
 
             // Assert
-            Assert.IsNull(paymentType, "Record is not deleted.");
+            Assert.IsNull(fundType, "Record is not deleted.");
         }
     }
 }

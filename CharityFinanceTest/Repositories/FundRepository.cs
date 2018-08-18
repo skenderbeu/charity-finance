@@ -5,13 +5,6 @@ using System.Linq;
 
 namespace Repositories
 {
-    public interface IFundRepository : IDisposable
-    {
-        Fund GetFundByName(FundTypes fundType);
-
-        Fund GetFundByNameAndDate(FundTypes fundType, DateTime date);
-    }
-
     public class FundRepository : IFundRepository
     {
         private Fund fund;

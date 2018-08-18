@@ -7,16 +7,16 @@ using System.Linq;
 namespace CharityFinanceTests
 {
     [TestClass]
-    public class PaymentTypeRepositoryTests
+    public class SpendTypeRepositoryTests
     {
-        private ITransactionTypeRepository<PaymentType> repo;
+        private ITransactionTypeRepository<SpendType> repo;
         private string DESCRIPTION;
         private string LONG_DESCRIPTION;
 
         [TestInitialize]
         public void Setup()
         {
-            repo = new PaymentTypeRepository();
+            repo = new SpendTypeRepository();
             InitialiseParameters();
         }
 
@@ -28,13 +28,13 @@ namespace CharityFinanceTests
 
         private void InitialiseParameters()
         {
-            DESCRIPTION = "TST";
+            DESCRIPTION = "Test";
             LONG_DESCRIPTION = "Test Type";
         }
 
         [TestMethod]
         [TestCategory("IntegrationTests")]
-        public void PaymentTypeCrud()
+        public void SpendTypeCrud()
         {
             int newId = Create();
             GetByID(newId);
@@ -46,68 +46,68 @@ namespace CharityFinanceTests
         private int Create()
         {
             //Arrange
-            PaymentType paymentType = new PaymentType
+            SpendType spendType = new SpendType
             {
                 Description = DESCRIPTION,
                 LongDescription = LONG_DESCRIPTION
             };
 
             //Act
-            paymentType.Id = repo.AddTransactionType(paymentType);
+            spendType.Id = repo.AddTransactionType(spendType);
 
             //Assert
-            Assert.AreNotEqual(0, paymentType.Id, "Creating new record does not return id");
+            Assert.AreNotEqual(0, spendType.Id, "Creating new record does not return id");
 
-            return paymentType.Id;
+            return spendType.Id;
         }
 
         private void Update(int id)
         {
             // Arrange
-            PaymentType paymentType = repo.GetById(id);
-            paymentType.LongDescription = "Test Change";
+            SpendType spendType = repo.GetById(id);
+            spendType.LongDescription = "Test Change";
 
             // Act
-            repo.Update(paymentType);
+            repo.Update(spendType);
 
-            PaymentType updatedPaymentType = repo.GetById(id);
+            SpendType updatedSpendType = repo.GetById(id);
 
             // Assert
-            Assert.AreEqual("Test Change", updatedPaymentType.LongDescription, "Record is not updated.");
+            Assert.AreEqual("Test Change", updatedSpendType.LongDescription, "Record is not updated.");
         }
 
         private void GetAll()
         {
             // Act
-            IList<PaymentType> paymentTypes = repo.GetAll();
+            IList<SpendType> spendTypes = repo.GetAll();
 
             // Assert
-            Assert.IsTrue(paymentTypes.Count() > 0, "GetAll returned no items.");
+            Assert.IsTrue(spendTypes.Count() > 0, "GetAll returned no items.");
         }
 
         private void GetByID(int id)
         {
             // Act
-            PaymentType paymentType = repo.GetById(id);
+            SpendType spendType = repo.GetById(id);
 
             // Assert
-            Assert.IsNotNull(paymentType.Description, "GetByID returned null.");
-            Assert.AreEqual(id, paymentType.Id);
-            Assert.AreEqual(DESCRIPTION, paymentType.Description);
-            Assert.AreEqual(LONG_DESCRIPTION, paymentType.LongDescription);
+            Assert.IsNotNull(spendType.Description, "GetByID returned null.");
+            Assert.AreEqual(id, spendType.Id);
+            Assert.AreEqual(DESCRIPTION, spendType.Description);
+            Assert.AreEqual(LONG_DESCRIPTION, spendType.LongDescription);
         }
 
         private void Delete(int id)
         {
             // Arrange
-            PaymentType paymentType = repo.GetById(id);
+            SpendType spendType = repo.GetById(id);
 
             // Act
-            repo.Remove(paymentType);
-            paymentType = repo.GetById(id);
+            repo.Remove(spendType);
+            spendType = repo.GetById(id);
 
             // Assert
-            Assert.IsNull(paymentType, "Record is not deleted.");
+            Assert.IsNull(spendType, "Record is not deleted.");
         }
     }
 }

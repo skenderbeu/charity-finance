@@ -86,15 +86,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataAccessConfiguration.cs" />
+    <Compile Include="TypeRepositories\BudgetTypeRepository.cs" />
     <Compile Include="FundRepository.cs" />
     <Compile Include="IncomeRepository.cs" />
-    <Compile Include="ITransactionTypeRepository.cs" />
+    <Compile Include="Interfaces\IFundRepository.cs" />
+    <Compile Include="Interfaces\IIncomeRepository.cs" />
+    <Compile Include="Interfaces\IMonthRepository.cs" />
+    <Compile Include="Interfaces\IPaymentRepository.cs" />
+    <Compile Include="Interfaces\ITransactionTypeRepository.cs" />
     <Compile Include="MonthRepository.cs" />
     <Compile Include="PaymentRepository.cs" />
-    <Compile Include="FundTypeRepository.cs" />
-    <Compile Include="PaymentTypeRepository.cs" />
+    <Compile Include="TypeRepositories\FundTypeRepository.cs" />
+    <Compile Include="TypeRepositories\PaymentTypeRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TransactionTypeRepository.cs" />
+    <Compile Include="TypeRepositories\SpendTypeRepository.cs" />
+    <Compile Include="TypeRepositories\TransactionTypeADORepository.cs" />
+    <Compile Include="TypeRepositories\TransactionTypeRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Entities\FinanceEntities.csproj">
@@ -110,6 +118,10 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DependentUpon>FinanceDB.mdf</DependentUpon>
     </Content>
+    <EmbeddedResource Include="Mapping\SpendType.hbm.xml" />
+    <EmbeddedResource Include="Mapping\FundType.hbm.xml" />
+    <EmbeddedResource Include="Mapping\BudgetType.hbm.xml" />
+    <EmbeddedResource Include="Mapping\PaymentType.hbm.xml" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
@@ -127,6 +139,7 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

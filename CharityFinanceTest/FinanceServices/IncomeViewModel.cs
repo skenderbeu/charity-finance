@@ -8,18 +8,27 @@ namespace FinanceServices
     public class IncomeViewModel
     {
         private IIncomeRepository incomeRepository;
-        private ITransactionTypeRepository<TransactionType> paymentTypeRepository;
+        private ITransactionTypeRepository paymentTypeRepository;
+        private ITransactionTypeRepository budgetTypeRepository;
+        private ITransactionTypeRepository fundTypeRepository;
+        private ITransactionTypeRepository spendTypeRepository;
 
         public IncomeViewModel()
         {
             this.incomeRepository = new IncomeRepository();
             this.paymentTypeRepository = new PaymentTypeRepository();
+            this.budgetTypeRepository = new BudgetTypeRepository();
+            this.fundTypeRepository = new FundTypeRepository();
+            this.spendTypeRepository = new SpendTypeRepository();
         }
 
-        public IncomeViewModel(IIncomeRepository incomeRepository)
+        public IncomeViewModel(IncomeViewModelDTO incomeViewModelDTO)
         {
-            this.incomeRepository = incomeRepository;
-            this.paymentTypeRepository = new PaymentTypeRepository();
+            this.incomeRepository = incomeViewModelDTO.IncomeRepository;
+            this.budgetTypeRepository = incomeViewModelDTO.BudgetTypeRepository;
+            this.paymentTypeRepository = incomeViewModelDTO.PaymentTypeRepository;
+            this.fundTypeRepository = incomeViewModelDTO.FundTypeRepository;
+            this.spendTypeRepository = incomeViewModelDTO.SpendTypeRepository;
         }
 
         public List<TransactionType> GetPaymentTypes()
@@ -27,9 +36,40 @@ namespace FinanceServices
             return paymentTypeRepository.GetAll().ToList();
         }
 
-        public void AddIncome(Income income)
+        public List<TransactionType> GetBudgetTypes()
         {
-            incomeRepository.AddIncome(income);
+            return budgetTypeRepository.GetAll().ToList();
+        }
+
+        public List<TransactionType> GetFundypes()
+        {
+            return fundTypeRepository.GetAll().ToList();
+        }
+
+        public List<TransactionType> GetSpendTypes()
+        {
+            return spendTypeRepository.GetAll().ToList();
+        }
+
+        public void Add(Income income)
+        {
+            if (income.FieldsValidated())
+            {
+                incomeRepository.Add(income);
+            }
+        }
+
+        public void Update(Income income)
+        {
+            if (income.FieldsValidated())
+            {
+                incomeRepository.Update(income);
+            }
+        }
+
+        public void Save()
+        {
+            incomeRepository.Save();
         }
     }
 }
