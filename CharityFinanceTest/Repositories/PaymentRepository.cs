@@ -29,12 +29,12 @@ namespace Repositories
             return paymentsToFilterBy.Where(p => p.Amount == amount);
         }
 
-        public IEnumerable<Payment> GetPaymentsByBudgetType(BudgetTypes budgetType)
+        public IEnumerable<Payment> GetPaymentsByBudgetType(BudgetType budgetType)
         {
             return payments.Where(p => p.BudgetType == budgetType);
         }
 
-        public IEnumerable<Payment> GetPaymentsByBudgetType(BudgetTypes budgetType, IEnumerable<Payment> paymentsToFilterBy)
+        public IEnumerable<Payment> GetPaymentsByBudgetType(BudgetType budgetType, IEnumerable<Payment> paymentsToFilterBy)
         {
             return paymentsToFilterBy.Where(p => p.BudgetType == budgetType);
         }
@@ -59,12 +59,12 @@ namespace Repositories
             return paymentsToFilterBy.Where(p => TrimUpperReplaceBlank(p.Description).Contains(TrimUpperReplaceBlank(description)));
         }
 
-        public IEnumerable<Payment> GetPaymentsByPaymentType(PaymentTypes paymentType)
+        public IEnumerable<Payment> GetPaymentsByPaymentType(PaymentType paymentType)
         {
             return payments.Where(p => p.PaymentType == paymentType);
         }
 
-        public IEnumerable<Payment> GetPaymentsByPaymentType(PaymentTypes paymentType, IEnumerable<Payment> paymentsToFilterBy)
+        public IEnumerable<Payment> GetPaymentsByPaymentType(PaymentType paymentType, IEnumerable<Payment> paymentsToFilterBy)
         {
             return paymentsToFilterBy.Where(p => p.PaymentType == paymentType);
         }

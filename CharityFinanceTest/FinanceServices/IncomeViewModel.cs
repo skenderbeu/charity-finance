@@ -1,75 +1,73 @@
 ﻿using FinanceEntities;
 using Repositories;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace FinanceServices
 {
-    public class IncomeViewModel
+    public class IncomeViewModel : IIncomeViewModel
     {
-        private IIncomeRepository incomeRepository;
-        private ITransactionTypeRepository<PaymentType> paymentTypeRepository;
-        private ITransactionTypeRepository<BudgetType> budgetTypeRepository;
-        private ITransactionTypeRepository<FundType> fundTypeRepository;
-        private ITransactionTypeRepository<SpendType> spendTypeRepository;
+        private IRepository<Income> incomeRepository;
 
         public IncomeViewModel()
         {
-            this.incomeRepository = new IncomeRepository();
-            this.paymentTypeRepository = new PaymentTypeRepository();
-            this.budgetTypeRepository = new BudgetTypeRepository();
-            this.fundTypeRepository = new FundTypeRepository();
-            this.spendTypeRepository = new SpendTypeRepository();
+            this.incomeRepository = new IncomeRepository<Income>();
         }
 
-        public IncomeViewModel(IncomeViewModelDTO incomeViewModelDTO)
+        public IncomeViewModel(IncomeRepository<Income> incomeRepository)
         {
-            this.incomeRepository = incomeViewModelDTO.IncomeRepository;
-            this.budgetTypeRepository = incomeViewModelDTO.BudgetTypeRepository;
-            this.paymentTypeRepository = incomeViewModelDTO.PaymentTypeRepository;
-            this.fundTypeRepository = incomeViewModelDTO.FundTypeRepository;
-            this.spendTypeRepository = incomeViewModelDTO.SpendTypeRepository;
+            this.incomeRepository = incomeRepository;
         }
 
-        public IList<PaymentType> GetPaymentTypes()
+        public IList<Income> GetIncomeByDescription(string description)
         {
-            return paymentTypeRepository.GetAll();
+            return incomeRepository.GetBy(i => i.Description == description);
         }
 
-        public IList<BudgetType> GetBudgetTypes()
+        public IList<Income> GetIncomeByDescription(string description, IList<Income> incomeToFilterBy)
         {
-            return budgetTypeRepository.GetAll();
+            return incomeToFilterBy.Where(i => i.Description == description).ToList();
         }
 
-        public IList<FundType> GetFundypes()
+        public IList<Income> GetIncomeByDate(DateTime date)
         {
-            return fundTypeRepository.GetAll();
+            return incomeRepository.GetBy(i => i.Date.Date == date.Date);
         }
 
-        public IList<SpendType> GetSpendTypes()
+        public IList<Income> GetIncomeByDateRange(DateTime dateFrom, DateTime dateTo)
         {
-            return spendTypeRepository.GetAll();
+            return incomeRepository.GetBy(i => i.Date.Date >= dateFrom && i.Date.Date <= dateTo);
         }
 
-        public void Add(Income income)
+        public IList<Income> GetIncomeByBudgetType(BudgetType budgetType)
         {
-            if (income.FieldsValidated())
-            {
-                incomeRepository.Add(income);
-            }
+            return incomeRepository.GetBy(i => i.BudgetType == budgetType);
         }
 
-        public void Update(Income income)
+        public IList<Income> GetIncomeByBudgetType(BudgetType budgetType, IList<Income> incomeToFilterBy)
         {
-            if (income.FieldsValidated())
-            {
-                incomeRepository.Update(income);
-            }
+            return incomeToFilterBy.Where(i => i.BudgetType == budgetType).ToList();
         }
 
-        public void Save()
+        public IList<Income> GetIncomeByPaymentType(PaymentType paymentType)
         {
-            incomeRepository.Save();
+            return incomeRepository.GetBy(i => i.PaymentType == paymentType);
+        }
+
+        public IList<Income> GetIncomeByPaymentType(PaymentType paymentType, IList<Income> incomeToFilterBy)
+        {
+            return incomeToFilterBy.Where(i => i.PaymentType == paymentType).ToList();
+        }
+
+        public IList<Income> GetIncomeByAmount(double amount)
+        {
+            return incomeRepository.GetBy(i => i.Amount == amount);
+        }
+
+        public IList<Income> GetIncomeByAmount(double amount, IList<Income> incomeToFilterBy)
+        {
+            return incomeToFilterBy.Where(i => i.Amount == amount).ToList();
         }
     }
 }

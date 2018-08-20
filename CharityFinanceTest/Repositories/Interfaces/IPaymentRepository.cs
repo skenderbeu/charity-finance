@@ -14,13 +14,13 @@ namespace Repositories
 
         IEnumerable<Payment> GetPaymentsByDateRange(DateTime dateFrom, DateTime dateTo);
 
-        IEnumerable<Payment> GetPaymentsByBudgetType(BudgetTypes budgetType);
+        IEnumerable<Payment> GetPaymentsByBudgetType(BudgetType budgetType);
 
-        IEnumerable<Payment> GetPaymentsByBudgetType(BudgetTypes budgetType, IEnumerable<Payment> paymentsToFilterBy);
+        IEnumerable<Payment> GetPaymentsByBudgetType(BudgetType budgetType, IEnumerable<Payment> paymentsToFilterBy);
 
-        IEnumerable<Payment> GetPaymentsByPaymentType(PaymentTypes paymentType);
+        IEnumerable<Payment> GetPaymentsByPaymentType(PaymentType paymentType);
 
-        IEnumerable<Payment> GetPaymentsByPaymentType(PaymentTypes paymentType, IEnumerable<Payment> paymentsToFilterBy);
+        IEnumerable<Payment> GetPaymentsByPaymentType(PaymentType paymentType, IEnumerable<Payment> paymentsToFilterBy);
 
         IEnumerable<Payment> GetPaymentsByAmount(double amount);
 

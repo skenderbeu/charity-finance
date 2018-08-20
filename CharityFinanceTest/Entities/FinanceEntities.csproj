@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DBBaseClass.cs" />
     <Compile Include="Fund.cs" />
     <Compile Include="TransactionType.cs" />
     <Compile Include="Transaction.cs" />

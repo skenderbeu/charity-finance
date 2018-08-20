@@ -6,7 +6,7 @@ namespace FinanceEntities
     {
         private string _payingInSlip;
 
-        public string PayingInSlip
+        public virtual string PayingInSlip
         {
             get { return _payingInSlip; }
             set
@@ -23,11 +23,12 @@ namespace FinanceEntities
             }
         }
 
-        public GiftAidStatus GiftAidStatus { get; set; }
+        public virtual GiftAidStatus GiftAidStatus { get; set; }
 
         public override bool FieldsValidated()
         {
-            if ((PaymentType == PaymentTypes.CASH || PaymentType == PaymentTypes.CHQ) && !string.IsNullOrEmpty(PayingInSlip))
+            if (PaymentType == null) return false;
+            if ((PaymentType.Description == "CSH" || PaymentType.Description == "CHQ") && !string.IsNullOrEmpty(PayingInSlip))
             {
                 return base.FieldsValidated();
             }
@@ -35,6 +36,11 @@ namespace FinanceEntities
             {
                 return false;
             }
+        }
+
+        public override string ToString()
+        {
+            return $"Income {Description} received {Date} for {Amount} into budget {BudgetType.LongDescription}";
         }
     }
 }

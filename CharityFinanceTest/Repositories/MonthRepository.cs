@@ -56,7 +56,7 @@ namespace Repositories
         public double GetOSChequesAmountByMonth(Month month, int year)
         {
             return payments
-                .Where(p => p.PaymentType == PaymentTypes.CHQ
+                .Where(p => p.PaymentType.Description == "CHQ"
                     && p.BankCleared == false
                     && p.Date.Month == (int)month
                     && p.Date.Year == year)

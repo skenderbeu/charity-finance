@@ -7,20 +7,41 @@ namespace CharityFinanceTests
     [TestClass]
     public class PaymentTests
     {
-        [TestMethod]
-        public void Payment_AddPayment()
+        private Payment payment;
+
+        [TestInitialize]
+        public void Setup()
         {
-            Payment payment = new Payment
+            payment = new Payment
             {
                 Date = DateTime.Parse("03/06/2018"),
                 Description = "Council Tax",
-                PaymentType = PaymentTypes.DDR,
+                PaymentType = new PaymentType()
+                {
+                    Id = Guid.NewGuid(),
+                    Description = "DDR",
+                    LongDescription = "Direct Debit"
+                },
                 Amount = 210.00,
-                BudgetType = BudgetTypes.CouncilTax,
-                SpendType = SpendTypes.Revenue
+                BudgetType = new BudgetType()
+                {
+                    Id = Guid.NewGuid(),
+                    Description = "CTAX",
+                    LongDescription = "Council Tax"
+                },
+                SpendType = new SpendType()
+                {
+                    Id = Guid.NewGuid(),
+                    Description = "Revenue",
+                    LongDescription = "Revenue"
+                }
             };
+        }
 
-            var expected = "CouncilTax";
+        [TestMethod]
+        public void Payment_AddPayment()
+        {
+            var expected = "Council Tax";
 
             var actual = payment.BudgetType.ToString();
 
@@ -30,16 +51,6 @@ namespace CharityFinanceTests
         [TestMethod]
         public void Payment_ValidateFields_True()
         {
-            Payment payment = new Payment
-            {
-                Date = DateTime.Parse("03/06/2018"),
-                Description = "Council Tax",
-                PaymentType = PaymentTypes.DDR,
-                Amount = 210.00,
-                BudgetType = BudgetTypes.CouncilTax,
-                SpendType = SpendTypes.Revenue
-            };
-
             var actual = payment.FieldsValidated();
 
             Assert.IsTrue(actual);
@@ -48,65 +59,11 @@ namespace CharityFinanceTests
         [TestMethod]
         public void Payment_ValidateFields_False()
         {
-            Payment payment = new Payment
-            {
-                Date = DateTime.Parse("03/06/2018"),
-                Description = "Council Tax",
-                PaymentType = PaymentTypes.DDR,
-                Amount = 210.00,
-                BudgetType = BudgetTypes.CouncilTax
-            };
+            payment.SpendType = null;
 
             var actual = payment.FieldsValidated();
 
             Assert.IsFalse(actual);
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
-        public void Payment_ValidateFundType_ThrowsException()
-        {
-            Payment payment = new Payment
-            {
-                Date = DateTime.Parse("03/06/2018"),
-                Description = "Council Tax",
-                PaymentType = PaymentTypes.DDR,
-                Amount = 210.00,
-                BudgetType = BudgetTypes.NotSet,
-                FundType = FundTypes.MessyChurch
-            };
-
-            payment.GetFund();
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
-        public void Payment_ValidateFundTypeNoBudgetType_ThrowsException()
-        {
-            Payment payment = new Payment
-            {
-                Date = DateTime.Parse("03/06/2018"),
-                Description = "Council Tax",
-                PaymentType = PaymentTypes.DDR,
-                Amount = 210.00,
-                FundType = FundTypes.MessyChurch
-            };
-
-            payment.GetFund();
-        }
-
-        [TestMethod]
-        public void Payment_ValidateFundType_NoException()
-        {
-            Payment payment = new Payment
-            {
-                Date = DateTime.Parse("03/06/2018"),
-                Description = "Council Tax",
-                PaymentType = PaymentTypes.DDR,
-                Amount = 210.00,
-                BudgetType = BudgetTypes.MessyChurch,
-                FundType = FundTypes.MessyChurch
-            };
         }
     }
 }

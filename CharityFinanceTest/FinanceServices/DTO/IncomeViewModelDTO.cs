@@ -5,7 +5,7 @@ namespace FinanceServices
 {
     public class IncomeViewModelDTO
     {
-        public IIncomeRepository IncomeRepository { get; set; }
+        public IRepository<Income> IncomeRepository { get; set; }
         public ITransactionTypeRepository<PaymentType> PaymentTypeRepository { get; set; }
         public ITransactionTypeRepository<FundType> FundTypeRepository { get; set; }
         public ITransactionTypeRepository<SpendType> SpendTypeRepository { get; set; }

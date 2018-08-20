@@ -5,8 +5,8 @@ namespace Repositories
 {
     public interface IFundRepository : IDisposable
     {
-        Fund GetFundByName(FundTypes fundType);
+        Fund GetFundByName(FundType fundType);
 
-        Fund GetFundByNameAndDate(FundTypes fundType, DateTime date);
+        Fund GetFundByNameAndDate(FundType fundType, DateTime date);
     }
 }

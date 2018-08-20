@@ -2,44 +2,46 @@
 
 namespace FinanceEntities
 {
-    public abstract class Transaction
+    public abstract class Transaction : DBBase
     {
-        public DateTime Date { get; set; }
-        public string Description { get; set; }
-        public PaymentTypes PaymentType { get; set; }
-        public Double Amount { get; set; }
-        public BudgetTypes BudgetType { get; set; }
-        public string Notes { get; set; }
-        public FundTypes FundType { get; set; }
-        public Boolean BankCleared { get; set; }
+        public virtual DateTime Date { get; set; }
+        public virtual string Description { get; set; }
+        public virtual PaymentType PaymentType { get; set; }
+        public virtual Double Amount { get; set; }
+        public virtual BudgetType BudgetType { get; set; }
+        public virtual string Notes { get; set; }
+        public virtual FundType FundType { get; set; }
+        public virtual Boolean BankCleared { get; set; }
 
         public virtual bool FieldsValidated()
         {
             var isValid = this.Date > DateTime.MinValue
                 && !string.IsNullOrEmpty(this.Description)
-                && PaymentType != PaymentTypes.NotSet
+                && PaymentType != null
                 && Amount > 0.00
-                && BudgetType != BudgetTypes.NotSet ? true : false;
+                && BudgetType != null ? true : false;
 
             return isValid;
         }
 
         public virtual void GetFund()
         {
-            if (BudgetType == BudgetTypes.NotSet) throw new ArgumentOutOfRangeException("No Budget Type Selected before setting Fund");
+            throw new NotImplementedException();
+        }
 
-            if (BudgetType == BudgetTypes.MessyChurch)
+        public override bool Equals(object obj)
+        {
+            if (!(obj is Transaction item))
             {
-                FundType = FundTypes.MessyChurch;
+                return false;
             }
-            if (BudgetType == BudgetTypes.Building)
-            {
-                FundType = FundTypes.BuildingFund;
-            }
-            else
-            {
-                FundType = FundTypes.Revenue;
-            }
+
+            return this.Id.Equals(item.Id);
+        }
+
+        public override int GetHashCode()
+        {
+            return Id.GetHashCode();
         }
     }
 }

@@ -22,7 +22,7 @@ namespace Repositories
             this.payments = payments;
         }
 
-        public Fund GetFundByName(FundTypes fundType)
+        public Fund GetFundByName(FundType fundType)
         {
             var balance = GetIncomeByFundType(fundType).Sum(i => i.Amount) -
                          GetPaymentByFundType(fundType).Sum(p => p.Amount);
@@ -35,7 +35,7 @@ namespace Repositories
             return fund;
         }
 
-        public Fund GetFundByNameAndDate(FundTypes fundType, DateTime date)
+        public Fund GetFundByNameAndDate(FundType fundType, DateTime date)
         {
             var balance = GetIncomeByFundType(fundType).Where(t => t.Date <= date).Sum(i => i.Amount) -
                 GetPaymentByFundType(fundType).Where(t => t.Date <= date).Sum(p => p.Amount);
@@ -48,12 +48,12 @@ namespace Repositories
             return fund;
         }
 
-        private IEnumerable<Income> GetIncomeByFundType(FundTypes fundType)
+        private IEnumerable<Income> GetIncomeByFundType(FundType fundType)
         {
             return incomes.Where(t => t.FundType == fundType);
         }
 
-        private IEnumerable<Payment> GetPaymentByFundType(FundTypes fundType)
+        private IEnumerable<Payment> GetPaymentByFundType(FundType fundType)
         {
             return payments.Where(t => t.FundType == fundType);
         }

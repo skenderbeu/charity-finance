@@ -1,6 +1,7 @@
 ﻿using FinanceEntities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Repositories;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -36,14 +37,14 @@ namespace CharityFinanceTests
         [TestCategory("IntegrationTests")]
         public void PaymentTypeCrud()
         {
-            int newId = Create();
+            Guid newId = Create();
             GetByID(newId);
             GetAll();
             Update(newId);
             Delete(newId);
         }
 
-        private int Create()
+        private Guid Create()
         {
             //Arrange
             PaymentType paymentType = new PaymentType
@@ -61,7 +62,7 @@ namespace CharityFinanceTests
             return paymentType.Id;
         }
 
-        private void Update(int id)
+        private void Update(Guid id)
         {
             // Arrange
             PaymentType paymentType = repo.GetById(id);
@@ -85,7 +86,7 @@ namespace CharityFinanceTests
             Assert.IsTrue(paymentTypes.Count() > 0, "GetAll returned no items.");
         }
 
-        private void GetByID(int id)
+        private void GetByID(Guid id)
         {
             // Act
             PaymentType paymentType = repo.GetById(id);
@@ -97,7 +98,7 @@ namespace CharityFinanceTests
             Assert.AreEqual(LONG_DESCRIPTION, paymentType.LongDescription);
         }
 
-        private void Delete(int id)
+        private void Delete(Guid id)
         {
             // Arrange
             PaymentType paymentType = repo.GetById(id);
