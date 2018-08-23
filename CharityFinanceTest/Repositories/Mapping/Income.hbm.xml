@@ -8,13 +8,14 @@
     </id>
     <property name="Date" />
     <property name="Description" />
-    <property name="PaymentType" type="PaymentType" />
     <property name="Amount" />
-    <property name="BudgetType" type="BudgetType" />
     <property name="Notes" />
-    <property name="FundType" type="FundType" />
     <property name="BankCleared" />
     <property name="PayingInSlip" />
     <property name="GiftAidStatus" type="Repositories.PaymentGiftAidStatusType" />
+
+    <many-to-one name="PaymentType" class="PaymentType" column="PaymentTypeId" />
+    <many-to-one name="BudgetType" class="BudgetType" column="BudgetTypeId" />
+    <many-to-one name="FundType" class="FundType" column="FundTypeId" />
   </class>
 </hibernate-mapping>

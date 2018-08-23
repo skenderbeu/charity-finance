@@ -1,32 +1,27 @@
 ﻿using FinanceEntities;
+using Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Repositories
+namespace FinanceServices
 {
-    public class MonthRepository : IMonthRepository
+    public class MonthServices : IMonthServices
     {
-        private IEnumerable<Payment> payments;
-        private IEnumerable<Income> incomes;
+        private IRepository<Income> incomeRepository;
+        private IRepository<Payment> paymentRepository;
 
-        public MonthRepository()
+        public MonthServices(IRepository<Income> incomeRepository, IRepository<Payment> paymentRepository)
         {
-        }
-
-        //Used for Testing
-        public MonthRepository(IEnumerable<Payment> payments, IEnumerable<Income> incomes)
-        {
-            this.payments = payments;
-            this.incomes = incomes;
+            this.incomeRepository = incomeRepository;
+            this.paymentRepository = paymentRepository;
         }
 
         public double GetPaymentsTotalByMonth(Month month, int year)
         {
             if (month == Month.NotSet) { throw new ArgumentException("Month has not been set properly"); }
 
-            return payments
-                .Where(p => p.Date.Month == (int)month && p.Date.Year == year)
+            return paymentRepository.GetBy(p => p.Date.Month == (int)month && p.Date.Year == year)
                 .Sum(p => p.Amount);
         }
 
@@ -34,29 +29,25 @@ namespace Repositories
         {
             if (month == Month.NotSet) { throw new ArgumentException("Month has not been set properly"); }
 
-            return incomes
-                .Where(i => i.Date.Month == (int)month && i.Date.Year == year)
+            return incomeRepository.GetBy(i => i.Date.Month == (int)month && i.Date.Year == year)
                 .Sum(i => i.Amount);
         }
 
         public double GetBankedClearedPaymentsTotalByMonth(Month month, int year)
         {
-            return payments
-                .Where(p => p.BankCleared == true && p.Date.Month == (int)month && p.Date.Year == year)
+            return paymentRepository.GetBy(p => p.BankCleared == true && p.Date.Month == (int)month && p.Date.Year == year)
                 .Sum(p => p.Amount);
         }
 
         public double GetBankedClearedIncomeTotalByMonth(Month month, int year)
         {
-            return incomes
-                .Where(i => i.BankCleared == true && i.Date.Month == (int)month && i.Date.Year == year)
+            return incomeRepository.GetBy(i => i.BankCleared == true && i.Date.Month == (int)month && i.Date.Year == year)
                 .Sum(p => p.Amount);
         }
 
         public double GetOSChequesAmountByMonth(Month month, int year)
         {
-            return payments
-                .Where(p => p.PaymentType.Description == "CHQ"
+            return paymentRepository.GetBy(p => p.PaymentType.Description == "CHQ"
                     && p.BankCleared == false
                     && p.Date.Month == (int)month
                     && p.Date.Year == year)
@@ -65,20 +56,19 @@ namespace Repositories
 
         public double GetOSPaidInAmountByMonth(Month month, int year)
         {
-            return incomes
-                .Where(i => !string.IsNullOrWhiteSpace(i.PayingInSlip)
+            return incomeRepository.GetBy(i => !string.IsNullOrWhiteSpace(i.PayingInSlip)
                     && i.Date.Month == (int)month
                     && i.Date.Year == year
                     && i.BankCleared == false)
                 .Sum(i => i.Amount);
         }
 
-        public IEnumerable<Payment> GetOSChequesByMonth(Month month, int year)
+        public IList<Payment> GetOSChequesByMonth(Month month, int year)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Income> GetOSPaidInByMonth(Month month, int year)
+        public IList<Income> GetOSPaidInByMonth(Month month, int year)
         {
             throw new NotImplementedException();
         }

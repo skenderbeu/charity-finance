@@ -12,7 +12,7 @@ namespace FinanceDesktopView
         {
             InitializeComponent();
 
-            IEditIncomeViewModel incomeViewModel = new EditIncomeViewModel();
+            IIncomeViewModel incomeViewModel = new IncomeViewModel();
 
             cmbPaymentType.ItemsSource = incomeViewModel.GetPaymentTypes();
         }
