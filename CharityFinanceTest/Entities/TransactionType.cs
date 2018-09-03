@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace FinanceEntities
 {
@@ -28,11 +29,17 @@ namespace FinanceEntities
         }
     }
 
-    public class PaymentType : TransactionType { }
+    [Serializable]
+    public class PaymentType : TransactionType
+    {
+    }
 
+    [Serializable]
     public class FundType : TransactionType { }
 
+    [Serializable]
     public class BudgetType : TransactionType { }
 
+    [Serializable]
     public class SpendType : TransactionType { }
 }

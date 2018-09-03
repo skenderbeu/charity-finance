@@ -8,12 +8,13 @@
     </id>
     <property name="Date" />
     <property name="Description" />
-    <property name="PaymentType" type="PaymentType" />
     <property name="Amount" />
-    <property name="BudgetType" type="BudgetType" />
     <property name="Notes" />
-    <property name="FundType" type="FundType" />
     <property name="BankCleared" />
-    <property name="SpendType" type="SpendType" />
+    <property name ="ChequeNumber" />
+    <many-to-one name="PaymentType" column="PaymentTypeId" />
+    <many-to-one name="BudgetType" class="BudgetType" column="BudgetTypeId" />
+    <many-to-one name="FundType" class="FundType" column="FundTypeId" />
+    <many-to-one name="SpendType" class="SpendType" column="SpendTypeId" />
   </class>
 </hibernate-mapping>

@@ -1,5 +1,8 @@
-﻿namespace FinanceEntities
+﻿using System;
+
+namespace FinanceEntities
 {
+    [Serializable]
     public enum GiftAidStatus
     {
         NotSet,

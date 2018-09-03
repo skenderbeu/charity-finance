@@ -3,6 +3,7 @@
     public class Payment : Transaction
     {
         public virtual SpendType SpendType { get; set; }
+        public virtual string ChequeNumber { get; set; }
 
         public override bool FieldsValidated()
         {

@@ -12,9 +12,8 @@
     <property name="Notes" />
     <property name="BankCleared" />
     <property name="PayingInSlip" />
-    <property name="GiftAidStatus" type="Repositories.PaymentGiftAidStatusType" />
-
-    <many-to-one name="PaymentType" class="PaymentType" column="PaymentTypeId" />
+    <property name="GiftAidStatus" column="GiftAidStatusId" type="Repositories.PaymentGiftAidStatusType, Repositories" />
+    <many-to-one name="PaymentType" column="PaymentTypeId" />
     <many-to-one name="BudgetType" class="BudgetType" column="BudgetTypeId" />
     <many-to-one name="FundType" class="FundType" column="FundTypeId" />
   </class>

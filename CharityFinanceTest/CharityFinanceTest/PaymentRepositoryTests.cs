@@ -1,250 +1,208 @@
-﻿//using FinanceEntities;
-//using Microsoft.VisualStudio.TestTools.UnitTesting;
-//using Repositories;
-//using System;
-//using System.Linq;
+﻿using FinanceEntities;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Repositories;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
-//namespace CharityFinanceTests
-//{
-//    [TestClass]
-//    public class PaymentRepositoryTests
-//    {
-//        private IPaymentRepository repo;
+namespace CharityFinanceTests
+{
+    [TestClass]
+    public class PaymentRepositoryTests
+    {
+        private IRepository<Payment> repo;
+        private DateTime DATERECIEVED;
+        private string DESCRIPTION;
+        private PaymentType PAYMENTTYPE_TOADD;
+        private PaymentType PAYMENTTYPE;
+        private double AMOUNT;
+        private BudgetType BUDGETTYPE_TOADD;
+        private BudgetType BUDGETTYPE;
+        private string NOTE;
+        private bool BANKCLEARED;
+        private FundType FUNDTYPE_TOADD;
+        private FundType FUNDTYPE;
+        private SpendType SPENDTYPE_TOADD;
+        private SpendType SPENDTYPE;
+        private string CHEQUENUMBER;
 
-//        [TestInitialize]
-//        public void Setup()
-//        {
-//            repo = new PaymentRepository(MockPayments.Payments());
-//        }
+        private PaymentTypeRepository paymentTypeRepository;
+        private BudgetTypeRepository budgetTypeRepository;
+        private FundTypeRepository fundTypeRepository;
+        private SpendTypeRepository spendTypeRepository;
 
-//        [TestCleanup]
-//        public void CloseDown()
-//        {
-//            repo.Dispose();
-//            repo = null;
-//        }
+        [TestInitialize]
+        public void Setup()
+        {
+            repo = new PaymentRepository<Payment>();
+            InitialiseParameters();
 
-//        [TestMethod]
-//        public void GetPaymentsByAmount_50_Returns4()
-//        {
-//            //Arrange
-//            var amount = 50.00;
+            CreateTransactionTypeRows();
+        }
 
-//            //Act
-//            var actual = repo.GetPaymentsByAmount(amount).ToList().Count();
-//            var expected = 4;
+        [TestCleanup]
+        public void CloseDown()
+        {
+            repo = null;
 
-//            //Assert
-//            Assert.AreEqual(expected, actual);
-//        }
+            DeleteTransactionTypeRows();
 
-//        [TestMethod]
-//        public void GetPaymentsByAmountWithDate_50_Returns4()
-//        {
-//            //Arrange
-//            var amount = 50.00;
-//            var dateOfPayment = DateTime.Parse("03/06/2018");
+            paymentTypeRepository = null;
+            fundTypeRepository = null;
+            budgetTypeRepository = null;
+        }
 
-//            var payments = repo.GetPaymentsByDate(dateOfPayment);
+        private void CreateTransactionTypeRows()
+        {
+            paymentTypeRepository = new PaymentTypeRepository();
+            fundTypeRepository = new FundTypeRepository();
+            budgetTypeRepository = new BudgetTypeRepository();
+            spendTypeRepository = new SpendTypeRepository();
 
-//            //Act
-//            var actual = repo.GetPaymentsByAmount(amount, payments).ToList().Count();
-//            var expected = 2;
+            var paymentTypeId = paymentTypeRepository.Add(PAYMENTTYPE_TOADD);
+            var fundTypeId = fundTypeRepository.Add(FUNDTYPE_TOADD);
+            var budgetTypeId = budgetTypeRepository.Add(BUDGETTYPE_TOADD);
+            var spendTypeId = spendTypeRepository.Add(SPENDTYPE_TOADD);
 
-//            //Assert
-//            Assert.AreEqual(expected, actual);
-//        }
+            PAYMENTTYPE = paymentTypeRepository.GetById(paymentTypeId);
+            BUDGETTYPE = budgetTypeRepository.GetById(budgetTypeId);
+            FUNDTYPE = fundTypeRepository.GetById(fundTypeId);
+            SPENDTYPE = spendTypeRepository.GetById(spendTypeId);
+        }
 
-//        [TestMethod]
-//        public void GetPaymentsByDate_03062018_Returns2()
-//        {
-//            //Arrange
-//            var dateOfPayment = DateTime.Parse("03/06/2018");
+        private void DeleteTransactionTypeRows()
+        {
+            paymentTypeRepository.Remove(PAYMENTTYPE);
+            fundTypeRepository.Remove(FUNDTYPE);
+            budgetTypeRepository.Remove(BUDGETTYPE);
+            spendTypeRepository.Remove(SPENDTYPE);
+        }
 
-//            //Act
-//            var actual = repo.GetPaymentsByDate(dateOfPayment).ToList().Count();
-//            var expected = 2;
+        private void InitialiseParameters()
+        {
+            DATERECIEVED = new DateTime(2018, 8, 7);
+            DESCRIPTION = "Builder and Sons";
+            AMOUNT = 520.00;
+            PAYMENTTYPE_TOADD = new PaymentType()
+            {
+                Id = Guid.NewGuid(),
+                Description = "CHQ",
+                LongDescription = "Cheque"
+            };
+            BUDGETTYPE_TOADD = new BudgetType()
+            {
+                Id = Guid.NewGuid(),
+                Description = "Building",
+                LongDescription = "Building Maintenance"
+            };
+            FUNDTYPE_TOADD = new FundType()
+            {
+                Id = Guid.NewGuid(),
+                Description = "Building",
+                LongDescription = "Building Fund"
+            };
+            SPENDTYPE_TOADD = new SpendType()
+            {
+                Id = Guid.NewGuid(),
+                Description = "Capital",
+                LongDescription = "Capital"
+            };
+            NOTE = "";
+            BANKCLEARED = false;
+            CHEQUENUMBER = "000123";
+        }
 
-//            //Assert
-//            Assert.AreEqual(expected, actual);
-//        }
+        [TestMethod]
+        [TestCategory("IntegrationTests")]
+        public void PaymentCrud()
+        {
+            Guid newId = Create();
+            GetByID(newId);
+            GetAll();
+            Update(newId);
+            Delete(newId);
+        }
 
-//        [TestMethod]
-//        public void GetPaymentsByDate_01011900_Returns0()
-//        {
-//            //Arrange
-//            var dateOfPayment = DateTime.Parse("01/01/1900");
+        private Guid Create()
+        {
+            //Arrange
+            Payment payment = new Payment()
+            {
+                Date = DATERECIEVED,
+                Description = DESCRIPTION,
+                Amount = AMOUNT,
+                PaymentType = PAYMENTTYPE,
+                BudgetType = BUDGETTYPE,
+                Notes = NOTE,
+                BankCleared = BANKCLEARED,
+                FundType = FUNDTYPE,
+                SpendType = SPENDTYPE
+            };
 
-//            //Act
-//            var actual = repo.GetPaymentsByDate(dateOfPayment).ToList().Count();
-//            var expected = 0;
+            //Act
+            payment.Id = repo.Add(payment);
 
-//            //Assert
-//            Assert.AreEqual(expected, actual);
-//        }
+            //Assert
+            Assert.AreNotEqual(0, payment.Id, "Creating new record does not return id");
 
-//        [TestMethod]
-//        public void GetPaymentsByDateRange_01062018to25062018_Returns4()
-//        {
-//            //Arrange
-//            var datefrom = DateTime.Parse("01/06/2018");
-//            var dateTo = DateTime.Parse("25/06/2018");
+            return payment.Id;
+        }
 
-//            //Act
-//            var actual = repo.GetPaymentsByDateRange(datefrom, dateTo).ToList().Count();
-//            var expected = 4;
+        private void Update(Guid id)
+        {
+            // Arrange
+            Payment payment = repo.GetById(id);
+            payment.Description = "Test Change";
 
-//            //Assert
-//            Assert.AreEqual(expected, actual);
-//        }
+            // Act
+            repo.Update(payment);
 
-//        [TestMethod]
-//        public void GetPaymentsByBudgetType_Building_Returns2()
-//        {
-//            //Arrange
-//            var budgetType = BudgetTypes.Building;
+            Payment updatedPayment = repo.GetById(id);
 
-//            //Act
-//            var actual = repo.GetPaymentsByBudgetType(budgetType).ToList().Count();
-//            var expected = 2;
+            // Assert
+            Assert.AreEqual("Test Change", updatedPayment.Description, "Record is not updated.");
+        }
 
-//            //Assert
-//            Assert.AreEqual(expected, actual);
-//        }
+        private void GetAll()
+        {
+            // Act
+            IList<Payment> payment = repo.GetAll();
 
-//        [TestMethod]
-//        public void GetPaymentsByBudgetTypeWithDate_Building_Returns2()
-//        {
-//            //Arrange
-//            var budgetType = BudgetTypes.Building;
-//            var dateOfPayment = DateTime.Parse("03/06/2018");
+            // Assert
+            Assert.IsTrue(payment.Count() > 0, "GetAll returned no items.");
+        }
 
-//            var payments = repo.GetPaymentsByDate(dateOfPayment);
+        private void GetByID(Guid id)
+        {
+            // Act
+            Payment payment = repo.GetById(id);
 
-//            //Act
-//            var actual = repo.GetPaymentsByBudgetType(budgetType, payments).ToList().Count();
-//            var expected = 1;
+            // Assert
+            Assert.IsNotNull(payment.Description, "GetByID returned null.");
+            Assert.AreEqual(id, payment.Id);
+            Assert.AreEqual(DESCRIPTION, payment.Description);
+            Assert.AreEqual(AMOUNT, payment.Amount);
+            Assert.AreEqual(CHEQUENUMBER, payment.ChequeNumber);
+            Assert.AreEqual(PAYMENTTYPE, payment.PaymentType);
+            Assert.AreEqual(BUDGETTYPE, payment.BudgetType);
+            Assert.AreEqual(FUNDTYPE, payment.FundType);
+            Assert.AreEqual(SPENDTYPE, payment.SpendType);
+            Assert.AreEqual(NOTE, payment.Notes);
+            Assert.AreEqual(BANKCLEARED, payment.BankCleared);
+            Assert.AreEqual(DATERECIEVED, payment.Date);
+        }
 
-//            //Assert
-//            Assert.AreEqual(expected, actual);
-//        }
+        private void Delete(Guid id)
+        {
+            // Arrange
+            Payment payment = repo.GetById(id);
 
-//        [TestMethod]
-//        public void GetPaymentsByPaymentType_DDR_Returns4()
-//        {
-//            //Arrange
-//            var paymentType = PaymentTypes.DDR;
+            // Act
+            repo.Remove(payment);
+            payment = repo.GetById(id);
 
-//            //Act
-//            var actual = repo.GetPaymentsByPaymentType(paymentType).ToList().Count();
-//            var expected = 4;
-
-//            //Assert
-//            Assert.AreEqual(expected, actual);
-//        }
-
-//        [TestMethod]
-//        public void GetPaymentsByPaymentTypeWithDate_DDR_Returns2()
-//        {
-//            //Arrange
-//            var paymentType = PaymentTypes.DDR;
-//            var dateOfPayment = DateTime.Parse("03/06/2018");
-
-//            var payments = repo.GetPaymentsByDate(dateOfPayment);
-
-//            //Act
-//            var actual = repo.GetPaymentsByPaymentType(paymentType, payments).ToList().Count();
-//            var expected = 2;
-
-//            //Assert
-//            Assert.AreEqual(expected, actual);
-//        }
-
-//        [TestMethod]
-//        public void GetPaymentsByDescription_Tax_Returns2()
-//        {
-//            //Arrange
-//            var description = "Tax";
-
-//            //Act
-//            var actual = repo.GetPaymentsByDescription(description).ToList().Count();
-//            var expected = 2;
-
-//            //Assert
-//            Assert.AreEqual(expected, actual);
-//        }
-
-//        [TestMethod]
-//        public void GetPaymentsByDescriptionWithDate_Tax_Returns1()
-//        {
-//            //Arrange
-//            var description = "Tax";
-//            var dateOfPayment = DateTime.Parse("03/06/2018");
-
-//            var payments = repo.GetPaymentsByDate(dateOfPayment);
-
-//            //Act
-//            var actual = repo.GetPaymentsByDescription(description, payments).ToList().Count();
-//            var expected = 1;
-
-//            //Assert
-//            Assert.AreEqual(expected, actual);
-//        }
-
-//        [TestMethod]
-//        public void GetPaymentsByDescription_tax_Returns2()
-//        {
-//            //Arrange
-//            var description = "tax";
-
-//            //Act
-//            var actual = repo.GetPaymentsByDescription(description).ToList().Count();
-//            var expected = 2;
-
-//            //Assert
-//            Assert.AreEqual(expected, actual);
-//        }
-
-//        [TestMethod]
-//        public void GetPaymentsByDescription_TAX_Returns2()
-//        {
-//            //Arrange
-//            var description = "TAX";
-
-//            //Act
-//            var actual = repo.GetPaymentsByDescription(description).ToList().Count();
-//            var expected = 2;
-
-//            //Assert
-//            Assert.AreEqual(expected, actual);
-//        }
-
-//        [TestMethod]
-//        public void GetPaymentsByDescription_Council__Tax_Returns2()
-//        {
-//            //Arrange
-//            var description = "Council  Tax";
-
-//            //Act
-//            var actual = repo.GetPaymentsByDescription(description).ToList().Count();
-//            var expected = 2;
-
-//            //Assert
-//            Assert.AreEqual(expected, actual);
-//        }
-
-//        [TestMethod]
-//        public void GetPaymentsByDescription__Council_Tax_Returns2()
-//        {
-//            //Arrange
-//            var description = " Council Tax";
-
-//            //Act
-//            var actual = repo.GetPaymentsByDescription(description).ToList().Count();
-//            var expected = 2;
-
-//            //Assert
-//            Assert.AreEqual(expected, actual);
-//        }
-//    }
-//}
+            // Assert
+            Assert.IsNull(payment, "Record is not deleted.");
+        }
+    }
+}

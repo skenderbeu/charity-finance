@@ -13,26 +13,63 @@ namespace CharityFinanceTests
         private IRepository<Income> repo;
         private DateTime DATERECIEVED;
         private string DESCRIPTION;
+        private PaymentType PAYMENTTYPE_TOADD;
         private PaymentType PAYMENTTYPE;
         private double AMOUNT;
+        private BudgetType BUDGETTYPE_TOADD;
         private BudgetType BUDGETTYPE;
         private GiftAidStatus GIFTAIDSTATUS;
         private string PAYINGINSLIP;
         private string NOTE;
         private bool BANKCLEARED;
+        private FundType FUNDTYPE_TOADD;
         private FundType FUNDTYPE;
+
+        private PaymentTypeRepository paymentTypeRepository;
+        private BudgetTypeRepository budgetTypeRepository;
+        private FundTypeRepository fundTypeRepository;
 
         [TestInitialize]
         public void Setup()
         {
             repo = new IncomeRepository<Income>();
             InitialiseParameters();
+
+            CreateTransactionTypeRows();
         }
 
         [TestCleanup]
         public void CloseDown()
         {
             repo = null;
+
+            DeleteTransactionTypeRows();
+
+            paymentTypeRepository = null;
+            fundTypeRepository = null;
+            budgetTypeRepository = null;
+        }
+
+        private void CreateTransactionTypeRows()
+        {
+            paymentTypeRepository = new PaymentTypeRepository();
+            fundTypeRepository = new FundTypeRepository();
+            budgetTypeRepository = new BudgetTypeRepository();
+
+            var paymentTypeId = paymentTypeRepository.Add(PAYMENTTYPE_TOADD);
+            var fundTypeId = fundTypeRepository.Add(FUNDTYPE_TOADD);
+            var budgetTypeId = budgetTypeRepository.Add(BUDGETTYPE_TOADD);
+
+            PAYMENTTYPE = paymentTypeRepository.GetById(paymentTypeId);
+            BUDGETTYPE = budgetTypeRepository.GetById(budgetTypeId);
+            FUNDTYPE = fundTypeRepository.GetById(fundTypeId);
+        }
+
+        private void DeleteTransactionTypeRows()
+        {
+            paymentTypeRepository.Remove(PAYMENTTYPE);
+            fundTypeRepository.Remove(FUNDTYPE);
+            budgetTypeRepository.Remove(BUDGETTYPE);
         }
 
         private void InitialiseParameters()
@@ -40,19 +77,19 @@ namespace CharityFinanceTests
             DATERECIEVED = new DateTime(2018, 8, 7);
             DESCRIPTION = "Offering 7/8/2018";
             AMOUNT = 230.00;
-            PAYMENTTYPE = new PaymentType()
+            PAYMENTTYPE_TOADD = new PaymentType()
             {
                 Id = Guid.NewGuid(),
                 Description = "CSH",
                 LongDescription = "Cash"
             };
-            BUDGETTYPE = new BudgetType()
+            BUDGETTYPE_TOADD = new BudgetType()
             {
                 Id = Guid.NewGuid(),
                 Description = "GeneralIncome",
                 LongDescription = "General Income"
             };
-            FUNDTYPE = new FundType()
+            FUNDTYPE_TOADD = new FundType()
             {
                 Id = Guid.NewGuid(),
                 Description = "Revenue",
@@ -66,7 +103,7 @@ namespace CharityFinanceTests
 
         [TestMethod]
         [TestCategory("IntegrationTests")]
-        public void BudgetTypeCrud()
+        public void IncomeCrud()
         {
             Guid newId = Create();
             GetByID(newId);
