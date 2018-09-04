@@ -12,7 +12,7 @@
     <property name="Notes" />
     <property name="BankCleared" />
     <property name ="ChequeNumber" />
-    <many-to-one name="PaymentType" column="PaymentTypeId" />
+    <many-to-one name="PaymentType" class="PaymentType" column="PaymentTypeId" />
     <many-to-one name="BudgetType" class="BudgetType" column="BudgetTypeId" />
     <many-to-one name="FundType" class="FundType" column="FundTypeId" />
     <many-to-one name="SpendType" class="SpendType" column="SpendTypeId" />

@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinanceDesktopView", "Finan
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinanceServices", "FinanceServices\FinanceServices.csproj", "{BC394C39-01E4-4300-B457-DCD68B67E71F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExcelServices", "ExcelServices\ExcelServices.csproj", "{265CA93A-65E0-49C6-A373-0802430FAC8F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{BC394C39-01E4-4300-B457-DCD68B67E71F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BC394C39-01E4-4300-B457-DCD68B67E71F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BC394C39-01E4-4300-B457-DCD68B67E71F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{265CA93A-65E0-49C6-A373-0802430FAC8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{265CA93A-65E0-49C6-A373-0802430FAC8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{265CA93A-65E0-49C6-A373-0802430FAC8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{265CA93A-65E0-49C6-A373-0802430FAC8F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

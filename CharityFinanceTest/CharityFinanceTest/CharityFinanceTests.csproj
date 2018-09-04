@@ -58,20 +58,25 @@
     <Compile Include="MockPayments.cs" />
     <Compile Include="PaymentTest.cs" />
     <Compile Include="IncomeTest.cs" />
-    <Compile Include="FundTypeRepositoryTests.cs" />
-    <Compile Include="BudgetTypeRepositoryTests.cs" />
-    <Compile Include="SpendTypeRepositoryTests.cs" />
+    <Compile Include="Repository\FundTypeRepositoryTests.cs" />
+    <Compile Include="Repository\BudgetTypeRepositoryTests.cs" />
+    <Compile Include="Repository\SpendTypeRepositoryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="FundRepositoryTests.cs" />
-    <Compile Include="PaymentRepositoryTests.cs" />
+    <Compile Include="Repository\PaymentRepositoryTests.cs" />
     <Compile Include="MonthRepositoryTest.cs" />
-    <Compile Include="IncomeRepositoryTests.cs" />
-    <Compile Include="PaymentTypeRepositoryTests.cs" />
+    <Compile Include="Repository\IncomeRepositoryTests.cs" />
+    <Compile Include="Repository\PaymentTypeRepositoryTests.cs" />
+    <Compile Include="ExcelServices\ExcelWriterTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Entities\FinanceEntities.csproj">
       <Project>{5edf35bc-981a-4c34-b428-1beadbb29fe0}</Project>
       <Name>FinanceEntities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ExcelServices\ExcelServices.csproj">
+      <Project>{265ca93a-65e0-49c6-a373-0802430fac8f}</Project>
+      <Name>ExcelServices</Name>
     </ProjectReference>
     <ProjectReference Include="..\Repositories\Repositories.csproj">
       <Project>{d50cd673-444f-468f-abd3-8d258e47ddb9}</Project>
@@ -80,6 +85,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Services\" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

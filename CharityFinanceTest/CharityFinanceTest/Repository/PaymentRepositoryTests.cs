@@ -136,7 +136,8 @@ namespace CharityFinanceTests
                 Notes = NOTE,
                 BankCleared = BANKCLEARED,
                 FundType = FUNDTYPE,
-                SpendType = SPENDTYPE
+                SpendType = SPENDTYPE,
+                ChequeNumber = CHEQUENUMBER
             };
 
             //Act
