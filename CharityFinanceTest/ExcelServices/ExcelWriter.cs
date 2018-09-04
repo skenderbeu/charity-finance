@@ -7,33 +7,47 @@ namespace ExcelServices
 {
     public class ExcelWriter
     {
-        public void Write(ExcelFile excelFile, IList<IncomeSheetDTO> rows)
+        private const string FIRST_CELL = "A2";
+        private ExcelFile _excelFile;
+
+        public ExcelWriter(ExcelFile excelFile)
         {
-            //Create a new ExcelPackage
+            _excelFile = excelFile;
+        }
+
+        public void Write(IList<IncomeSheetDTO> rows)
+        {
             using (ExcelPackage excelPackage = new ExcelPackage())
             {
-                //Set some properties of the Excel document
-                AddFileProperties(excelFile, excelPackage);
-                //Create the WorkSheet
-                ExcelWorksheet worksheet = excelPackage.Workbook.Worksheets.Add(excelFile.SheetName);
+                AddFileProperties(excelPackage);
+
+                ExcelWorksheet worksheet = excelPackage.Workbook.Worksheets.Add(_excelFile.SheetName);
 
                 AddHeaders(worksheet);
 
-                worksheet.Cells["A2"].LoadFromCollection(rows);
+                worksheet.Cells[FIRST_CELL].LoadFromCollection(rows);
 
                 worksheet.Cells[worksheet.Dimension.Address].AutoFitColumns();
 
-                excelPackage.SaveAs(excelFile.FilePath);
-            }
+                excelPackage.SaveAs(_excelFile.FilePath);
+            }
         }
 
         public IList<string> Read(string fileName)
         {
-            //create a list to hold all the values
             List<string> excelData = new List<string>();
+
             //read the Excel file as byte array
             byte[] bin = File.ReadAllBytes(fileName);
+
             //create a new Excel package in a memorystream
+            GetExcelData(excelData, bin);
+
+            return excelData;
+        }
+
+        private void GetExcelData(List<string> excelData, byte[] bin)
+        {
             using (MemoryStream stream = new MemoryStream(bin))
             using (ExcelPackage excelPackage = new ExcelPackage(stream))
             {
@@ -56,15 +70,13 @@ namespace ExcelServices
                     }
                 }
             }
-
-            return excelData;
         }
 
-        private void AddFileProperties(ExcelFile excelFile, ExcelPackage excelPackage)
+        private void AddFileProperties(ExcelPackage excelPackage)
         {
-            excelPackage.Workbook.Properties.Author = excelFile.Author;
-            excelPackage.Workbook.Properties.Title = excelFile.Title;
-            excelPackage.Workbook.Properties.Subject = excelFile.Subject;
+            excelPackage.Workbook.Properties.Author = _excelFile.Author;
+            excelPackage.Workbook.Properties.Title = _excelFile.Title;
+            excelPackage.Workbook.Properties.Subject = _excelFile.Subject;
             excelPackage.Workbook.Properties.Created = DateTime.Now;
         }
 

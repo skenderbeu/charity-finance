@@ -16,8 +16,8 @@ namespace CharityFinanceTests
         [TestInitialize]
         public void Setup()
         {
-            excelWriter = new ExcelWriter();
             InitializeVariables();
+            excelWriter = new ExcelWriter(excelFile);
         }
 
         [TestCleanup]
@@ -62,7 +62,7 @@ namespace CharityFinanceTests
             };
 
             //Act
-            excelWriter.Write(excelFile, rows);
+            excelWriter.Write(rows);
             var actual = excelWriter.Read(excelFile.FilePath.FullName).Count;
             var expected = 20;
 
