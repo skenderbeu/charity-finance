@@ -2,7 +2,13 @@
 {
     public class Fund
     {
-        public string FundName { get; set; }
-        public double Balance { get; set; }
+        public Fund(string fundName, double balance)
+        {
+            FundName = fundname;
+            Balance = balance;
+        }
+        
+        public string FundName { get; private set;}
+        public double Balance { get; private set;}
     }
 }
