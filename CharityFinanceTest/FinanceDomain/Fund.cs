@@ -4,11 +4,11 @@
     {
         public Fund(string fundName, double balance)
         {
-            FundName = fundname;
+            FundName = fundName;
             Balance = balance;
         }
-        
-        public string FundName { get; private set;}
-        public double Balance { get; private set;}
+
+        public string FundName { get; private set; }
+        public double Balance { get; private set; }
     }
 }

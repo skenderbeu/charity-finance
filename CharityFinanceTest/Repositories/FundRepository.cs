@@ -27,10 +27,7 @@ namespace Repositories
             var balance = GetIncomeByFundType(fundType).Sum(i => i.Amount) -
                          GetPaymentByFundType(fundType).Sum(p => p.Amount);
 
-            fund = new Fund()
-            {
-                Balance = balance
-            };
+            fund = new Fund(fundType.ToString(), balance);
 
             return fund;
         }
@@ -40,10 +37,7 @@ namespace Repositories
             var balance = GetIncomeByFundType(fundType).Where(t => t.Date <= date).Sum(i => i.Amount) -
                 GetPaymentByFundType(fundType).Where(t => t.Date <= date).Sum(p => p.Amount);
 
-            fund = new Fund()
-            {
-                Balance = balance
-            };
+            fund = new Fund(fundType.ToString(), balance);
 
             return fund;
         }

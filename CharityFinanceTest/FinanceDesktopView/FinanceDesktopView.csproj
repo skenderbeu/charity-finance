@@ -96,7 +96,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Entities\FinanceDomain.csproj">
+    <ProjectReference Include="..\FinanceDomain\FinanceDomain.csproj">
       <Project>{5edf35bc-981a-4c34-b428-1beadbb29fe0}</Project>
       <Name>FinanceDomain</Name>
     </ProjectReference>

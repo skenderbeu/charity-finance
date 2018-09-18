@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2035
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinanceServicesTest", "CharityFinanceTest\FinanceServicesTest.csproj", "{6927B21B-2845-486C-9950-090A08B4BA73}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinanceServicesTest", "FinanceServicesTest\FinanceServicesTest.csproj", "{6927B21B-2845-486C-9950-090A08B4BA73}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinanceDomain", "Entities\FinanceDomain.csproj", "{5EDF35BC-981A-4C34-B428-1BEADBB29FE0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinanceDomain", "FinanceDomain\FinanceDomain.csproj", "{5EDF35BC-981A-4C34-B428-1BEADBB29FE0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repositories", "Repositories\Repositories.csproj", "{D50CD673-444F-468F-ABD3-8D258E47DDB9}"
 EndProject
