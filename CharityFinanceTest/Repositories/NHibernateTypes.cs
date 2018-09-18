@@ -1,5 +1,5 @@
 ﻿using System;
-using FinanceEntities;
+using FinanceDomain;
 using NHibernate.Type;
 
 namespace Repositories

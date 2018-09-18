@@ -1,7 +1,6 @@
-﻿using FinanceEntities;
-using System;
+﻿using System;
 
-namespace Repositories
+namespace FinanceDomain
 {
     public interface IFundRepository : IDisposable
     {

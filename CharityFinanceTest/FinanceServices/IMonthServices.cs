@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using FinanceEntities;
+using FinanceDomain;
 
 namespace FinanceServices
 {

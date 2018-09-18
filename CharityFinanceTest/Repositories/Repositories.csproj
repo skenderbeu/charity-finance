@@ -49,23 +49,11 @@
     <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
       <HintPath>..\packages\Antlr3.Runtime.3.5.1\lib\net40-client\Antlr3.Runtime.dll</HintPath>
     </Reference>
-    <Reference Include="Glimpse.Core, Version=1.8.6.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Glimpse.1.8.6\lib\net45\Glimpse.Core.dll</HintPath>
-    </Reference>
     <Reference Include="Iesi.Collections, Version=4.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <HintPath>..\packages\Iesi.Collections.4.0.4\lib\net461\Iesi.Collections.dll</HintPath>
     </Reference>
     <Reference Include="NHibernate, Version=5.1.0.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <HintPath>..\packages\NHibernate.5.1.3\lib\net461\NHibernate.dll</HintPath>
-    </Reference>
-    <Reference Include="NHibernate.Glimpse, Version=3.3.3.4001, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NHibernate.Glimpse.3.3.3.40011\lib\net35\NHibernate.Glimpse.dll</HintPath>
-    </Reference>
-    <Reference Include="NHibernate.Validator, Version=5.1.0.0, Culture=neutral, PublicKeyToken=70154e18752585bd, processorArchitecture=MSIL">
-      <HintPath>..\packages\NHibernate.Validator.5.1.0\lib\net461\NHibernate.Validator.dll</HintPath>
-    </Reference>
-    <Reference Include="NHibernate.Validator.Specific, Version=5.1.0.0, Culture=neutral, PublicKeyToken=70154e18752585bd, processorArchitecture=MSIL">
-      <HintPath>..\packages\NHibernate.Validator.5.1.0\lib\net461\NHibernate.Validator.Specific.dll</HintPath>
     </Reference>
     <Reference Include="Remotion.Linq, Version=2.2.0.0, Culture=neutral, PublicKeyToken=fee00910d6e5f53b, processorArchitecture=MSIL">
       <HintPath>..\packages\Remotion.Linq.2.2.0\lib\net45\Remotion.Linq.dll</HintPath>
@@ -87,18 +75,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataAccessConfiguration.cs" />
-    <Compile Include="Interfaces\IGetAllRepository.cs" />
-    <Compile Include="Interfaces\IListRepository.cs" />
-    <Compile Include="Interfaces\IRepository.cs" />
-    <Compile Include="Interfaces\ISingleRepository.cs" />
     <Compile Include="NHibernateTypes.cs" />
     <Compile Include="RepositoryBase.cs" />
     <Compile Include="TypeRepositories\BudgetTypeRepository.cs" />
     <Compile Include="FundRepository.cs" />
     <Compile Include="IncomeRepository.cs" />
-    <Compile Include="Interfaces\IFundRepository.cs" />
-    <Compile Include="Interfaces\IPaymentRepository.cs" />
-    <Compile Include="Interfaces\ITransactionTypeRepository.cs" />
     <Compile Include="PaymentRepository.cs" />
     <Compile Include="TypeRepositories\FundTypeRepository.cs" />
     <Compile Include="TypeRepositories\PaymentTypeRepository.cs" />
@@ -107,9 +88,9 @@
     <Compile Include="TypeRepositories\TransactionTypeRepository.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Entities\FinanceEntities.csproj">
+    <ProjectReference Include="..\Entities\FinanceDomain.csproj">
       <Project>{5edf35bc-981a-4c34-b428-1beadbb29fe0}</Project>
-      <Name>FinanceEntities</Name>
+      <Name>FinanceDomain</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -142,7 +123,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
+    <None Include="app.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />

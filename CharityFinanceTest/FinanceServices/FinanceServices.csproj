@@ -52,9 +52,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Entities\FinanceEntities.csproj">
+    <ProjectReference Include="..\Entities\FinanceDomain.csproj">
       <Project>{5edf35bc-981a-4c34-b428-1beadbb29fe0}</Project>
-      <Name>FinanceEntities</Name>
+      <Name>FinanceDomain</Name>
     </ProjectReference>
     <ProjectReference Include="..\Repositories\Repositories.csproj">
       <Project>{d50cd673-444f-468f-abd3-8d258e47ddb9}</Project>

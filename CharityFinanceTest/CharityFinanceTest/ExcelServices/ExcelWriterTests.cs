@@ -2,10 +2,10 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ExcelServices;
 using System.IO;
-using FinanceEntities;
 using System.Collections.Generic;
+using FinanceDomain;
 
-namespace CharityFinanceTests
+namespace FinanceServicesTest
 {
     [TestClass]
     public class ExcelWriterTests

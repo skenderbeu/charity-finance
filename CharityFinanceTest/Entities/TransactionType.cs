@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace FinanceEntities
+namespace FinanceDomain
 {
     public class TransactionType : DBBase
     {

@@ -1,5 +1,4 @@
-﻿using FinanceEntities;
-using NHibernate;
+﻿using FinanceDomain;
 using System;
 using System.Collections.Generic;
 using System.Data;

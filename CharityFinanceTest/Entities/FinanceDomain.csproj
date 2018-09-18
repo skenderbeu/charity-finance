@@ -7,8 +7,8 @@
     <ProjectGuid>{5EDF35BC-981A-4C34-B428-1BEADBB29FE0}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FinanceEntities</RootNamespace>
-    <AssemblyName>FinanceEntities</AssemblyName>
+    <RootNamespace>FinanceDomain</RootNamespace>
+    <AssemblyName>FinanceDomain</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -42,6 +42,12 @@
   <ItemGroup>
     <Compile Include="DBBaseClass.cs" />
     <Compile Include="Fund.cs" />
+    <Compile Include="Interfaces\IFundRepository.cs" />
+    <Compile Include="Interfaces\IGetAllRepository.cs" />
+    <Compile Include="Interfaces\IListRepository.cs" />
+    <Compile Include="Interfaces\IRepository.cs" />
+    <Compile Include="Interfaces\ISingleRepository.cs" />
+    <Compile Include="Interfaces\ITransactionTypeRepository.cs" />
     <Compile Include="TransactionType.cs" />
     <Compile Include="Transaction.cs" />
     <Compile Include="Income.cs" />

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
-namespace Repositories
+namespace FinanceDomain
 {
     public interface IListRepository<T> where T : class
     {

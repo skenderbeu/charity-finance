@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Repositories
+namespace FinanceDomain
 {
     public interface IGetAllRepository<T> where T : class
     {

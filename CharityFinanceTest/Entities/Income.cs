@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FinanceEntities
+namespace FinanceDomain
 {
     public class Income : Transaction
     {

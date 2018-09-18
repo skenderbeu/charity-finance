@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2035
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CharityFinanceTests", "CharityFinanceTest\CharityFinanceTests.csproj", "{6927B21B-2845-486C-9950-090A08B4BA73}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinanceServicesTest", "CharityFinanceTest\FinanceServicesTest.csproj", "{6927B21B-2845-486C-9950-090A08B4BA73}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinanceEntities", "Entities\FinanceEntities.csproj", "{5EDF35BC-981A-4C34-B428-1BEADBB29FE0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinanceDomain", "Entities\FinanceDomain.csproj", "{5EDF35BC-981A-4C34-B428-1BEADBB29FE0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repositories", "Repositories\Repositories.csproj", "{D50CD673-444F-468F-ABD3-8D258E47DDB9}"
 EndProject
@@ -14,6 +14,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinanceServices", "FinanceServices\FinanceServices.csproj", "{BC394C39-01E4-4300-B457-DCD68B67E71F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExcelServices", "ExcelServices\ExcelServices.csproj", "{265CA93A-65E0-49C6-A373-0802430FAC8F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepositoriesTest", "RepositoryTest\RepositoriesTest.csproj", "{FA3119CE-1CFB-4DC6-B9AF-5BBDE81E0A19}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinanceDomainTest", "FinanceDomainTest\FinanceDomainTest.csproj", "{C237F491-6D60-4641-AE3B-0AA549FC086E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +49,14 @@ Global
 		{265CA93A-65E0-49C6-A373-0802430FAC8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{265CA93A-65E0-49C6-A373-0802430FAC8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{265CA93A-65E0-49C6-A373-0802430FAC8F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA3119CE-1CFB-4DC6-B9AF-5BBDE81E0A19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA3119CE-1CFB-4DC6-B9AF-5BBDE81E0A19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA3119CE-1CFB-4DC6-B9AF-5BBDE81E0A19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA3119CE-1CFB-4DC6-B9AF-5BBDE81E0A19}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C237F491-6D60-4641-AE3B-0AA549FC086E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C237F491-6D60-4641-AE3B-0AA549FC086E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C237F491-6D60-4641-AE3B-0AA549FC086E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C237F491-6D60-4641-AE3B-0AA549FC086E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Repositories
+namespace FinanceDomain
 {
     public interface ISingleRepository<T> where T : class
     {

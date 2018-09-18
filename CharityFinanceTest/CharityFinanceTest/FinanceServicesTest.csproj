@@ -56,39 +56,31 @@
     <Compile Include="MockIncomes.cs" />
     <Compile Include="MockPaymentsMonthRepo.cs" />
     <Compile Include="MockPayments.cs" />
-    <Compile Include="PaymentTest.cs" />
-    <Compile Include="IncomeTest.cs" />
-    <Compile Include="Repository\FundTypeRepositoryTests.cs" />
-    <Compile Include="Repository\BudgetTypeRepositoryTests.cs" />
-    <Compile Include="Repository\SpendTypeRepositoryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="FundRepositoryTests.cs" />
-    <Compile Include="Repository\PaymentRepositoryTests.cs" />
     <Compile Include="MonthRepositoryTest.cs" />
-    <Compile Include="Repository\IncomeRepositoryTests.cs" />
-    <Compile Include="Repository\PaymentTypeRepositoryTests.cs" />
     <Compile Include="ExcelServices\ExcelWriterTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Entities\FinanceEntities.csproj">
+    <ProjectReference Include="..\Entities\FinanceDomain.csproj">
       <Project>{5edf35bc-981a-4c34-b428-1beadbb29fe0}</Project>
-      <Name>FinanceEntities</Name>
+      <Name>FinanceDomain</Name>
     </ProjectReference>
     <ProjectReference Include="..\ExcelServices\ExcelServices.csproj">
       <Project>{265ca93a-65e0-49c6-a373-0802430fac8f}</Project>
       <Name>ExcelServices</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Repositories\Repositories.csproj">
-      <Project>{d50cd673-444f-468f-abd3-8d258e47ddb9}</Project>
-      <Name>Repositories</Name>
+    <ProjectReference Include="..\FinanceServices\FinanceServices.csproj">
+      <Project>{bc394c39-01e4-4300-b457-dcd68b67e71f}</Project>
+      <Name>FinanceServices</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Services\" />
-  </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

@@ -1,4 +1,4 @@
-﻿using FinanceEntities;
+﻿using FinanceDomain;
 
 namespace Repositories
 {

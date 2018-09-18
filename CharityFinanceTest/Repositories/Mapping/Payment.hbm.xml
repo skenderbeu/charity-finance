@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
-                   assembly="FinanceEntities"
-                    namespace="FinanceEntities">
+                   assembly="FinanceDomain"
+                    namespace="FinanceDomain">
   <class name="Payment">
     <id name="Id" type="guid">
       <generator class="guid.comb" />

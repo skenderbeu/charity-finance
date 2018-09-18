@@ -1,4 +1,4 @@
-﻿namespace FinanceEntities
+﻿namespace FinanceDomain
 {
     public class Fund
     {

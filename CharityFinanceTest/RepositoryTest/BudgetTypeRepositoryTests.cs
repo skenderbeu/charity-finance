@@ -1,11 +1,11 @@
-﻿using FinanceEntities;
+﻿using FinanceDomain;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace CharityFinanceTests
+namespace RepositoriesTest
 {
     [TestClass]
     public class BudgetTypeRepositoryTests

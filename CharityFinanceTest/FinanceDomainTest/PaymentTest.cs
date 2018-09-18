@@ -1,8 +1,8 @@
-﻿using FinanceEntities;
+﻿using FinanceDomain;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
-namespace CharityFinanceTests
+namespace FinanceServicesTest
 {
     [TestClass]
     public class PaymentTests
