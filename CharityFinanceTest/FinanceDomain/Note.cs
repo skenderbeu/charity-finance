@@ -2,14 +2,14 @@
 {
     public class Note : ValueObject<Note>
     {
-        public virtual string Value { get; set; }
+        public virtual string Value { get; protected set; }
 
-        public Note()
+        private Note()
         {
             new Note(string.Empty);
         }
 
-        public Note(string value)
+        private Note(string value)
         {
             Value = value;
         }

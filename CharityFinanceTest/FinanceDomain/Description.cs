@@ -2,14 +2,14 @@
 {
     public class TransactionDescription : ValueObject<TransactionDescription>
     {
-        public virtual string Value { get; set; }
+        public virtual string Value { get; protected set; }
 
-        public TransactionDescription()
+        private TransactionDescription()
         {
             new TransactionDescription("Something");
         }
 
-        public TransactionDescription(string value)
+        private TransactionDescription(string value)
         {
             Value = value;
         }
