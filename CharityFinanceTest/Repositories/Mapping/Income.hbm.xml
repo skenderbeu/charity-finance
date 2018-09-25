@@ -7,9 +7,13 @@
       <generator class="guid.comb" />
     </id>
     <property name="Date" />
-    <property name="Description" />
+    <component name="Description">
+      <property name="Value"  column="Description" />
+    </component>
     <property name="Amount" />
-    <property name="Notes" />
+    <component name="Notes">
+      <property name="Value"  column ="Notes" />
+    </component>
     <property name="BankCleared" />
     <property name="PayingInSlip" />
     <property name="GiftAidStatus" column="GiftAidStatusId" type="Repositories.PaymentGiftAidStatusType, Repositories" />

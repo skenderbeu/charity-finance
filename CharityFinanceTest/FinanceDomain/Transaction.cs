@@ -1,15 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace FinanceDomain
 {
-    public abstract class Transaction : DBBase
+    public abstract class Transaction : Entity
     {
         public virtual DateTime Date { get; set; }
-        public virtual string Description { get; set; }
+        public virtual TransactionDescription Description { get; set; }
         public virtual PaymentType PaymentType { get; set; }
         public virtual Double Amount { get; set; }
         public virtual BudgetType BudgetType { get; set; }
-        public virtual string Notes { get; set; }
+        public virtual Note Notes { get; set; }
         public virtual FundType FundType { get; set; }
         public virtual Boolean BankCleared { get; set; }
 
@@ -24,14 +25,11 @@ namespace FinanceDomain
             return isValid;
         }
 
-        public virtual void GetFund()
-        {
-            throw new NotImplementedException();
-        }
-
         public override bool Equals(object obj)
         {
-            if (!(obj is Transaction item))
+            var item = obj as Transaction;
+
+            if (item == null)
             {
                 return false;
             }
@@ -41,7 +39,12 @@ namespace FinanceDomain
 
         public override int GetHashCode()
         {
-            return Id.GetHashCode();
+            return this.Id.GetHashCode();
+        }
+
+        public virtual void GetFund()
+        {
+            throw new NotImplementedException();
         }
     }
 }

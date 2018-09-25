@@ -12,13 +12,13 @@ namespace RepositoriesTest
     {
         private IRepository<Payment> repo;
         private DateTime DATERECIEVED;
-        private string DESCRIPTION;
+        private TransactionDescription DESCRIPTION;
         private PaymentType PAYMENTTYPE_TOADD;
         private PaymentType PAYMENTTYPE;
         private double AMOUNT;
         private BudgetType BUDGETTYPE_TOADD;
         private BudgetType BUDGETTYPE;
-        private string NOTE;
+        private Note NOTE;
         private bool BANKCLEARED;
         private FundType FUNDTYPE_TOADD;
         private FundType FUNDTYPE;
@@ -34,7 +34,7 @@ namespace RepositoriesTest
         [TestInitialize]
         public void Setup()
         {
-            repo = new PaymentRepository<Payment>();
+            repo = new PaymentRepository();
             InitialiseParameters();
 
             CreateTransactionTypeRows();
@@ -81,7 +81,7 @@ namespace RepositoriesTest
         private void InitialiseParameters()
         {
             DATERECIEVED = new DateTime(2018, 8, 7);
-            DESCRIPTION = "Builder and Sons";
+            DESCRIPTION = (TransactionDescription)"Builder and Sons";
             AMOUNT = 520.00;
             PAYMENTTYPE_TOADD = new PaymentType()
             {
@@ -107,7 +107,7 @@ namespace RepositoriesTest
                 Description = "Capital",
                 LongDescription = "Capital"
             };
-            NOTE = "";
+            NOTE = (Note)string.Empty;
             BANKCLEARED = false;
             CHEQUENUMBER = "000123";
         }
@@ -153,7 +153,7 @@ namespace RepositoriesTest
         {
             // Arrange
             Payment payment = repo.GetById(id);
-            payment.Description = "Test Change";
+            payment.Description = (TransactionDescription)"Test Change";
 
             // Act
             repo.Update(payment);

@@ -2,7 +2,7 @@
 
 namespace Repositories
 {
-    public class PaymentRepository<T> : RepositoryBase<T> where T : Payment
+    public class PaymentRepository : RepositoryBase<Payment>
     {
     }
 }

@@ -3,14 +3,21 @@ using System.Collections.Generic;
 
 namespace FinanceDomain
 {
-    public class TransactionType : DBBase
+    public class TransactionType : Entity
     {
         public virtual string Description { get; set; }
         public virtual string LongDescription { get; set; }
 
+        public override string ToString()
+        {
+            return $"{LongDescription}";
+        }
+
         public override bool Equals(object obj)
         {
-            if (!(obj is TransactionType item))
+            var item = obj as TransactionType;
+
+            if (item == null)
             {
                 return false;
             }
@@ -20,12 +27,7 @@ namespace FinanceDomain
 
         public override int GetHashCode()
         {
-            return Id.GetHashCode();
-        }
-
-        public override string ToString()
-        {
-            return $"{LongDescription}";
+            return this.Id.GetHashCode();
         }
     }
 

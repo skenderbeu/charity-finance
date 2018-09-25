@@ -40,7 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DBBaseClass.cs" />
+    <Compile Include="Entity.cs" />
     <Compile Include="Fund.cs" />
     <Compile Include="Interfaces\IFundRepository.cs" />
     <Compile Include="Interfaces\IGetAllRepository.cs" />
@@ -48,12 +48,17 @@
     <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Interfaces\ISingleRepository.cs" />
     <Compile Include="Interfaces\ITransactionTypeRepository.cs" />
+    <Compile Include="Maybe.cs" />
+    <Compile Include="Description.cs" />
+    <Compile Include="Note.cs" />
+    <Compile Include="Result.cs" />
     <Compile Include="TransactionType.cs" />
     <Compile Include="Transaction.cs" />
     <Compile Include="Income.cs" />
     <Compile Include="Payment.cs" />
     <Compile Include="PaymentEnums.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ValueObject.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

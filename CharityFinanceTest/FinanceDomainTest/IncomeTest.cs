@@ -15,7 +15,7 @@ namespace FinanceServicesTest
             income = new Income
             {
                 Date = DateTime.Parse("22/05/2018"),
-                Description = "Offering 20/05/18",
+                Description = (TransactionDescription)"Offering 20/05/18",
                 PaymentType = new PaymentType()
                 {
                     Id = Guid.NewGuid(),

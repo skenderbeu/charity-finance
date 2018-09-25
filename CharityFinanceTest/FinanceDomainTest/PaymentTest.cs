@@ -15,7 +15,7 @@ namespace FinanceServicesTest
             payment = new Payment
             {
                 Date = DateTime.Parse("03/06/2018"),
-                Description = "Council Tax",
+                Description = (TransactionDescription)"Council Tax",
                 PaymentType = new PaymentType()
                 {
                     Id = Guid.NewGuid(),

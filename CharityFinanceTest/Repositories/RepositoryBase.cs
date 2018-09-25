@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 
 namespace Repositories
 {
-    public class RepositoryBase<T> : IRepository<T> where T : DBBase
+    public class RepositoryBase<T> : IRepository<T> where T : Entity
     {
         public RepositoryBase()
         {

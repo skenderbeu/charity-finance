@@ -12,7 +12,7 @@ namespace RepositoriesTest
     {
         private IRepository<Income> repo;
         private DateTime DATERECIEVED;
-        private string DESCRIPTION;
+        private TransactionDescription DESCRIPTION;
         private PaymentType PAYMENTTYPE_TOADD;
         private PaymentType PAYMENTTYPE;
         private double AMOUNT;
@@ -20,7 +20,7 @@ namespace RepositoriesTest
         private BudgetType BUDGETTYPE;
         private GiftAidStatus GIFTAIDSTATUS;
         private string PAYINGINSLIP;
-        private string NOTE;
+        private Note NOTE;
         private bool BANKCLEARED;
         private FundType FUNDTYPE_TOADD;
         private FundType FUNDTYPE;
@@ -32,7 +32,7 @@ namespace RepositoriesTest
         [TestInitialize]
         public void Setup()
         {
-            repo = new IncomeRepository<Income>();
+            repo = new IncomeRepository();
             InitialiseParameters();
 
             CreateTransactionTypeRows();
@@ -75,7 +75,7 @@ namespace RepositoriesTest
         private void InitialiseParameters()
         {
             DATERECIEVED = new DateTime(2018, 8, 7);
-            DESCRIPTION = "Offering 7/8/2018";
+            DESCRIPTION = (TransactionDescription)"Offering 7/8/2018";
             AMOUNT = 230.00;
             PAYMENTTYPE_TOADD = new PaymentType()
             {
@@ -97,7 +97,7 @@ namespace RepositoriesTest
             };
             GIFTAIDSTATUS = GiftAidStatus.NotGiftAid;
             PAYINGINSLIP = "000124";
-            NOTE = "Offering taken in the evening";
+            NOTE = (Note)"Offering taken in the evening";
             BANKCLEARED = false;
         }
 
@@ -142,7 +142,7 @@ namespace RepositoriesTest
         {
             // Arrange
             Income income = repo.GetById(id);
-            income.Description = "Test Change";
+            income.Description = (TransactionDescription)"Test Change";
 
             // Act
             repo.Update(income);
