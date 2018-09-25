@@ -126,10 +126,9 @@ namespace RepositoriesTest
         private Guid Create()
         {
             //Arrange
-            Payment payment = new Payment()
+            Payment payment = new Payment(DESCRIPTION)
             {
                 Date = DATERECIEVED,
-                Description = DESCRIPTION,
                 Amount = AMOUNT,
                 PaymentType = PAYMENTTYPE,
                 BudgetType = BUDGETTYPE,
@@ -153,7 +152,7 @@ namespace RepositoriesTest
         {
             // Arrange
             Payment payment = repo.GetById(id);
-            payment.Description = (TransactionDescription)"Test Change";
+            payment.UpdateDescription((TransactionDescription)"Test Change");
 
             // Act
             repo.Update(payment);

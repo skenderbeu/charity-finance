@@ -6,6 +6,14 @@ namespace FinanceDomain
     {
         private string _payingInSlip;
 
+        public Income(TransactionDescription description) : base(description)
+        {
+        }
+
+        protected Income()
+        {
+        }
+
         public virtual string PayingInSlip
         {
             get { return _payingInSlip; }

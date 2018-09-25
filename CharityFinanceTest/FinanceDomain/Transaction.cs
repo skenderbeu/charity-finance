@@ -6,13 +6,27 @@ namespace FinanceDomain
     public abstract class Transaction : Entity
     {
         public virtual DateTime Date { get; set; }
-        public virtual TransactionDescription Description { get; set; }
+        public virtual TransactionDescription Description { get; protected set; }
         public virtual PaymentType PaymentType { get; set; }
         public virtual Double Amount { get; set; }
         public virtual BudgetType BudgetType { get; set; }
         public virtual Note Notes { get; set; }
         public virtual FundType FundType { get; set; }
         public virtual Boolean BankCleared { get; set; }
+
+        protected Transaction(TransactionDescription description)
+        {
+            Description = description;
+        }
+
+        protected Transaction()
+        {
+        }
+
+        public virtual void UpdateDescription(TransactionDescription description)
+        {
+            Description = description;
+        }
 
         public virtual bool FieldsValidated()
         {

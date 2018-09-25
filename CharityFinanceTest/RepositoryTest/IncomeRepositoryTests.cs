@@ -115,10 +115,9 @@ namespace RepositoriesTest
         private Guid Create()
         {
             //Arrange
-            Income income = new Income()
+            Income income = new Income(DESCRIPTION)
             {
                 Date = DATERECIEVED,
-                Description = DESCRIPTION,
                 Amount = AMOUNT,
                 PaymentType = PAYMENTTYPE,
                 BudgetType = BUDGETTYPE,
@@ -142,7 +141,7 @@ namespace RepositoriesTest
         {
             // Arrange
             Income income = repo.GetById(id);
-            income.Description = (TransactionDescription)"Test Change";
+            income.UpdateDescription((TransactionDescription)"Test Change");
 
             // Act
             repo.Update(income);

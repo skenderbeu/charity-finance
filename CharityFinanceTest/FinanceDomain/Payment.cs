@@ -2,6 +2,14 @@
 {
     public class Payment : Transaction
     {
+        public Payment(TransactionDescription description) : base(description)
+        {
+        }
+
+        protected Payment()
+        {
+        }
+
         public virtual SpendType SpendType { get; set; }
         public virtual string ChequeNumber { get; set; }
 
