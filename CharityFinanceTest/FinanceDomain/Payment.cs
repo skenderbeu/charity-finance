@@ -1,13 +1,35 @@
-﻿namespace FinanceDomain
+﻿using System;
+
+namespace FinanceDomain
 {
     public class Payment : Transaction
     {
-        public Payment(TransactionDescription description) : base(description)
-        {
-        }
+        private Payment(
+        TransactionDescription description,
+           DateTime transactionDate,
+            PaymentType paymentType,
+            double amount,
+            BudgetType budgetType,
+            Note note) :
+            base(description, transactionDate,
+                paymentType, amount, budgetType, note)
+        { }
 
         protected Payment()
         {
+        }
+
+        public static Payment Create(
+          TransactionDescription description,
+          DateTime transactionDate,
+          PaymentType paymentType,
+          Double amount,
+          BudgetType budgetType,
+          Note note)
+        {
+            return new Payment(
+                description, transactionDate,
+                paymentType, amount, budgetType, note);
         }
 
         public virtual SpendType SpendType { get; set; }

@@ -12,10 +12,10 @@ namespace FinanceServices
 
         public IncomeServices()
         {
-            this.incomeRepository = new IncomeRepository<Income>();
+            this.incomeRepository = new IncomeRepository();
         }
 
-        public IncomeServices(IncomeRepository<Income> incomeRepository)
+        public IncomeServices(IncomeRepository incomeRepository)
         {
             this.incomeRepository = incomeRepository;
         }

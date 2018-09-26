@@ -126,18 +126,18 @@ namespace RepositoriesTest
         private Guid Create()
         {
             //Arrange
-            Payment payment = new Payment(DESCRIPTION)
-            {
-                Date = DATERECIEVED,
-                Amount = AMOUNT,
-                PaymentType = PAYMENTTYPE,
-                BudgetType = BUDGETTYPE,
-                Notes = NOTE,
-                BankCleared = BANKCLEARED,
-                FundType = FUNDTYPE,
-                SpendType = SPENDTYPE,
-                ChequeNumber = CHEQUENUMBER
-            };
+            Payment payment = Payment.Create(
+                DESCRIPTION,
+                DATERECIEVED,
+                PAYMENTTYPE,
+                AMOUNT,
+                BUDGETTYPE,
+                NOTE);
+
+            payment.BankCleared = BANKCLEARED;
+            payment.FundType = FUNDTYPE;
+            payment.SpendType = SPENDTYPE;
+            payment.ChequeNumber = CHEQUENUMBER;
 
             //Act
             payment.Id = repo.Add(payment);

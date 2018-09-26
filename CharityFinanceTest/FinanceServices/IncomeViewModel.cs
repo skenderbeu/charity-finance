@@ -16,7 +16,7 @@ namespace FinanceServices
 
         public IncomeViewModel()
         {
-            this.incomeRepository = new IncomeRepository<Income>();
+            this.incomeRepository = new IncomeRepository();
             this.paymentTypeRepository = new PaymentTypeRepository();
             this.budgetTypeRepository = new BudgetTypeRepository();
             this.fundTypeRepository = new FundTypeRepository();

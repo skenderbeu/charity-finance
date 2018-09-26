@@ -5,21 +5,33 @@ namespace FinanceDomain
 {
     public abstract class Transaction : Entity
     {
-        public virtual DateTime Date { get; set; }
+        public virtual DateTime Date { get; protected set; }
         public virtual TransactionDescription Description { get; protected set; }
-        public virtual PaymentType PaymentType { get; set; }
-        public virtual Double Amount { get; set; }
-        public virtual BudgetType BudgetType { get; set; }
-        public virtual Note Notes { get; set; }
+        public virtual PaymentType PaymentType { get; protected set; }
+        public virtual Double Amount { get; protected set; }
+        public virtual BudgetType BudgetType { get; protected set; }
+        public virtual Note Notes { get; protected set; }
         public virtual FundType FundType { get; set; }
         public virtual Boolean BankCleared { get; set; }
 
-        protected Transaction(TransactionDescription description)
+        public Transaction(
+            TransactionDescription description,
+            DateTime transactionDate,
+            PaymentType paymentType,
+            Double amount,
+            BudgetType budgetType,
+            Note note
+            )
         {
             Description = description;
+            Date = transactionDate;
+            PaymentType = paymentType;
+            BudgetType = budgetType;
+            Amount = amount;
+            Notes = note;
         }
 
-        protected Transaction()
+        public Transaction()
         {
         }
 
@@ -28,10 +40,24 @@ namespace FinanceDomain
             Description = description;
         }
 
+        public virtual void UpdateNote(Note note)
+        {
+            Notes = note;
+        }
+
+        public virtual void UpdatePaymentType(PaymentType paymentType)
+        {
+            PaymentType = paymentType;
+        }
+
+        public virtual void UpdateBudgetType(BudgetType budgetType)
+        {
+            BudgetType = budgetType;
+        }
+
         public virtual bool FieldsValidated()
         {
             var isValid = this.Date > DateTime.MinValue
-                && !string.IsNullOrEmpty(this.Description)
                 && PaymentType != null
                 && Amount > 0.00
                 && BudgetType != null ? true : false;

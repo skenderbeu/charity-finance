@@ -12,29 +12,28 @@ namespace FinanceServicesTest
         [TestInitialize]
         public void Setup()
         {
-            payment = new Payment
-            {
-                Date = DateTime.Parse("03/06/2018"),
-                Description = (TransactionDescription)"Council Tax",
-                PaymentType = new PaymentType()
+            payment = Payment.Create(
+                (TransactionDescription)"Council Tax",
+                DateTime.Parse("03/06/2018"),
+                new PaymentType()
                 {
                     Id = Guid.NewGuid(),
                     Description = "DDR",
                     LongDescription = "Direct Debit"
                 },
-                Amount = 210.00,
-                BudgetType = new BudgetType()
+                210.00,
+                new BudgetType()
                 {
                     Id = Guid.NewGuid(),
                     Description = "CTAX",
                     LongDescription = "Council Tax"
-                },
-                SpendType = new SpendType()
-                {
-                    Id = Guid.NewGuid(),
-                    Description = "Revenue",
-                    LongDescription = "Revenue"
-                }
+                }, (Note)string.Empty);
+
+            payment.SpendType = new SpendType()
+            {
+                Id = Guid.NewGuid(),
+                Description = "Revenue",
+                LongDescription = "Revenue"
             };
         }
 

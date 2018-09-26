@@ -12,25 +12,24 @@ namespace FinanceServicesTest
         [TestInitialize]
         public void Setup()
         {
-            income = new Income
-            {
-                Date = DateTime.Parse("22/05/2018"),
-                Description = (TransactionDescription)"Offering 20/05/18",
-                PaymentType = new PaymentType()
-                {
-                    Id = Guid.NewGuid(),
-                    Description = "CSH",
-                    LongDescription = "Cash"
-                },
-                Amount = 230.00,
-                BudgetType = new BudgetType()
-                {
-                    Id = Guid.NewGuid(),
-                    Description = "GeneralIncome",
-                    LongDescription = "General Income"
-                },
-                GiftAidStatus = GiftAidStatus.NotGiftAid
-            };
+            income = Income.Create(
+                 (TransactionDescription)"Offering 20/05/18",
+                 DateTime.Parse("22/05/2018"),
+                 new PaymentType()
+                 {
+                     Id = Guid.NewGuid(),
+                     Description = "CSH",
+                     LongDescription = "Cash"
+                 },
+                 230.00,
+                 new BudgetType()
+                 {
+                     Id = Guid.NewGuid(),
+                     Description = "GeneralIncome",
+                     LongDescription = "General Income"
+                 }, (Note)string.Empty);
+
+            income.GiftAidStatus = GiftAidStatus.NotGiftAid;
         }
 
         [TestCleanup]
@@ -82,12 +81,12 @@ namespace FinanceServicesTest
         [TestMethod]
         public void Income_ValidatePayingInSlipIfCheque_True()
         {
-            income.PaymentType = new PaymentType()
+            income.UpdatePaymentType(new PaymentType()
             {
                 Id = Guid.NewGuid(),
                 Description = "CHQ",
                 LongDescription = "Cheque"
-            };
+            });
 
             income.PayingInSlip = "000124";
 
@@ -99,12 +98,12 @@ namespace FinanceServicesTest
         [TestMethod]
         public void Income_ValidatePayingInSlipIfCheque_False()
         {
-            income.PaymentType = new PaymentType()
+            income.UpdatePaymentType(new PaymentType()
             {
                 Id = Guid.NewGuid(),
                 Description = "CHQ",
                 LongDescription = "Cheque"
-            };
+            });
 
             var actual = income.FieldsValidated();
 

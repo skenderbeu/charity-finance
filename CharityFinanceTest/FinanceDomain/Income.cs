@@ -6,12 +6,37 @@ namespace FinanceDomain
     {
         private string _payingInSlip;
 
-        public Income(TransactionDescription description) : base(description)
-        {
-        }
+        private Income(
+            TransactionDescription description,
+            DateTime transactionDate,
+            PaymentType paymentType,
+            double amount,
+            BudgetType budgetType,
+            Note note) :
+            base(description, transactionDate,
+                paymentType, amount, budgetType, note)
+        { }
 
         protected Income()
         {
+        }
+
+        public static Income Create(
+            TransactionDescription description,
+            DateTime transactionDate,
+            PaymentType paymentType,
+            Double amount,
+            BudgetType budgetType,
+            Note note)
+        {
+            if (paymentType == null) return null;
+            if (budgetType == null) return null;
+            if (transactionDate == DateTime.MinValue) return null;
+            if (amount <= 0.00) return null;
+
+            return new Income(
+                description, transactionDate,
+                paymentType, amount, budgetType, note);
         }
 
         public virtual string PayingInSlip

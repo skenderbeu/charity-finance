@@ -115,18 +115,19 @@ namespace RepositoriesTest
         private Guid Create()
         {
             //Arrange
-            Income income = new Income(DESCRIPTION)
-            {
-                Date = DATERECIEVED,
-                Amount = AMOUNT,
-                PaymentType = PAYMENTTYPE,
-                BudgetType = BUDGETTYPE,
-                GiftAidStatus = GIFTAIDSTATUS,
-                PayingInSlip = PAYINGINSLIP,
-                Notes = NOTE,
-                BankCleared = BANKCLEARED,
-                FundType = FUNDTYPE
-            };
+
+            Income income = Income.Create(
+                DESCRIPTION,
+                DATERECIEVED,
+                PAYMENTTYPE,
+                AMOUNT,
+                BUDGETTYPE,
+                NOTE);
+
+            income.GiftAidStatus = GIFTAIDSTATUS;
+            income.PayingInSlip = PAYINGINSLIP;
+            income.BankCleared = BANKCLEARED;
+            income.FundType = FUNDTYPE;
 
             //Act
             income.Id = repo.Add(income);
