@@ -11,17 +11,18 @@ namespace FinanceDomain
         public virtual Double Amount { get; protected set; }
         public virtual BudgetType BudgetType { get; protected set; }
         public virtual Note Notes { get; protected set; }
-        public virtual FundType FundType { get; set; }
-        public virtual Boolean BankCleared { get; set; }
+        public virtual FundType FundType { get; protected set; }
+        public virtual Boolean BankCleared { get; protected set; }
 
-        public Transaction(
+        protected Transaction(
             TransactionDescription description,
             DateTime transactionDate,
             PaymentType paymentType,
             Double amount,
             BudgetType budgetType,
-            Note note
-            )
+            Note note,
+            FundType fundType
+            ) : this()
         {
             Description = description;
             Date = transactionDate;
@@ -29,9 +30,11 @@ namespace FinanceDomain
             BudgetType = budgetType;
             Amount = amount;
             Notes = note;
+            BankCleared = false;
+            FundType = fundType;
         }
 
-        public Transaction()
+        protected Transaction()
         {
         }
 
@@ -82,9 +85,14 @@ namespace FinanceDomain
             return this.Id.GetHashCode();
         }
 
-        public virtual void GetFund()
+        private FundType GetFund()
         {
-            throw new NotImplementedException();
+            return new FundType()
+            {
+                Id = Guid.NewGuid(),
+                Description = "Revenue",
+                LongDescription = "Revenue"
+            };
         }
     }
 }

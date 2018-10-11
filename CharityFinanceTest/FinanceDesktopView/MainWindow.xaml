@@ -3,35 +3,198 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:currency="clr-namespace:CurrencyTextBoxControl;assembly=CurrencyTextBoxControl"
         xmlns:local="clr-namespace:FinanceDesktopView"
         mc:Ignorable="d"
-        Title="Charity Finance" Height="450" Width="800">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="6*" />
-            <ColumnDefinition Width="13*" />
-            <ColumnDefinition Width="398*" />
-            <ColumnDefinition Width="376*" />
-        </Grid.ColumnDefinitions>
-        <TabControl HorizontalAlignment="Left" Height="400" Margin="4.091,10,0,0" VerticalAlignment="Top" Width="774" Grid.ColumnSpan="3" Grid.Column="1">
+        Title="Charity Finance" Height="600" Width="800">
+    <DockPanel LastChildFill="True">
+        <StackPanel DockPanel.Dock="Top">
+            <Menu x:Name="menu" Height="20" Width="Auto" HorizontalAlignment="Left">
+                <MenuItem Header="_File">
+                    <MenuItem Header="_Exit" />
+                </MenuItem>
+                <MenuItem Header="_Edit"></MenuItem>
+                <MenuItem Header="Configuration">
+                    <MenuItem Header="Payment Types" Click="PaymentType_Click"></MenuItem>
+                    <MenuItem Header="Budget Types" Click="BudgetType_Click"></MenuItem>
+                    <MenuItem Header="Fund Types" Click="FundType_Click"></MenuItem>
+                    <MenuItem Header="Spend Types" Click="SpendType_Click"></MenuItem>
+                </MenuItem>
+                <MenuItem Header="_Window"></MenuItem>
+                <MenuItem Header="_Help">
+                    <MenuItem Header="View Help"></MenuItem>
+                    <Separator />
+                    <MenuItem Header="About Charity Finance"></MenuItem>
+                </MenuItem>
+            </Menu>
+        </StackPanel>
+        <TabControl HorizontalAlignment="Left" Height="Auto"
+                Margin="4.091,10,0,0"
+                VerticalAlignment="Top"
+                Width="774">
             <TabItem Header="Income">
-                <Grid Background="#FFE5E5E5">
-                    <StackPanel>
-                        <Grid>
-                            <Label HorizontalAlignment="Left">Select a Payment Type:</Label>
-                            <ComboBox Name="cmbPaymentType" HorizontalAlignment="Right" Width="100" SelectedValuePath="Id" DisplayMemberPath="LongDescription">
-                            </ComboBox>
-                        </Grid>
-                        <Button Name="btnAddIncome" Content="Add Income"></Button>
+                <StackPanel>
+                    <StackPanel Orientation="Vertical">
+                        <Label HorizontalAlignment="Center" FontSize="22" FontFamily="Sitka Small">Add Income</Label>
                     </StackPanel>
-                </Grid>
+                    <Grid Background="#FFE5E5E5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Label HorizontalAlignment="Right" Grid.Row="0" Grid.Column="0" Content="Select a Payment Type:"></Label>
+                        <Label HorizontalAlignment="Right" Grid.Row="1" Grid.Column="0" Content="Select a Budget Type:"></Label>
+                        <Label HorizontalAlignment="Right" Grid.Row="2" Grid.Column="0" Content="Select a Fund Type:"></Label>
+                        <Label HorizontalAlignment="Right" Grid.Row="3" Grid.Column="0" Content="Check for GiftAided:"></Label>
+                        <Label HorizontalAlignment="Right" Grid.Row="4" Grid.Column="0" Content="Select a Date:"></Label>
+                        <Label HorizontalAlignment="Right" Grid.Row="5" Grid.Column="0" Content="Description:"></Label>
+                        <Label HorizontalAlignment="Right" Grid.Row="6" Grid.Column="0" Content="Amount:"></Label>
+                        <Label HorizontalAlignment="Right" Grid.Row="7" Grid.Column="0" Content="Note:"></Label>
+                        <ComboBox Name="cmbPaymentType" Grid.Row="0" Grid.Column="1"
+                          HorizontalAlignment="Left"
+                          MinWidth="100" Width="Auto"
+                          SelectedValuePath="Id"
+                          DisplayMemberPath="LongDescription">
+                        </ComboBox>
+                        <ComboBox Name="cmbBudgetType" Grid.Row="1" Grid.Column="1"
+                          HorizontalAlignment="Left"
+                          MinWidth="100" Width="Auto"
+                          SelectedValuePath="Id"
+                          DisplayMemberPath="LongDescription">
+                        </ComboBox>
+                        <ComboBox Name="cmbFundType" Grid.Row="2" Grid.Column="1"
+                          HorizontalAlignment="Left"
+                          MinWidth="100" Width="Auto"
+                          SelectedValuePath="Id"
+                          DisplayMemberPath="LongDescription">
+                        </ComboBox>
+                        <CheckBox Name="cbGiftAid" Grid.Row="3" Grid.Column="1"
+                          HorizontalAlignment="Left" VerticalAlignment="Center" />
+                        <DatePicker Name="dtIncomeDate" Grid.Row="4" Grid.Column="1"
+                            Width="100"
+                            HorizontalAlignment="Left" />
+                        <TextBox Name="txtIncomeDescription" Grid.Row="5" Grid.Column="1"
+                         Width="500"
+                         HorizontalAlignment="Left"></TextBox>
+                        <currency:CurrencyTextBox x:Name="txtIncomeAmount"
+                            Grid.Row="6" Grid.Column="1"
+                            HorizontalAlignment="Left" Width="100"
+                            Number="{Binding Number, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+                            Text="£0.00">
+                            <currency:CurrencyTextBox.Style>
+                                <Style TargetType="{x:Type currency:CurrencyTextBox}">
+                                    <Style.Triggers>
+                                        <Trigger Property="Validation.HasError" Value="True">
+                                            <!-- <Setter Property="ToolTip" Value="{Binding (Validation.Errors).CurrentItem.ErrorContent, RelativeSource={RelativeSource self}}" /> -->
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </currency:CurrencyTextBox.Style>
+                        </currency:CurrencyTextBox>
+                        <TextBox Name="txtIncomeNote" HorizontalAlignment="Left"
+                         Grid.Row="7" Grid.Column="1"
+                         Width="500" Height="250">
+                        </TextBox>
+                    </Grid>
+                    <StackPanel>
+                        <Button Name="btnAddIncome" Content="Add Income"
+                    Click="BtnAddIncome_Click">
+                        </Button>
+                    </StackPanel>
+                </StackPanel>
             </TabItem>
-            <TabItem Header="Payments">
-                <Grid Background="#FFE5E5E5" />
+            <TabItem Header="Payments" Height="22" Margin="-2.2,-2,-2.4,0" VerticalAlignment="Bottom">
+                <StackPanel>
+                    <StackPanel Orientation="Vertical">
+                        <Label HorizontalAlignment="Center"
+                           FontSize="22" FontFamily="Sitka Small">Add Payment</Label>
+                    </StackPanel>
+                    <Grid Background="#FFE5E5E5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Label HorizontalAlignment="Right" Grid.Row="0" Grid.Column="0" Content="Select a Payment Type:"></Label>
+                        <Label HorizontalAlignment="Right" Grid.Row="1" Grid.Column="0" Content="Select a Budget Type:"></Label>
+                        <Label HorizontalAlignment="Right" Grid.Row="2" Grid.Column="0" Content="Select a Fund Type:"></Label>
+                        <Label HorizontalAlignment="Right" Grid.Row="3" Grid.Column="0" Content="Select a Date:"></Label>
+                        <Label HorizontalAlignment="Right" Grid.Row="4" Grid.Column="0" Content="Description:"></Label>
+                        <Label HorizontalAlignment="Right" Grid.Row="5" Grid.Column="0" Content="Amount:"></Label>
+                        <Label HorizontalAlignment="Right" Grid.Row="6" Grid.Column="0" Content="Note:"></Label>
+                        <ComboBox Name="cmbPaymentPaymentType" Grid.Row="0" Grid.Column="1"
+                          HorizontalAlignment="Left"
+                          MinWidth="100" Width="Auto"
+                          SelectedValuePath="Id"
+                          DisplayMemberPath="LongDescription">
+                        </ComboBox>
+                        <ComboBox Name="cmbPaymentBudgetType" Grid.Row="1" Grid.Column="1"
+                          HorizontalAlignment="Left"
+                          MinWidth="100" Width="Auto"
+                          SelectedValuePath="Id"
+                          DisplayMemberPath="LongDescription">
+                        </ComboBox>
+                        <ComboBox Name="cmbPaymentFundType" Grid.Row="2" Grid.Column="1"
+                          HorizontalAlignment="Left"
+                          MinWidth="100" Width="Auto"
+                          SelectedValuePath="Id"
+                          DisplayMemberPath="LongDescription">
+                        </ComboBox>
+
+                        <DatePicker Name="dtPaymentDate" Grid.Row="3" Grid.Column="1"
+                            Width="100"
+                            HorizontalAlignment="Left" />
+                        <TextBox Name="txtPaymentDescription" Grid.Row="4" Grid.Column="1"
+                         Width="500"
+                         HorizontalAlignment="Left"></TextBox>
+                        <currency:CurrencyTextBox x:Name="txtPaymentAmount"
+                            Grid.Row="5" Grid.Column="1"
+                            HorizontalAlignment="Left" Width="100"
+                            Number="{Binding Number, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+                            Text="£0.00">
+                            <currency:CurrencyTextBox.Style>
+                                <Style TargetType="{x:Type currency:CurrencyTextBox}">
+                                    <Style.Triggers>
+                                        <Trigger Property="Validation.HasError" Value="True">
+                                            <!-- <Setter Property="ToolTip" Value="{Binding (Validation.Errors).CurrentItem.ErrorContent, RelativeSource={RelativeSource self}}" /> -->
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </currency:CurrencyTextBox.Style>
+                        </currency:CurrencyTextBox>
+                        <TextBox Name="txtPaymentNote" HorizontalAlignment="Left"
+                         Grid.Row="6" Grid.Column="1"
+                         Width="500" Height="250">
+                        </TextBox>
+                    </Grid>
+                    <StackPanel>
+                        <Button Name="btnAddPayment" Content="Add Payment"
+                        Click="BtnAddPayment_Click">
+                        </Button>
+                    </StackPanel>
+                </StackPanel>
             </TabItem>
             <TabItem Header="Funds">
                 <Grid Background="#FFE5E5E5" />
             </TabItem>
         </TabControl>
-    </Grid>
+    </DockPanel>
 </Window>

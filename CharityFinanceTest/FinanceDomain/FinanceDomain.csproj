@@ -52,6 +52,7 @@
     <Compile Include="Description.cs" />
     <Compile Include="Note.cs" />
     <Compile Include="Result.cs" />
+    <Compile Include="ResultExtensions.cs" />
     <Compile Include="TransactionType.cs" />
     <Compile Include="Transaction.cs" />
     <Compile Include="Income.cs" />

@@ -27,7 +27,14 @@ namespace FinanceServicesTest
                      Id = Guid.NewGuid(),
                      Description = "GeneralIncome",
                      LongDescription = "General Income"
-                 }, (Note)string.Empty);
+                 },
+                 (Note)string.Empty,
+                   new FundType()
+                   {
+                       Id = Guid.NewGuid(),
+                       Description = "Revenue",
+                       LongDescription = "Revenue"
+                   });
 
             income.GiftAidStatus = GiftAidStatus.NotGiftAid;
         }

@@ -12,9 +12,10 @@ namespace FinanceDomain
             PaymentType paymentType,
             double amount,
             BudgetType budgetType,
-            Note note) :
+            Note note,
+            FundType fundType) :
             base(description, transactionDate,
-                paymentType, amount, budgetType, note)
+                paymentType, amount, budgetType, note, fundType)
         { }
 
         protected Income()
@@ -27,16 +28,18 @@ namespace FinanceDomain
             PaymentType paymentType,
             Double amount,
             BudgetType budgetType,
-            Note note)
+            Note note,
+            FundType fundType)
         {
             if (paymentType == null) return null;
             if (budgetType == null) return null;
+            if (fundType == null) return null;
             if (transactionDate == DateTime.MinValue) return null;
             if (amount <= 0.00) return null;
 
             return new Income(
                 description, transactionDate,
-                paymentType, amount, budgetType, note);
+                paymentType, amount, budgetType, note, fundType);
         }
 
         public virtual string PayingInSlip

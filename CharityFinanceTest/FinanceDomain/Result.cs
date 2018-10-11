@@ -38,6 +38,17 @@ namespace FinanceDomain
         {
             return new Result<T>(value, true, string.Empty);
         }
+
+        public static Result Combine(params Result[] results)
+        {
+            foreach (Result result in results)
+            {
+                if (result.IsFailure)
+                    return result;
+            }
+
+            return Ok();
+        }
     }
 
     public class Result<T> : Result

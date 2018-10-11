@@ -27,14 +27,20 @@ namespace FinanceServicesTest
                     Id = Guid.NewGuid(),
                     Description = "CTAX",
                     LongDescription = "Council Tax"
-                }, (Note)string.Empty);
-
-            payment.SpendType = new SpendType()
-            {
-                Id = Guid.NewGuid(),
-                Description = "Revenue",
-                LongDescription = "Revenue"
-            };
+                },
+                new SpendType()
+                {
+                    Id = Guid.NewGuid(),
+                    Description = "Revenue",
+                    LongDescription = "Revenue"
+                },
+                (Note)string.Empty, "",
+                  new FundType()
+                  {
+                      Id = Guid.NewGuid(),
+                      Description = "Revenue",
+                      LongDescription = "Revenue"
+                  });
         }
 
         [TestMethod]
@@ -53,16 +59,6 @@ namespace FinanceServicesTest
             var actual = payment.FieldsValidated();
 
             Assert.IsTrue(actual);
-        }
-
-        [TestMethod]
-        public void Payment_ValidateFields_False()
-        {
-            payment.SpendType = null;
-
-            var actual = payment.FieldsValidated();
-
-            Assert.IsFalse(actual);
         }
     }
 }

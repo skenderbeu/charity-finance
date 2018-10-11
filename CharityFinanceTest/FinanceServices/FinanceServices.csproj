@@ -41,14 +41,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DTO\IncomeViewModelDTO.cs" />
+    <Compile Include="IIncomeCommands.cs" />
     <Compile Include="IIncomeServices.cs" />
     <Compile Include="IIncomeViewModel.cs" />
     <Compile Include="IMonthServices.cs" />
+    <Compile Include="IncomeCommands.cs" />
     <Compile Include="IncomeViewModel.cs" />
     <Compile Include="IncomeServices.cs" />
     <Compile Include="IPaymentServices.cs" />
+    <Compile Include="ITransactionTypeCommand.cs" />
     <Compile Include="MonthServices.cs" />
     <Compile Include="PaymentServices.cs" />
+    <Compile Include="PaymentTypeCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

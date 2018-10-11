@@ -122,12 +122,11 @@ namespace RepositoriesTest
                 PAYMENTTYPE,
                 AMOUNT,
                 BUDGETTYPE,
-                NOTE);
+                NOTE,
+                FUNDTYPE);
 
             income.GiftAidStatus = GIFTAIDSTATUS;
             income.PayingInSlip = PAYINGINSLIP;
-            income.BankCleared = BANKCLEARED;
-            income.FundType = FUNDTYPE;
 
             //Act
             income.Id = repo.Add(income);
@@ -175,7 +174,6 @@ namespace RepositoriesTest
             Assert.AreEqual(PAYINGINSLIP, income.PayingInSlip);
             Assert.AreEqual(PAYMENTTYPE, income.PaymentType);
             Assert.AreEqual(BUDGETTYPE, income.BudgetType);
-            Assert.AreEqual(FUNDTYPE, income.FundType);
             Assert.AreEqual(GIFTAIDSTATUS, income.GiftAidStatus);
             Assert.AreEqual(NOTE, income.Notes);
             Assert.AreEqual(BANKCLEARED, income.BankCleared);

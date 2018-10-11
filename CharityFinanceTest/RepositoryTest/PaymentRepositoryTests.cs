@@ -132,12 +132,10 @@ namespace RepositoriesTest
                 PAYMENTTYPE,
                 AMOUNT,
                 BUDGETTYPE,
-                NOTE);
-
-            payment.BankCleared = BANKCLEARED;
-            payment.FundType = FUNDTYPE;
-            payment.SpendType = SPENDTYPE;
-            payment.ChequeNumber = CHEQUENUMBER;
+                SPENDTYPE,
+                NOTE,
+                CHEQUENUMBER,
+                FUNDTYPE);
 
             //Act
             payment.Id = repo.Add(payment);
@@ -185,7 +183,6 @@ namespace RepositoriesTest
             Assert.AreEqual(CHEQUENUMBER, payment.ChequeNumber);
             Assert.AreEqual(PAYMENTTYPE, payment.PaymentType);
             Assert.AreEqual(BUDGETTYPE, payment.BudgetType);
-            Assert.AreEqual(FUNDTYPE, payment.FundType);
             Assert.AreEqual(SPENDTYPE, payment.SpendType);
             Assert.AreEqual(NOTE, payment.Notes);
             Assert.AreEqual(BANKCLEARED, payment.BankCleared);
