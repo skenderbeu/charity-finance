@@ -19,14 +19,14 @@ namespace FinanceDesktopView
     /// <summary>
     /// Interaction logic for PaymentType.xaml
     /// </summary>
-    public partial class PaymentTypeForm : Window
+    public partial class PaymentTypeForm : Window, INotifyPropertyChanged
     {
         public PaymentTypeForm()
         {
             InitializeComponent();
         }
 
-        public event PropertyChangedEventHandler PaymentTypeChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
 
         private void BtnAddPaymentType_Click(object sender, RoutedEventArgs e)
         {
@@ -48,9 +48,9 @@ namespace FinanceDesktopView
 
             if (result.IsSuccess)
             {
-                if (PaymentTypeChanged != null)
+                if (PropertyChanged != null)
                 {
-                    PaymentTypeChanged(this, new PropertyChangedEventArgs("PaymentType"));
+                    PropertyChanged(this, new PropertyChangedEventArgs("PaymentType"));
                     MessageBox.Show("Payment Type Added");
                 }
             }

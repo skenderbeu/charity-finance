@@ -65,8 +65,8 @@ namespace FinanceDesktopView
         private void PaymentType_Click(object sender, RoutedEventArgs e)
         {
             var paymentTypeForm = new PaymentTypeForm();
-            paymentTypeForm.PaymentTypeChanged -= PaymentTypeForm_paymentTypeChanged;
-            paymentTypeForm.PaymentTypeChanged += PaymentTypeForm_paymentTypeChanged;
+            paymentTypeForm.PropertyChanged -= PaymentTypeForm_paymentTypeChanged;
+            paymentTypeForm.PropertyChanged += PaymentTypeForm_paymentTypeChanged;
             paymentTypeForm.Show();
         }
 
