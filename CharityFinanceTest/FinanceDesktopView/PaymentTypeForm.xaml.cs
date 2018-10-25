@@ -1,5 +1,7 @@
-﻿using System;
+﻿using FinanceServices;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,10 +26,34 @@ namespace FinanceDesktopView
             InitializeComponent();
         }
 
+        public event PropertyChangedEventHandler PaymentTypeChanged;
+
         private void BtnAddPaymentType_Click(object sender, RoutedEventArgs e)
         {
             var paymentTypeDescription = txtPaymentTypeDescription.Text;
             var paymentTypeLongDescription = txtPaymentTypeLongDescription.Text;
+
+            if (string.IsNullOrWhiteSpace(paymentTypeDescription)) MessageBox.Show("Code is blank");
+            if (string.IsNullOrWhiteSpace(paymentTypeLongDescription)) MessageBox.Show("Description is blank");
+
+            PaymentTypeCommands paymentTypeCommands = new PaymentTypeCommands();
+
+            var result = paymentTypeCommands.Add(
+                    paymentTypeDescription, paymentTypeLongDescription);
+
+            if (result.IsFailure)
+            {
+                MessageBox.Show(result.Error);
+            }
+
+            if (result.IsSuccess)
+            {
+                if (PaymentTypeChanged != null)
+                {
+                    PaymentTypeChanged(this, new PropertyChangedEventArgs("PaymentType"));
+                    MessageBox.Show("Payment Type Added");
+                }
+            }
         }
     }
 }

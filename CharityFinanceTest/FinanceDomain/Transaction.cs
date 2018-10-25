@@ -87,12 +87,7 @@ namespace FinanceDomain
 
         private FundType GetFund()
         {
-            return new FundType()
-            {
-                Id = Guid.NewGuid(),
-                Description = "Revenue",
-                LongDescription = "Revenue"
-            };
+            return FundType.Create("Revenue", "Revenue");
         }
     }
 }

@@ -19,11 +19,11 @@ namespace FinanceDesktopView
 
             incomeViewModel = new IncomeViewModel();
 
-            cmbPaymentType.ItemsSource = incomeViewModel.GetPaymentTypes();
+            BindCmbPaymentType();
 
             cmbBudgetType.ItemsSource = incomeViewModel.GetBudgetTypes();
 
-            cmbFundType.ItemsSource = incomeViewModel.GetFundypes();
+            cmbFundType.ItemsSource = incomeViewModel.GetFundTypes();
         }
 
         private void BtnAddIncome_Click(object sender, RoutedEventArgs e)
@@ -65,7 +65,19 @@ namespace FinanceDesktopView
         private void PaymentType_Click(object sender, RoutedEventArgs e)
         {
             var paymentTypeForm = new PaymentTypeForm();
+            paymentTypeForm.PaymentTypeChanged -= PaymentTypeForm_paymentTypeChanged;
+            paymentTypeForm.PaymentTypeChanged += PaymentTypeForm_paymentTypeChanged;
             paymentTypeForm.Show();
+        }
+
+        private void BindCmbPaymentType()
+        {
+            cmbPaymentType.ItemsSource = incomeViewModel.GetPaymentTypes();
+        }
+
+        private void PaymentTypeForm_paymentTypeChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            BindCmbPaymentType();
         }
 
         private void BudgetType_Click(object sender, RoutedEventArgs e)

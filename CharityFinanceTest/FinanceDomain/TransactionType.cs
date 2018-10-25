@@ -3,10 +3,20 @@ using System.Collections.Generic;
 
 namespace FinanceDomain
 {
-    public class TransactionType : Entity
+    public abstract class TransactionType : Entity
     {
         public virtual string Description { get; set; }
         public virtual string LongDescription { get; set; }
+
+        protected TransactionType(string description, string longDescription)
+        {
+            Description = description;
+            LongDescription = longDescription;
+        }
+
+        protected TransactionType()
+        {
+        }
 
         public override string ToString()
         {
@@ -32,16 +42,53 @@ namespace FinanceDomain
     }
 
     [Serializable]
-    public class PaymentType : TransactionType
+    public class FundType : TransactionType
     {
+        private FundType(string description, string longDescription) : base(description, longDescription)
+        {
+        }
+
+        protected FundType() : base()
+        {
+        }
+
+        public static FundType Create(string description, string longDescription)
+        {
+            return new FundType(description, longDescription);
+        }
     }
 
     [Serializable]
-    public class FundType : TransactionType { }
+    public class BudgetType : TransactionType
+    {
+        private BudgetType(string description, string longDescription) : base(description, longDescription)
+        {
+        }
+
+        protected BudgetType() : base()
+        {
+        }
+
+        public static BudgetType Create(string description, string longDescription)
+        {
+            return new BudgetType(description, longDescription);
+        }
+    }
 
     [Serializable]
-    public class BudgetType : TransactionType { }
+    public class SpendType : TransactionType
+    {
+        private SpendType(string description, string longDescription) : base(description, longDescription)
+        {
+        }
 
-    [Serializable]
-    public class SpendType : TransactionType { }
+        protected SpendType() : base()
+        {
+        }
+
+        public static SpendType Create(string description, string longDescription)
+        {
+            return new SpendType(description, longDescription);
+        }
+    }
 }

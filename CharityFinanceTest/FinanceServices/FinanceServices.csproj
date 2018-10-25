@@ -52,7 +52,7 @@
     <Compile Include="ITransactionTypeCommand.cs" />
     <Compile Include="MonthServices.cs" />
     <Compile Include="PaymentServices.cs" />
-    <Compile Include="PaymentTypeCommand.cs" />
+    <Compile Include="PaymentTypeCommands.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

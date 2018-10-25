@@ -1,22 +1,18 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using FinanceDomain;
 
 namespace FinanceServices
 {
     public interface IIncomeViewModel
     {
-        void Add(Income income);
-
-        void Delete(Income income);
-
         IList<BudgetType> GetBudgetTypes();
 
-        IList<FundType> GetFundypes();
+        IList<FundType> GetFundTypes();
 
         IList<PaymentType> GetPaymentTypes();
 
         IList<SpendType> GetSpendTypes();
-
-        void Update(Income income);
     }
 }

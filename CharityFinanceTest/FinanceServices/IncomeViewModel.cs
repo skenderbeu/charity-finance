@@ -2,6 +2,8 @@
 using Repositories;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 
 namespace FinanceServices
@@ -16,9 +18,9 @@ namespace FinanceServices
 
         public IncomeViewModel()
         {
-            this.incomeRepository = new IncomeRepository();
-            this.paymentTypeRepository = new PaymentTypeRepository();
-            this.budgetTypeRepository = new BudgetTypeRepository();
+            incomeRepository = new IncomeRepository();
+            paymentTypeRepository = new PaymentTypeRepository();
+            budgetTypeRepository = new BudgetTypeRepository();
             this.fundTypeRepository = new FundTypeRepository();
             this.spendTypeRepository = new SpendTypeRepository();
         }
@@ -42,7 +44,7 @@ namespace FinanceServices
             return budgetTypeRepository.GetAll();
         }
 
-        public IList<FundType> GetFundypes()
+        public IList<FundType> GetFundTypes()
         {
             return fundTypeRepository.GetAll();
         }
@@ -50,27 +52,6 @@ namespace FinanceServices
         public IList<SpendType> GetSpendTypes()
         {
             return spendTypeRepository.GetAll();
-        }
-
-        public void Add(Income income)
-        {
-            if (income.FieldsValidated())
-            {
-                incomeRepository.Add(income);
-            }
-        }
-
-        public void Update(Income income)
-        {
-            if (income.FieldsValidated())
-            {
-                incomeRepository.Update(income);
-            }
-        }
-
-        public void Delete(Income income)
-        {
-            incomeRepository.Remove(income);
         }
     }
 }

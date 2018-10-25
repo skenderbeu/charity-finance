@@ -10,9 +10,12 @@ namespace FinanceServices
     public interface ITransactionTypeCommand
     {
         Result Add(string description, string longDescription);
+    }
 
-        void Delete(TransactionType transactionType);
+    public interface IPaymentTypeCommand : ITransactionTypeCommand
+    {
+        void Delete(PaymentType paymentType);
 
-        void Update(TransactionType transactionType);
+        void Update(PaymentType paymentType);
     }
 }

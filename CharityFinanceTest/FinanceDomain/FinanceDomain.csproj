@@ -51,6 +51,7 @@
     <Compile Include="Maybe.cs" />
     <Compile Include="Description.cs" />
     <Compile Include="Note.cs" />
+    <Compile Include="PaymentType.cs" />
     <Compile Include="Result.cs" />
     <Compile Include="ResultExtensions.cs" />
     <Compile Include="TransactionType.cs" />
