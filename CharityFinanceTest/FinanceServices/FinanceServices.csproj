@@ -49,10 +49,13 @@
     <Compile Include="IncomeViewModel.cs" />
     <Compile Include="IncomeServices.cs" />
     <Compile Include="IPaymentServices.cs" />
+    <Compile Include="IPaymentTypeViewModel.cs" />
     <Compile Include="ITransactionTypeCommand.cs" />
+    <Compile Include="MockPaymentTypeViewModel.cs" />
     <Compile Include="MonthServices.cs" />
     <Compile Include="PaymentServices.cs" />
     <Compile Include="PaymentTypeCommands.cs" />
+    <Compile Include="PaymentTypeViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

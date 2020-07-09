@@ -1,0 +1,24 @@
+﻿@page
+@model FinanceWeb.Pages.PaymentTypes.ListModel
+@{
+    ViewData["Title"] = "PaymentType";
+}
+
+<h1>Payment Types</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Description</th>
+            <th>Long Description</th>
+        </tr>
+    </thead>
+    @foreach (var paymentType in Model.PaymentTypes)
+    {
+    <tr>
+        <td>@paymentType.Description</td>
+        <td>@paymentType.LongDescription</td>
+    </tr>
+    }
+
+</table>
