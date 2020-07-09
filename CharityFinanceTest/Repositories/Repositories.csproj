@@ -88,13 +88,6 @@
     <Compile Include="TypeRepositories\TransactionTypeRepository.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="FinanceDB.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="FinanceDB_log.ldf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <DependentUpon>FinanceDB.mdf</DependentUpon>
-    </Content>
     <EmbeddedResource Include="Mapping\Payment.hbm.xml" />
     <EmbeddedResource Include="Mapping\Income.hbm.xml">
       <SubType>Designer</SubType>
@@ -119,6 +112,7 @@
   <ItemGroup>
     <None Include="app.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
   </ItemGroup>

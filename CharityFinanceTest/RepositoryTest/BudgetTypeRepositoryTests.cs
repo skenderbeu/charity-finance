@@ -47,11 +47,7 @@ namespace RepositoriesTest
         private Guid Create()
         {
             //Arrange
-            BudgetType budgetType = new BudgetType
-            {
-                Description = DESCRIPTION,
-                LongDescription = LONG_DESCRIPTION
-            };
+            BudgetType budgetType = BudgetType.Create(DESCRIPTION, LONG_DESCRIPTION);
 
             //Act
             budgetType.Id = repo.Add(budgetType);

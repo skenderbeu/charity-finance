@@ -47,11 +47,7 @@ namespace RepositoriesTest
         private Guid Create()
         {
             //Arrange
-            PaymentType paymentType = new PaymentType
-            {
-                Description = DESCRIPTION,
-                LongDescription = LONG_DESCRIPTION
-            };
+            PaymentType paymentType = PaymentType.Create(DESCRIPTION, LONG_DESCRIPTION).Value;
 
             //Act
             paymentType.Id = repo.Add(paymentType);

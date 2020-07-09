@@ -47,11 +47,7 @@ namespace RepositoriesTest
         private Guid Create()
         {
             //Arrange
-            FundType fundType = new FundType
-            {
-                Description = DESCRIPTION,
-                LongDescription = LONG_DESCRIPTION
-            };
+            FundType fundType = FundType.Create(DESCRIPTION, LONG_DESCRIPTION);
 
             //Act
             fundType.Id = repo.Add(fundType);

@@ -15,32 +15,12 @@ namespace FinanceServicesTest
             payment = Payment.Create(
                 (TransactionDescription)"Council Tax",
                 DateTime.Parse("03/06/2018"),
-                new PaymentType()
-                {
-                    Id = Guid.NewGuid(),
-                    Description = "DDR",
-                    LongDescription = "Direct Debit"
-                },
+                PaymentType.Create("DDR", "Direct Debit").Value,
                 210.00,
-                new BudgetType()
-                {
-                    Id = Guid.NewGuid(),
-                    Description = "CTAX",
-                    LongDescription = "Council Tax"
-                },
-                new SpendType()
-                {
-                    Id = Guid.NewGuid(),
-                    Description = "Revenue",
-                    LongDescription = "Revenue"
-                },
+                BudgetType.Create("CTAX","Council Tax"),
+                SpendType.Create("Revenue","Revenue"),
                 (Note)string.Empty, "",
-                  new FundType()
-                  {
-                      Id = Guid.NewGuid(),
-                      Description = "Revenue",
-                      LongDescription = "Revenue"
-                  });
+                FundType.Create("Revenue", "Revenue"));
         }
 
         [TestMethod]

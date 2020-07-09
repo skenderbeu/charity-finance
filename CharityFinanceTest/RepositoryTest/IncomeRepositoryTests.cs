@@ -77,24 +77,9 @@ namespace RepositoriesTest
             DATERECIEVED = new DateTime(2018, 8, 7);
             DESCRIPTION = (TransactionDescription)"Offering 7/8/2018";
             AMOUNT = 230.00;
-            PAYMENTTYPE_TOADD = new PaymentType()
-            {
-                Id = Guid.NewGuid(),
-                Description = "CSH",
-                LongDescription = "Cash"
-            };
-            BUDGETTYPE_TOADD = new BudgetType()
-            {
-                Id = Guid.NewGuid(),
-                Description = "GeneralIncome",
-                LongDescription = "General Income"
-            };
-            FUNDTYPE_TOADD = new FundType()
-            {
-                Id = Guid.NewGuid(),
-                Description = "Revenue",
-                LongDescription = "Revenue"
-            };
+            PAYMENTTYPE_TOADD = PaymentType.Create("CSH", "Cash").Value;
+            BUDGETTYPE_TOADD = BudgetType.Create("GeneralIncome", "General Income");
+            FUNDTYPE_TOADD = FundType.Create("Revenue", "Revenue");
             GIFTAIDSTATUS = GiftAidStatus.NotGiftAid;
             PAYINGINSLIP = "000124";
             NOTE = (Note)"Offering taken in the evening";

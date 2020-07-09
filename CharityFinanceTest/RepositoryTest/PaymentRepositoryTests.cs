@@ -83,30 +83,10 @@ namespace RepositoriesTest
             DATERECIEVED = new DateTime(2018, 8, 7);
             DESCRIPTION = (TransactionDescription)"Builder and Sons";
             AMOUNT = 520.00;
-            PAYMENTTYPE_TOADD = new PaymentType()
-            {
-                Id = Guid.NewGuid(),
-                Description = "CHQ",
-                LongDescription = "Cheque"
-            };
-            BUDGETTYPE_TOADD = new BudgetType()
-            {
-                Id = Guid.NewGuid(),
-                Description = "Building",
-                LongDescription = "Building Maintenance"
-            };
-            FUNDTYPE_TOADD = new FundType()
-            {
-                Id = Guid.NewGuid(),
-                Description = "Building",
-                LongDescription = "Building Fund"
-            };
-            SPENDTYPE_TOADD = new SpendType()
-            {
-                Id = Guid.NewGuid(),
-                Description = "Capital",
-                LongDescription = "Capital"
-            };
+            PAYMENTTYPE_TOADD = PaymentType.Create("CHQ", "Cheque").Value;
+            BUDGETTYPE_TOADD = BudgetType.Create("Building", "Building Maintenance");
+            FUNDTYPE_TOADD = FundType.Create("Building", "Building Fund");
+            SPENDTYPE_TOADD = SpendType.Create("Capital", "Capital");
             NOTE = (Note)string.Empty;
             BANKCLEARED = false;
             CHEQUENUMBER = "000123";

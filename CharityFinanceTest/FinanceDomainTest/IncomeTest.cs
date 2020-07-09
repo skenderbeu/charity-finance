@@ -15,26 +15,12 @@ namespace FinanceServicesTest
             income = Income.Create(
                  (TransactionDescription)"Offering 20/05/18",
                  DateTime.Parse("22/05/2018"),
-                 new PaymentType()
-                 {
-                     Id = Guid.NewGuid(),
-                     Description = "CSH",
-                     LongDescription = "Cash"
-                 },
+                 PaymentType.Create("CSH", "Cash").Value,
                  230.00,
-                 new BudgetType()
-                 {
-                     Id = Guid.NewGuid(),
-                     Description = "GeneralIncome",
-                     LongDescription = "General Income"
-                 },
+                 BudgetType.Create("GeneralIncome", "General Income"),
                  (Note)string.Empty,
-                   new FundType()
-                   {
-                       Id = Guid.NewGuid(),
-                       Description = "Revenue",
-                       LongDescription = "Revenue"
-                   });
+                 FundType.Create("Revenue", "Revenue")
+                 );
 
             income.GiftAidStatus = GiftAidStatus.NotGiftAid;
         }
@@ -88,12 +74,7 @@ namespace FinanceServicesTest
         [TestMethod]
         public void Income_ValidatePayingInSlipIfCheque_True()
         {
-            income.UpdatePaymentType(new PaymentType()
-            {
-                Id = Guid.NewGuid(),
-                Description = "CHQ",
-                LongDescription = "Cheque"
-            });
+            income.UpdatePaymentType(PaymentType.Create("CHQ", "Cheque").Value);
 
             income.PayingInSlip = "000124";
 
@@ -105,12 +86,7 @@ namespace FinanceServicesTest
         [TestMethod]
         public void Income_ValidatePayingInSlipIfCheque_False()
         {
-            income.UpdatePaymentType(new PaymentType()
-            {
-                Id = Guid.NewGuid(),
-                Description = "CHQ",
-                LongDescription = "Cheque"
-            });
+            income.UpdatePaymentType(PaymentType.Create("CHQ", "Cheque").Value);
 
             var actual = income.FieldsValidated();
 

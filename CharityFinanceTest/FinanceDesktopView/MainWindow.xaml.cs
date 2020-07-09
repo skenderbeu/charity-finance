@@ -30,7 +30,9 @@ namespace FinanceDesktopView
         {
             IncomeCommands incomeCommands = new IncomeCommands();
 
-            if (double.TryParse(txtIncomeAmount.Text, out double amount))
+            double amount;
+
+            if (double.TryParse(txtIncomeAmount.Text, out amount))
             {
                 var result = incomeCommands.Add(
                    txtIncomeDescription.Text,

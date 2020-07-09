@@ -47,11 +47,7 @@ namespace RepositoriesTest
         private Guid Create()
         {
             //Arrange
-            SpendType spendType = new SpendType
-            {
-                Description = DESCRIPTION,
-                LongDescription = LONG_DESCRIPTION
-            };
+            SpendType spendType = SpendType.Create(DESCRIPTION, LONG_DESCRIPTION);
 
             //Act
             spendType.Id = repo.Add(spendType);

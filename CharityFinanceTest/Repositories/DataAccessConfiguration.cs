@@ -3,18 +3,19 @@ using NHibernate.Cfg;
 using NHibernate.Dialect;
 using NHibernate.Driver;
 using System.Reflection;
+using System.Configuration;
 
 namespace Repositories
 {
     public static class DataAccessConfiguration
     {
-        private static Configuration NHibernateConfiguration()
+        private static NHibernate.Cfg.Configuration NHibernateConfiguration()
         {
-            var cfg = new Configuration();
+            var cfg = new NHibernate.Cfg.Configuration();
 
             cfg.DataBaseIntegration(x =>
             {
-                x.ConnectionStringName = "fileDB";
+                x.ConnectionString = @"Server=(localdb)\MSSQLLocalDB;Integrated Security=true;AttachDbFileName=C:\Data\FinanceDB.mdf";
                 x.Driver<SqlClientDriver>();
                 x.Dialect<MsSql2012Dialect>();
                 x.Timeout = 10;

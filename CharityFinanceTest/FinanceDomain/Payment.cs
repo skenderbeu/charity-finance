@@ -47,7 +47,8 @@ namespace FinanceDomain
             if (amount <= 0.00) return null;
             if (!string.IsNullOrWhiteSpace(chequeNumber))
             {
-                if (!int.TryParse(chequeNumber, out int result)) return null;
+                int result; 
+                if (!int.TryParse(chequeNumber, out result)) return null;
             }
 
             return new Payment(
