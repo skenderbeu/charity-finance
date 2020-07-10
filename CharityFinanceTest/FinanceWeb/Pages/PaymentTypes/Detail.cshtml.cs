@@ -9,20 +9,25 @@ using FinanceDomain;
 
 namespace FinanceWeb.Pages.PaymentTypes
 {
-    public class ListModel : PageModel
+    public class DetailModel : PageModel
     {
         private readonly IPaymentTypeViewModel paymentTypeViewModel;
-        public IEnumerable<PaymentType> PaymentTypes { get; set;} 
+        public FinanceDomain.PaymentType PaymentType { get; set; }
 
-        public ListModel(IPaymentTypeViewModel paymentTypeViewModel)
+        public DetailModel(IPaymentTypeViewModel paymentTypeViewModel)
         {
             this.paymentTypeViewModel = paymentTypeViewModel;
         }
 
-
-        public void OnGet()
+        public void OnGet(Guid paymentTypeId)
         {
-            PaymentTypes = paymentTypeViewModel.GetPaymentTypes();
+         
+            PaymentType = paymentTypeViewModel.GetPaymentTypeById(paymentTypeId);
+
+            if(PaymentType == null)
+            {
+
+            }
         }
     }
 }

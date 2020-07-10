@@ -10,6 +10,7 @@ namespace FinanceDomain
 
         protected TransactionType(string description, string longDescription)
         {
+            Id = Guid.NewGuid();
             Description = description;
             LongDescription = longDescription;
         }

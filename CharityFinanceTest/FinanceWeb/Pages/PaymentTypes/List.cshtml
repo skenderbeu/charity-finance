@@ -9,6 +9,7 @@
 <table class="table">
     <thead>
         <tr>
+            <th>Id</th>
             <th>Description</th>
             <th>Long Description</th>
         </tr>
@@ -16,8 +17,14 @@
     @foreach (var paymentType in Model.PaymentTypes)
     {
     <tr>
+        <td>@paymentType.Id</td>
         <td>@paymentType.Description</td>
         <td>@paymentType.LongDescription</td>
+        <td>
+           <a class="btn btn-primary" asp-page="./Detail" asp-route-paymentTypeId="@paymentType.Id">
+                Detail
+          </a>
+        </td>
     </tr>
     }
 

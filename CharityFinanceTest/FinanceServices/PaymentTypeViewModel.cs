@@ -2,9 +2,6 @@
 using Repositories;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FinanceServices
 {
@@ -17,7 +14,12 @@ namespace FinanceServices
             paymentTypeRepository = new PaymentTypeRepository();
         }
 
-        public IList<PaymentType> GetPaymentTypes()
+        public PaymentType GetPaymentTypeById(Guid Id)
+        {
+            return paymentTypeRepository.GetById(Id);
+        }
+
+        public IEnumerable<PaymentType> GetPaymentTypes()
         {
             return paymentTypeRepository.GetAll();
         }

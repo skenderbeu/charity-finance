@@ -1,0 +1,13 @@
+﻿@page "{paymentTypeId:Guid}"
+@model FinanceWeb.Pages.PaymentTypes.DetailModel
+@{
+    ViewData["Title"] = "Detail";
+}
+
+<h1>@Model.PaymentType.LongDescription</h1>
+<div>
+    ShortCode : @Model.PaymentType.Description
+</div>
+
+<a asp-page="./List" class="btn btn-primary"> All Payment Types</a>
+

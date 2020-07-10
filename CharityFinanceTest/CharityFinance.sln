@@ -19,7 +19,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepositoriesTest", "Reposit
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinanceDomainTest", "FinanceDomainTest\FinanceDomainTest.csproj", "{C237F491-6D60-4641-AE3B-0AA549FC086E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinanceWeb", "FinanceWeb\FinanceWeb.csproj", "{C447354F-AE14-4E53-A586-83120B5D33A7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinanceWeb", "FinanceWeb\FinanceWeb.csproj", "{C447354F-AE14-4E53-A586-83120B5D33A7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

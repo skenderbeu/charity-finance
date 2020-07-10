@@ -1,5 +1,7 @@
 ﻿using FinanceDomain;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace FinanceServices
 {
@@ -14,7 +16,13 @@ namespace FinanceServices
                 PaymentType.Create("CHG", "Charge").Value, 
             };
         }
-        public IList<PaymentType> GetPaymentTypes()
+
+        public PaymentType GetPaymentTypeById(Guid Id)
+        {
+            return PaymentTypes.Where(p => p.Id == Id).FirstOrDefault();
+        }
+
+        public IEnumerable<PaymentType> GetPaymentTypes()
         {
             return PaymentTypes;
         }
