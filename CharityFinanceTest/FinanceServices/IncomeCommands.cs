@@ -7,11 +7,11 @@ namespace FinanceServices
 {
     public class IncomeCommands : IIncomeCommands
     {
-        private IRepository<Income> incomeRepository;
+        private readonly IRepository<Income> incomeRepository;
 
-        public IncomeCommands()
+        public IncomeCommands(IRepository<Income> incomeRepository)
         {
-            incomeRepository = new IncomeRepository();
+            this.incomeRepository = incomeRepository;
         }
 
         public Result Add(string description, double amount, DateTime date, string note, PaymentType paymentType,

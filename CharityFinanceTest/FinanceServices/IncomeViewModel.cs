@@ -16,13 +16,17 @@ namespace FinanceServices
         private ITransactionTypeRepository<FundType> fundTypeRepository;
         private ITransactionTypeRepository<SpendType> spendTypeRepository;
 
-        public IncomeViewModel()
+        public IncomeViewModel(IRepository<Income> incomeRepository,
+            ITransactionTypeRepository<PaymentType> paymentTypeRepository,
+            ITransactionTypeRepository<BudgetType> budgetTypeRepository,
+            ITransactionTypeRepository<FundType> fundTypeRepository,
+            ITransactionTypeRepository<SpendType> spendTypeRepository)
         {
-            incomeRepository = new IncomeRepository();
-            paymentTypeRepository = new PaymentTypeRepository();
-            budgetTypeRepository = new BudgetTypeRepository();
-            this.fundTypeRepository = new FundTypeRepository();
-            this.spendTypeRepository = new SpendTypeRepository();
+            this.incomeRepository = incomeRepository;
+            this.paymentTypeRepository = paymentTypeRepository;
+            this.budgetTypeRepository = budgetTypeRepository;
+            this.fundTypeRepository = fundTypeRepository;
+            this.spendTypeRepository = spendTypeRepository;
         }
 
         public IncomeViewModel(IncomeViewModelDTO incomeViewModelDTO)

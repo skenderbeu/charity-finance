@@ -1,21 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FinanceDomain;
-using Repositories;
+﻿using FinanceDomain;
 
 namespace FinanceServices
 {
     public class PaymentTypeCommands : IPaymentTypeCommand
     {
-        private ITransactionTypeRepository<PaymentType> repository;
+        private readonly ITransactionTypeRepository<PaymentType> repository;
 
-        public PaymentTypeCommands()
+        public PaymentTypeCommands(ITransactionTypeRepository<PaymentType> repository)
         {
-            repository = new PaymentTypeRepository();
+            this.repository = repository;
         }
 
         public Result Add(string description, string longDescription)

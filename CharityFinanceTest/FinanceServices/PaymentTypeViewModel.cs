@@ -7,11 +7,11 @@ namespace FinanceServices
 {
     public class PaymentTypeViewModel : IPaymentTypeViewModel
     {
-        private ITransactionTypeRepository<PaymentType> paymentTypeRepository;
+        private readonly ITransactionTypeRepository<PaymentType> paymentTypeRepository;
 
-        public PaymentTypeViewModel()
+        public PaymentTypeViewModel(ITransactionTypeRepository<PaymentType> paymentTypeRepository)
         {
-            paymentTypeRepository = new PaymentTypeRepository();
+            this.paymentTypeRepository = paymentTypeRepository;
         }
 
         public PaymentType GetPaymentTypeById(Guid Id)

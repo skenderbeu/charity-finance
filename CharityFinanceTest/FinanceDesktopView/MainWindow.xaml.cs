@@ -11,13 +11,15 @@ namespace FinanceDesktopView
     /// </summary>
     public partial class MainWindow : Window
     {
-        private IIncomeViewModel incomeViewModel;
+        private readonly IIncomeViewModel incomeViewModel;
+        private readonly IIncomeCommands incomeCommands;
 
-        public MainWindow()
+        public MainWindow(IIncomeViewModel incomeViewModel, IIncomeCommands incomeCommands)
         {
             InitializeComponent();
 
-            incomeViewModel = new IncomeViewModel();
+            this.incomeViewModel = incomeViewModel;
+            this.incomeCommands = incomeCommands;
 
             BindCmbPaymentType();
 
@@ -28,7 +30,6 @@ namespace FinanceDesktopView
 
         private void BtnAddIncome_Click(object sender, RoutedEventArgs e)
         {
-            IncomeCommands incomeCommands = new IncomeCommands();
 
             double amount;
 

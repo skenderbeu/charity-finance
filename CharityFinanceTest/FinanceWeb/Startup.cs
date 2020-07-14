@@ -1,21 +1,22 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using FinanceDomain;
 using FinanceServices;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using NHibernate.NetCore;
+using Repositories;
+using System;
 
 namespace FinanceWeb
 {
     public class Startup
     {
         public Startup(IConfiguration configuration)
-        {
+        { 
             Configuration = configuration;
         }
 
@@ -25,7 +26,21 @@ namespace FinanceWeb
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
-            services.AddSingleton<IPaymentTypeViewModel, MockPaymentTypeViewModel>();
+            services.AddScoped<ITransactionTypeRepository<PaymentType>, PaymentTypeRepository>();
+            services.AddScoped<IPaymentTypeViewModel, PaymentTypeViewModel>();
+            //services.AddScoped<ILoggerFactory, >();
+
+            //                // Set the built-in log component to NHibernate's log component
+            //factory.UseAsHibernateLoggerFactory();
+
+            // The path of the NHibernate configuration file
+            var path = System.IO.Path.Combine(
+             AppDomain.CurrentDomain.BaseDirectory,
+             "hibernate.config"
+            );
+            // Adding NHibernate-related services
+            services.AddHibernate(path);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

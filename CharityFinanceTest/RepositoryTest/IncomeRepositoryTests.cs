@@ -10,7 +10,7 @@ namespace RepositoriesTest
     [TestClass]
     public class IncomeRepositoryTests
     {
-        private IRepository<Income> repo;
+        private IRepository<Income> incomeRepository;
         private DateTime DATERECIEVED;
         private TransactionDescription DESCRIPTION;
         private PaymentType PAYMENTTYPE_TOADD;
@@ -30,9 +30,16 @@ namespace RepositoriesTest
         private FundTypeRepository fundTypeRepository;
 
         [TestInitialize]
-        public void Setup()
+        public void Setup(IRepository<Income> incomeRepository,
+            PaymentTypeRepository paymentTypeRepository,
+            BudgetTypeRepository budgetTypeRepository,
+            FundTypeRepository fundTypeRepository)
         {
-            repo = new IncomeRepository();
+            this.incomeRepository = incomeRepository;
+            this.paymentTypeRepository = paymentTypeRepository;
+            this.budgetTypeRepository = budgetTypeRepository;
+            this.fundTypeRepository = fundTypeRepository;
+
             InitialiseParameters();
 
             CreateTransactionTypeRows();
@@ -41,7 +48,7 @@ namespace RepositoriesTest
         [TestCleanup]
         public void CloseDown()
         {
-            repo = null;
+            incomeRepository = null;
 
             DeleteTransactionTypeRows();
 
@@ -52,9 +59,6 @@ namespace RepositoriesTest
 
         private void CreateTransactionTypeRows()
         {
-            paymentTypeRepository = new PaymentTypeRepository();
-            fundTypeRepository = new FundTypeRepository();
-            budgetTypeRepository = new BudgetTypeRepository();
 
             var paymentTypeId = paymentTypeRepository.Add(PAYMENTTYPE_TOADD);
             var fundTypeId = fundTypeRepository.Add(FUNDTYPE_TOADD);
@@ -114,7 +118,7 @@ namespace RepositoriesTest
             income.PayingInSlip = PAYINGINSLIP;
 
             //Act
-            income.Id = repo.Add(income);
+            income.Id = incomeRepository.Add(income);
 
             //Assert
             Assert.AreNotEqual(0, income.Id, "Creating new record does not return id");
@@ -125,13 +129,13 @@ namespace RepositoriesTest
         private void Update(Guid id)
         {
             // Arrange
-            Income income = repo.GetById(id);
+            Income income = incomeRepository.GetById(id);
             income.UpdateDescription((TransactionDescription)"Test Change");
 
             // Act
-            repo.Update(income);
+            incomeRepository.Update(income);
 
-            Income updatedIncome = repo.GetById(id);
+            Income updatedIncome = incomeRepository.GetById(id);
 
             // Assert
             Assert.AreEqual("Test Change", updatedIncome.Description, "Record is not updated.");
@@ -140,7 +144,7 @@ namespace RepositoriesTest
         private void GetAll()
         {
             // Act
-            IList<Income> income = repo.GetAll();
+            IList<Income> income = incomeRepository.GetAll();
 
             // Assert
             Assert.IsTrue(income.Count() > 0, "GetAll returned no items.");
@@ -149,7 +153,7 @@ namespace RepositoriesTest
         private void GetByID(Guid id)
         {
             // Act
-            Income income = repo.GetById(id);
+            Income income = incomeRepository.GetById(id);
 
             // Assert
             Assert.IsNotNull(income.Description, "GetByID returned null.");
@@ -168,11 +172,11 @@ namespace RepositoriesTest
         private void Delete(Guid id)
         {
             // Arrange
-            Income income = repo.GetById(id);
+            Income income = incomeRepository.GetById(id);
 
             // Act
-            repo.Remove(income);
-            income = repo.GetById(id);
+            incomeRepository.Remove(income);
+            income = incomeRepository.GetById(id);
 
             // Assert
             Assert.IsNull(income, "Record is not deleted.");

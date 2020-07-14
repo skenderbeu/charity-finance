@@ -10,9 +10,9 @@ namespace FinanceServices
     {
         private IRepository<Income> incomeRepository;
 
-        public IncomeServices()
+        public IncomeServices(IRepository<Income> incomeRepository)
         {
-            this.incomeRepository = new IncomeRepository();
+            this.incomeRepository = incomeRepository;
         }
 
         public IncomeServices(IncomeRepository incomeRepository)

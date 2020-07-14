@@ -1,4 +1,5 @@
 ﻿using FinanceDomain;
+using NHibernate;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,14 +9,17 @@ namespace Repositories
 {
     public class RepositoryBase<T> : IRepository<T> where T : Entity
     {
-        public RepositoryBase()
+        ISessionFactory sessionFactory;
+
+        public RepositoryBase(ISessionFactory sessionFactory)
         {
+            this.sessionFactory = sessionFactory;
         }
 
         public Guid Add(T entity)
         {
             Guid idCreated;
-            using (var session = DataAccessConfiguration.SessionFactory().OpenSession())
+            using (var session = sessionFactory.OpenSession())
             using (var trans = session.BeginTransaction())
             {
                 idCreated = (Guid)session.Save(entity);
@@ -28,7 +32,7 @@ namespace Repositories
         public List<Guid> Add(IList<T> entities)
         {
             List<Guid> idsCreated = new List<Guid>();
-            using (var session = DataAccessConfiguration.SessionFactory().OpenSession())
+            using (var session = sessionFactory.OpenSession())
             using (var trans = session.BeginTransaction())
             {
                 foreach (var transactionType in entities)
@@ -45,7 +49,7 @@ namespace Repositories
         {
             IList<T> entities;
 
-            using (var session = DataAccessConfiguration.SessionFactory().OpenSession())
+            using (var session = sessionFactory.OpenSession())
             using (var tx = session.BeginTransaction())
             {
                 entities = session.Query<T>().Select(x => x).ToList();
@@ -59,7 +63,7 @@ namespace Repositories
         {
             IList<T> entities;
 
-            using (var session = DataAccessConfiguration.SessionFactory().OpenSession())
+            using (var session = sessionFactory.OpenSession())
             using (var tx = session.BeginTransaction())
             {
                 entities = session.Query<T>().Select(x => x).Where(expression).ToList();
@@ -71,7 +75,7 @@ namespace Repositories
 
         public T GetById(Guid id)
         {
-            using (var session = DataAccessConfiguration.SessionFactory().OpenSession())
+            using (var session = sessionFactory.OpenSession())
             using (var tx = session.BeginTransaction())
             {
                 var entity = session
@@ -86,7 +90,7 @@ namespace Repositories
 
         public void Remove(T entity)
         {
-            using (var session = DataAccessConfiguration.SessionFactory().OpenSession())
+            using (var session = sessionFactory.OpenSession())
             using (var tx = session.BeginTransaction())
             {
                 session.Delete(entity);
@@ -96,7 +100,7 @@ namespace Repositories
 
         public void Remove(IList<T> entities)
         {
-            using (var session = DataAccessConfiguration.SessionFactory().OpenSession())
+            using (var session = sessionFactory.OpenSession())
             using (var tx = session.BeginTransaction())
             {
                 foreach (var entity in entities)
@@ -109,7 +113,7 @@ namespace Repositories
 
         public void Update(T entity)
         {
-            using (var session = DataAccessConfiguration.SessionFactory().OpenSession())
+            using (var session = sessionFactory.OpenSession())
             using (var trans = session.BeginTransaction())
             {
                 session.Update(entity);
@@ -119,7 +123,7 @@ namespace Repositories
 
         public void Update(IList<T> entities)
         {
-            using (var session = DataAccessConfiguration.SessionFactory().OpenSession())
+            using (var session = sessionFactory.OpenSession())
             using (var trans = session.BeginTransaction())
             {
                 foreach (var entity in entities)

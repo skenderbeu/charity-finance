@@ -1,4 +1,5 @@
 ﻿using FinanceDomain;
+using NHibernate;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -8,10 +9,16 @@ namespace Repositories
 {
     public abstract class TransactionTypeRepository<T> : ITransactionTypeRepository<T> where T : TransactionType
     {
+        private readonly ISessionFactory sessionFactory;
+
+        public TransactionTypeRepository(ISessionFactory sessionFactory)
+        {
+            this.sessionFactory = sessionFactory;
+        }
         public Guid Add(T transactionType)
         {
             Guid idCreated;
-            using (var session = DataAccessConfiguration.SessionFactory().OpenSession())
+            using (var session = sessionFactory.OpenSession())
             using (var trans = session.BeginTransaction())
             {
                 idCreated = (Guid)session.Save(transactionType);
@@ -23,7 +30,7 @@ namespace Repositories
 
         public T GetById(Guid id)
         {
-            using (var session = DataAccessConfiguration.SessionFactory().OpenSession())
+            using (var session = sessionFactory.OpenSession())
             using (var tx = session.BeginTransaction())
             {
                 var transactionType = session
@@ -40,7 +47,7 @@ namespace Repositories
         {
             IList<T> transactionTypes;
 
-            using (var session = DataAccessConfiguration.SessionFactory().OpenSession())
+            using (var session = sessionFactory.OpenSession())
             using (var tx = session.BeginTransaction())
             {
                 transactionTypes = session.Query<T>().Select(x => x).ToList();
@@ -52,7 +59,7 @@ namespace Repositories
 
         public void Update(T transactionType)
         {
-            using (var session = DataAccessConfiguration.SessionFactory().OpenSession())
+            using (var session = sessionFactory.OpenSession())
             using (var trans = session.BeginTransaction())
             {
                 session.Update(transactionType);
@@ -62,7 +69,7 @@ namespace Repositories
 
         public void Remove(T transactionType)
         {
-            using (var session = DataAccessConfiguration.SessionFactory().OpenSession())
+            using (var session = sessionFactory.OpenSession())
             using (var tx = session.BeginTransaction())
             {
                 session.Delete(transactionType);

@@ -10,7 +10,7 @@ namespace RepositoriesTest
     [TestClass]
     public class PaymentRepositoryTests
     {
-        private IRepository<Payment> repo;
+        private IRepository<Payment> paymentRepository;
         private DateTime DATERECIEVED;
         private TransactionDescription DESCRIPTION;
         private PaymentType PAYMENTTYPE_TOADD;
@@ -32,9 +32,19 @@ namespace RepositoriesTest
         private SpendTypeRepository spendTypeRepository;
 
         [TestInitialize]
-        public void Setup()
+        public void Setup(IRepository<Payment> paymentRepository,
+            PaymentTypeRepository paymentTypeRepository,
+            BudgetTypeRepository budgetTypeRepository,
+            FundTypeRepository fundTypeRepository,
+            SpendTypeRepository spendTypeRepository
+            )
         {
-            repo = new PaymentRepository();
+            this.paymentRepository = paymentRepository;
+            this.paymentTypeRepository = paymentTypeRepository;
+            this.fundTypeRepository = fundTypeRepository;
+            this.budgetTypeRepository = budgetTypeRepository;
+            this.spendTypeRepository = spendTypeRepository;
+
             InitialiseParameters();
 
             CreateTransactionTypeRows();
@@ -43,7 +53,7 @@ namespace RepositoriesTest
         [TestCleanup]
         public void CloseDown()
         {
-            repo = null;
+            paymentRepository = null;
 
             DeleteTransactionTypeRows();
 
@@ -54,11 +64,6 @@ namespace RepositoriesTest
 
         private void CreateTransactionTypeRows()
         {
-            paymentTypeRepository = new PaymentTypeRepository();
-            fundTypeRepository = new FundTypeRepository();
-            budgetTypeRepository = new BudgetTypeRepository();
-            spendTypeRepository = new SpendTypeRepository();
-
             var paymentTypeId = paymentTypeRepository.Add(PAYMENTTYPE_TOADD);
             var fundTypeId = fundTypeRepository.Add(FUNDTYPE_TOADD);
             var budgetTypeId = budgetTypeRepository.Add(BUDGETTYPE_TOADD);
@@ -118,7 +123,7 @@ namespace RepositoriesTest
                 FUNDTYPE);
 
             //Act
-            payment.Id = repo.Add(payment);
+            payment.Id = paymentRepository.Add(payment);
 
             //Assert
             Assert.AreNotEqual(0, payment.Id, "Creating new record does not return id");
@@ -129,13 +134,13 @@ namespace RepositoriesTest
         private void Update(Guid id)
         {
             // Arrange
-            Payment payment = repo.GetById(id);
+            Payment payment = paymentRepository.GetById(id);
             payment.UpdateDescription((TransactionDescription)"Test Change");
 
             // Act
-            repo.Update(payment);
+            paymentRepository.Update(payment);
 
-            Payment updatedPayment = repo.GetById(id);
+            Payment updatedPayment = paymentRepository.GetById(id);
 
             // Assert
             Assert.AreEqual("Test Change", updatedPayment.Description, "Record is not updated.");
@@ -144,7 +149,7 @@ namespace RepositoriesTest
         private void GetAll()
         {
             // Act
-            IList<Payment> payment = repo.GetAll();
+            IList<Payment> payment = paymentRepository.GetAll();
 
             // Assert
             Assert.IsTrue(payment.Count() > 0, "GetAll returned no items.");
@@ -153,7 +158,7 @@ namespace RepositoriesTest
         private void GetByID(Guid id)
         {
             // Act
-            Payment payment = repo.GetById(id);
+            Payment payment = paymentRepository.GetById(id);
 
             // Assert
             Assert.IsNotNull(payment.Description, "GetByID returned null.");
@@ -172,11 +177,11 @@ namespace RepositoriesTest
         private void Delete(Guid id)
         {
             // Arrange
-            Payment payment = repo.GetById(id);
+            Payment payment = paymentRepository.GetById(id);
 
             // Act
-            repo.Remove(payment);
-            payment = repo.GetById(id);
+            paymentRepository.Remove(payment);
+            payment = paymentRepository.GetById(id);
 
             // Assert
             Assert.IsNull(payment, "Record is not deleted.");
