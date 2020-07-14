@@ -23,9 +23,16 @@ namespace FinanceWeb.Pages.PaymentTypes
             this.paymentTypeViewModel = paymentTypeViewModel;
         }
 
-        public IActionResult OnGet(Guid paymentTypeId)
+        public IActionResult OnGet(Guid? paymentTypeId)
         {
-            PaymentType = paymentTypeViewModel.GetPaymentTypeById(paymentTypeId);
+            if (paymentTypeId.HasValue)
+            {
+                PaymentType = paymentTypeViewModel.GetPaymentTypeById(paymentTypeId.Value);
+            }
+            else
+            {
+                PaymentType = new PaymentType();
+            }
 
             if (PaymentType == null)
             {
@@ -37,8 +44,26 @@ namespace FinanceWeb.Pages.PaymentTypes
 
         public IActionResult OnPost()
         {
-            paymentTypeCommand.Update(PaymentType);
-            return Page();
+            if(!ModelState.IsValid)
+            {
+                return Page();
+            }
+
+            if (PaymentType.Id != Guid.Empty)
+            {
+                paymentTypeCommand.Update(PaymentType);
+            }
+            else
+            {
+                var result = paymentTypeCommand.Add(PaymentType.Description, PaymentType.LongDescription);
+
+                if (result.IsFailure)
+                {
+                    return Page();
+                }
+            }
+
+            return RedirectToPage("./Detail", new { paymenttypeid = PaymentType.Id });
         }
     }
 }

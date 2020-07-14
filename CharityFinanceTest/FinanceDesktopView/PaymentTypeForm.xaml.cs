@@ -21,9 +21,13 @@ namespace FinanceDesktopView
     /// </summary>
     public partial class PaymentTypeForm : Window, INotifyPropertyChanged
     {
-        public PaymentTypeForm()
+        private readonly IPaymentTypeCommand paymentTypeCommand;
+
+        public PaymentTypeForm(IPaymentTypeCommand paymentTypeCommand)
         {
             InitializeComponent();
+
+            this.paymentTypeCommand = paymentTypeCommand;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -36,9 +40,8 @@ namespace FinanceDesktopView
             if (string.IsNullOrWhiteSpace(paymentTypeDescription)) MessageBox.Show("Code is blank");
             if (string.IsNullOrWhiteSpace(paymentTypeLongDescription)) MessageBox.Show("Description is blank");
 
-            PaymentTypeCommands paymentTypeCommands = new PaymentTypeCommands();
 
-            var result = paymentTypeCommands.Add(
+            var result = paymentTypeCommand.Add(
                     paymentTypeDescription, paymentTypeLongDescription);
 
             if (result.IsFailure)

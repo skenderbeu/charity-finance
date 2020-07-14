@@ -9,7 +9,7 @@ namespace FinanceDomain
         {
         }
 
-        protected PaymentType() : base()
+        public PaymentType() : base()
         {
         }
 
