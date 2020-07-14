@@ -28,10 +28,7 @@ namespace FinanceWeb
             services.AddRazorPages();
             services.AddScoped<ITransactionTypeRepository<PaymentType>, PaymentTypeRepository>();
             services.AddScoped<IPaymentTypeViewModel, PaymentTypeViewModel>();
-            //services.AddScoped<ILoggerFactory, >();
-
-            //                // Set the built-in log component to NHibernate's log component
-            //factory.UseAsHibernateLoggerFactory();
+            services.AddScoped<IPaymentTypeCommand, PaymentTypeCommands>();
 
             // The path of the NHibernate configuration file
             var path = System.IO.Path.Combine(

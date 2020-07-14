@@ -1,33 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using FinanceDomain;
+using FinanceServices;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using FinanceServices;
-using FinanceDomain;
+using System;
 
 namespace FinanceWeb.Pages.PaymentTypes
 {
     public class DetailModel : PageModel
     {
         private readonly IPaymentTypeViewModel paymentTypeViewModel;
-        public FinanceDomain.PaymentType PaymentType { get; set; }
+        public PaymentType PaymentType { get; set; }
 
         public DetailModel(IPaymentTypeViewModel paymentTypeViewModel)
         {
             this.paymentTypeViewModel = paymentTypeViewModel;
         }
 
-        public void OnGet(Guid paymentTypeId)
+        public IActionResult OnGet(Guid paymentTypeId)
         {
          
             PaymentType = paymentTypeViewModel.GetPaymentTypeById(paymentTypeId);
 
             if(PaymentType == null)
             {
-
+                return RedirectToPage("./NotFound");
             }
+
+            return Page();
         }
     }
 }
