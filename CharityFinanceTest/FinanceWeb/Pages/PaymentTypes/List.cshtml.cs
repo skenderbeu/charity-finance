@@ -7,6 +7,7 @@ namespace FinanceWeb.Pages.PaymentTypes
     public class ListModel : PageModel
     {
         private readonly IPaymentTypeViewModel paymentTypeViewModel;
+        public string Message { get; set; }
         public IEnumerable<FinanceDomain.PaymentType> PaymentTypes { get; set;} 
 
         public ListModel(IPaymentTypeViewModel paymentTypeViewModel)
@@ -18,6 +19,10 @@ namespace FinanceWeb.Pages.PaymentTypes
         public void OnGet()
         {
             PaymentTypes = paymentTypeViewModel.GetPaymentTypes();
+            if (TempData["Message"] != null)
+            {
+                Message = TempData["Message"].ToString();
+            }
         }
     }
 }

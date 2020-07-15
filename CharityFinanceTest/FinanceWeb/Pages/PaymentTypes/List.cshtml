@@ -6,38 +6,13 @@
 
 <h1>Payment Types</h1>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Description</th>
-            <th>Long Description</th>
-        </tr>
-    </thead>
     @foreach (var paymentType in Model.PaymentTypes)
     {
-<tr>
-    <td>@paymentType.Id</td>
-    <td>@paymentType.Description</td>
-    <td>@paymentType.LongDescription</td>
-    <td>
-        <a class="btn btn-primary" asp-page="./Detail" asp-route-paymentTypeId="@paymentType.Id">
-            Detail
-        </a>
-    </td>
-    <td>
-        <a class="btn btn-primary" asp-page="./Edit" asp-route-paymentTypeId="@paymentType.Id">
-            Edit
-        </a>
-    </td>
-    <td>
-        <a class="btn btn-primary" asp-page="./Delete" asp-route-paymentTypeId="@paymentType.Id">
-            Delete
-        </a>
-    </td>
-</tr>
+        <partial name="_Summary" model="paymentType" />
     }
 
-</table>
+   <a asp-page=".\Edit" class="btn btn-primary">Add New</a>
 
-<a asp-page=".\Edit" class="btn btn-primary">Add New</a>
+@section footer {
+    <div>@Model.Message</div>
+}
