@@ -59,8 +59,11 @@ namespace FinanceWeb.Pages.PaymentTypes
 
                 if (result.IsFailure)
                 {
+                    TempData["Error"] = result.Error;
                     return Page();
                 }
+
+               
             }
 
             return RedirectToPage("./Detail", new { paymenttypeid = PaymentType.Id });

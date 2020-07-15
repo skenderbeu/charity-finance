@@ -2,6 +2,8 @@
 @model FinanceWeb.Pages.PaymentTypes.EditModel
 @{
     ViewData["Title"] = "Edit";
+
+    var tempval = TempData["Error"];
 }
 
 <h2>Editing @Model.PaymentType.LongDescription</h2>
@@ -17,4 +19,8 @@
         <input asp-for="PaymentType.LongDescription" class="form-control" />
     </div>
     <button type="submit" class="btn btn-primary">Save</button>
+
+
+    @if (tempval != null)
+    {<div class="alert alert-danger alert-dismissible"><button type="button" class="close" data-dismiss="alert">&times;</button><strong>@TempData["Error"]</strong></div>}
 </form>

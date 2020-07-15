@@ -15,6 +15,7 @@ namespace FinanceDomain
 
         public static Result<PaymentType> Create(string description, string longDescription)
         {
+            if (string.IsNullOrEmpty(description) || string.IsNullOrEmpty(longDescription)) return Result.Fail<PaymentType>("Payment Type Code and Description cannot be blank");
             if (description.Length != 3) return Result.Fail<PaymentType>("Payment Type Code must be 3 characters");
             if (string.IsNullOrWhiteSpace(longDescription)) return Result.Fail<PaymentType>("Payment Type Long Description cannot be blank");
             if (longDescription.Length > 20) return Result.Fail<PaymentType>("Payment Type Long Description must be under 21 characters");
